@@ -1,0 +1,64 @@
+############
+# IMAP/GMail settings
+############
+set folder=imaps://imap.gmail.com/
+set spoolfile = "+INBOX"
+set imap_check_subscribed
+set hostname = gmail.com
+set imap_keepalive = 900
+set record="+[Gmail]/Sent Mail"
+set postponed="+[Gmail]/Drafts"
+
+mailboxes ! "=[Gmail]/Drafts" "=[Gmail]/All Mail" =[Gmail]/Trash
+
+bind index G imap-fetch-mail
+
+############
+# Gmail-related keyboard shortcuts
+############
+# This allows going to space-containing folder names
+bind editor <space> noop
+
+# The trash variable doesn't exist in this version of mutt, so we
+# trash with delete; we also turn off pattern delete due to no "ask
+# for user input" command; just use the tag functions
+#
+# Note that saving to Trash immediately, forcefully, deletes the message from
+# the inbox; this causes a "Mailbox was externally modified.  Flags
+# may be wrong." message, and often causes the cursor to go
+# somewhere weird.  This does not seem to be fixable, although you
+# could add <last-entry> or something to these macros and at least
+# end up in a predictable place.
+#
+macro index,pager d "<save-message>=[Gmail]/Trash<enter>" "Gmail trash message"
+bind index,pager D noop
+macro index,pager ^D "<tag-thread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Gmail trash thread"
+macro index,pager <esc>d "<tag-subthread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Gmail trash thread"
+
+# I don't use labels basically ever, so by default save just means
+# "get it out of my inbox"
+#
+# This version, and the variable setting, auto-expunge such
+# messages; if you don't want that, comment out the next three lines
+# and uncomment the one after that.
+
+# This caused problems with my finger memory vs. other
+# configurations.
+#
+# set delete=yes
+
+# macro index,pager s "<save-message>=Saved<enter><sync-mailbox>" "Remove from inbox/save to all mail"
+# macro index,pager S "<tag-thread><tag-prefix><save-message>=Saved<enter><sync-mailbox>" "Thread save: Remove from inbox/save to all mail"
+# # macro index,pager s "<save-message>=Saved<enter>" "Remove from inbox/save to all mail"
+# macro index,pager ,S "<save-message>" "Normal save"
+
+# The above got annoying because I couldn't remember how to get to
+# normal save when I needed it, so:
+save-hook ~A =Saved
+
+# Macros to go to common gmail labels.
+macro index,pager ,i "<change-folder>=INBOX<enter>" "Go to inbox"
+macro index,pager ,a "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
+macro index,pager ,s "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
+macro index,pager ,d "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
+macro index,pager ,t "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
