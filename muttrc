@@ -1,4 +1,3 @@
-source ~/.muttrc-global
 source ~/.muttrc-local
 
 ############
