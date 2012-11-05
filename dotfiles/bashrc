@@ -6,3 +6,17 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
+
+set -o vi
+
+. ~/.ssh/agent >/dev/null 2>&1
+
+export HISTFILESIZE=100000
+export HISTSIZE=100000
+export HISTFILE=~/.bash_history
+export VISUAL=~/bin/cvim
+export EDITOR=~/bin/cvim
+
+alias vim=~/bin/cvim 
+
+export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"

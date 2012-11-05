@@ -7,6 +7,11 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
+PATH=$PATH:$HOME/bin
 
 export PATH
+
+# Put pwd in tmux status
+export PROMPT_COMMAND='printf "\033]2;$(uname -n | cut -d . -f 1):${PWD}\033\\"'
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

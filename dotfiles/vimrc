@@ -124,7 +124,7 @@ nnoremap <Space>n :tabnew<CR>
 nnoremap <Space>q :cclose<CR>:only<CR>
 " Close the currrent tab
 nnoremap <Space>Q :tabclose<CR>
-" Attempt to close the current buffer                                                                                                                                                                                                                                             nnoremap <Space>d :bdelete<CR>
+" Attempt to close the current buffer
 nnoremap <Space>d :bdelete<CR>
 
 " Aligning things in columns on commas (doesn't hit return so we can
@@ -411,3 +411,6 @@ function! MyTabLine()
   endif
   return s
 endfunction
+
+" Last so we can override stuff
+source ~/.vimrc-local

@@ -6,9 +6,8 @@ fi
 
 echo "Setting up dot files."
 
-for file in gitconfig vimrc tmux.conf muttrc muttrc-gmail \
-                        inputrc bash_profile bashrc zshenv \
-                        zshrc
+for file in vimrc tmux.conf muttrc muttrc-gmail inputrc \
+            bash_profile bashrc zshenv zshrc
 do
   dotfile="$HOME/.$file"
   gitfile="$(pwd)/dotfiles/$file"
@@ -16,7 +15,7 @@ do
   if [ -e "$dotfile" -a ! -h "$dotfile" ]
   then
     echo "File $dotfile already exists; diffs: "
-    diff -U 5 "$gitfile" "$dotfile"
+    vimdiff "$gitfile" "$dotfile"
     continue
   fi
 
@@ -34,7 +33,7 @@ ln -sfT "$(pwd)/dotfiles/vim" ~/.vim
 
 echo "Setting up bin files"
 
-For file in cvim ws_trim_wrap
+for file in cvim ws_trim_wrap
 do
   binfile="$HOME/bin/$file"
   gitfile="$(pwd)/binfiles/$file"
@@ -42,7 +41,7 @@ do
   if [ -e "$binfile" -a ! -h "$binfile" ]
   then
     echo "File $binfile already exists; diffs: "
-    diff -U 5 "$gitfile" "$binfile"
+    vimdiff "$gitfile" "$binfile"
     continue
   fi
 
