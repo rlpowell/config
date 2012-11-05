@@ -30,3 +30,22 @@ ln -sfT "$(pwd)/dotfiles/vim" ~/.vim
 #
 # cd autojump
 # ./install.sh --local
+
+
+echo "Setting up bin files"
+
+For file in cvim ws_trim_wrap
+do
+  binfile="$HOME/bin/$file"
+  gitfile="$(pwd)/binfiles/$file"
+
+  if [ -e "$binfile" -a ! -h "$binfile" ]
+  then
+    echo "File $binfile already exists; diffs: "
+    diff -U 5 "$gitfile" "$binfile"
+    continue
+  fi
+
+  ln -sf "$gitfile" "$binfile"
+done
+

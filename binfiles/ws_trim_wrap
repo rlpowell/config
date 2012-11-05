@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+sep="$1"
+
+rm -f /tmp/rlp_tmux_buf
+tmux save-buffer -b 0 /tmp/rlp_tmux_buf
+if [ "$sep" ]
+then
+  cat /tmp/rlp_tmux_buf | sed 's/^ *//' | tr '\012' "$sep" >/tmp/rlp_tmux_buf.tmp
+else
+  cat /tmp/rlp_tmux_buf  | sed 's/^ *//' | tr -d '\012' >/tmp/rlp_tmux_buf.tmp
+fi
+tmux load-buffer -b 18 /tmp/rlp_tmux_buf.tmp
+tmux paste-buffer -b 18
+rm /tmp/rlp_tmux_buf /tmp/rlp_tmux_buf.tmp
+
