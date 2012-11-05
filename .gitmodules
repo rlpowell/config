@@ -1,9 +1,9 @@
-[submodule "vim/bundle/vim-pathogen"]
-	path = vim/bundle/vim-pathogen
+[submodule "dotfiles/vim/bundle/vim-pathogen"]
+	path = dotfiles/vim/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule "vim/bundle/perl"]
-	path = vim/bundle/perl
+[submodule "dotfiles/vim/bundle/perl"]
+	path = dotfiles/vim/bundle/perl
 	url = git://github.com/vim-perl/vim-perl.git
-[submodule "vim/bundle/tabular"]
-	path = vim/bundle/tabular
+[submodule "dotfiles/vim/bundle/tabular"]
+	path = dotfiles/vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
