@@ -99,11 +99,6 @@ export YOUSAID='In %C you wrote:'
 export ATTRIBUTION='%f wrote:'
 export LESS=-eM
 export PAGER=less
-#export HELPDIR=/usr/local/lib/zsh/help  # directory for run-help function to find docs
-#export NETHACKOPTIONS="name:Turgul-W,hilite_pet,nocolor,number_pad,fruit:Pear,noautopickup,nolegacy,rest_on_space,time,showexp,showscore"
-#export SCREENDIR=$HOME/.screen
-#export HUNT="name=JaDur,team=7,scan,nobeep"
-#export IRCSERVER="irc.digitalkingdom.org irc.paganpaths.org"
 
 MAILCHECK=300
 DIRSTACKSIZE=30
