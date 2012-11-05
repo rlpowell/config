@@ -8,22 +8,6 @@ set alias_file=~/.aliases
 source ~/.aliases
 set use_envelope_from=yes
 
-# Bunch of examples I made for a macro tutorial on mutt-users.
-#
-# macro index ,t t
-# macro index ,T <tag-entry>
-# macro index ,x <tag-prefix>,t
-# macro index ,X <tag-prefix>,T
-# 
-# macro index ,g '<pipe-entry>wc -l<enter><delete-message>' "useless: count lines, throw away the count, and then delete"
-# macro index ,G '<enter-command>set wait_key=no<enter><pipe-entry>wc -l<enter><delete-message>' "useless: count lines, don't wait, throw away the count, and then delete"
-# macro index ,t '<toggle-new><delete-message>'
-# macro index ,d "<enter-command>unset resolve<enter><toggle-new><delete-message><enter-command>set resolve<enter>" "Read and Delete Message"
-# macro index ,D "<tag-prefix><toggle-new><tag-prefix><delete-message>" "Read and Delete Tagged Messages"
-# macro index ,p "<enter-command>unset resolve<enter><save-message>=spam<enter><undelete-message><enter-command>set resolve<enter>" "Save and undelete message"
-# macro index ,P "<tag-prefix><save-message>=spam<enter><tag-prefix><undelete-message>" "Save and undelete message"
-# macro index ,q "<enter-command>unset delete_untag<enter><<tag-prefix><save-message>=spam<enter><tag-prefix><undelete-message><enter-command>set delete_untag<enter><" "Save and undelete message"
-
 ############
 # Personal settings.
 ############
