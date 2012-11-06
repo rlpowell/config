@@ -42,7 +42,6 @@ fi
 stty susp 
 
 # set up aliases
-unalias ll
 alias screen="screen -U"
 alias mv='nocorrect mv -i'    # no spelling correction on mv
 alias cp='nocorrect cp -i'    # no spelling correction on cp
