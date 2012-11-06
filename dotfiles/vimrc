@@ -245,14 +245,16 @@ autocmd BufReadPost,FileReadPost *.cl setl lisp
 
 " Stuff that I've reviewed but do not have specific comments about
 
-:set backspace=2
-:set history=1024
-:set ruler
-:set hidden             " very important with NERDTree
-:set hlsearch
-:set undolevels=10000
-:set undodir=/home/tmp/rlpowell/vimundo
-:set undofile
+set backspace=2
+set history=1024
+set ruler
+set hidden             " very important with NERDTree
+set hlsearch
+set undolevels=10000
+if version >= 703
+  set undodir=/home/tmp/rlpowell/vimundo
+  set undofile
+endif
 
 " Everything below here has probably not been properly reviewed
 
