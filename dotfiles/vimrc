@@ -345,6 +345,12 @@ function! MyDiff()
 endfunction
 set diffopt=filler,iwhite
 
+" FIXME: If we want to make the below more intelligent (like "shrink
+" if necessary based on window size"),
+" https://github.com/blueyed/dotfiles/blob/master/vimrc#L396 might
+" make a good starting point (the ShortenFilename function), not
+" because we want to do the same things but just to cargo cult.
+
 " tabline customization function; started with the JonSkanes example
 " from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
 " and customized further
@@ -372,7 +378,13 @@ function! MyTabLine()
         let n .= '[Q]'
       else
         " Enforce file name maxlen
-        let n .= bufname(b)[-50:-1]
+        let bufname = bufname(b)
+        let bufname = substitute(bufname, 'manifests/', 'm/', 'g')
+        let bufname = substitute(bufname, 'files/', 'f/', 'g')
+        let bufname = substitute(bufname, 'lib/', 'l/', 'g')
+        let bufname = substitute(bufname, 'pages/', 'p/', 'g')
+        let bufname = substitute(bufname, 'cloud/', 'c/', 'g')
+        let n .= bufname[-30:-1]
       endif
       " check and ++ tab's &modified count
       if getbufvar( b, "&modified" )
@@ -415,4 +427,4 @@ function! MyTabLine()
 endfunction
 
 " Last so we can override stuff
-source ~/.vimrc-local
+silent! source ~/.vimrc-local
