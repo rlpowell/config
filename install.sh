@@ -4,7 +4,7 @@ then
   exit 1
 fi
 
-echo "Setting up dot files."
+echo "Setting up dot files"
 
 for file in vimrc tmux.conf muttrc muttrc-gmail inputrc \
             bash_profile bashrc zshenv zshrc bash_logout
@@ -48,3 +48,12 @@ do
   ln -sf "$gitfile" "$binfile"
 done
 
+echo "Setting up cron"
+
+cronfile_orig=/tmp/cron.$$
+cronfile_new=/tmp/cron.$$.new
+crontab -l >$cronfile_orig
+grep -v $(pwd) $cronfile_orig >$cronfile_new
+echo "1 1 * * * cd $(pwd) ; git update ; git submodule update" >> $cronfile_new
+diff $cronfile_orig $cronfile_new
+crontab $cronfile_new
