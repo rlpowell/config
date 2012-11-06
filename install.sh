@@ -7,7 +7,7 @@ fi
 echo "Setting up dot files."
 
 for file in vimrc tmux.conf muttrc muttrc-gmail inputrc \
-            bash_profile bashrc zshenv zshrc
+            bash_profile bashrc zshenv zshrc bash_logout
 do
   dotfile="$HOME/.$file"
   gitfile="$(pwd)/dotfiles/$file"
