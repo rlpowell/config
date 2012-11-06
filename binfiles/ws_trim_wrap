@@ -13,4 +13,3 @@ fi
 tmux load-buffer -b 18 /tmp/rlp_tmux_buf.tmp
 tmux paste-buffer -b 18
 rm /tmp/rlp_tmux_buf /tmp/rlp_tmux_buf.tmp
-
