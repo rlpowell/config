@@ -17,6 +17,11 @@ export HISTFILE=~/.bash_history
 export VISUAL=~/bin/cvim
 export EDITOR=~/bin/cvim
 
+export LESSBINFMT='*d\%o'
+export LESS=-eM
+export PAGER=less
+export MANPAGER='less -isR'
+
 alias vim=~/bin/cvim 
 
 export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"

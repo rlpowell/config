@@ -92,12 +92,13 @@ export PS1="$USER@$HOSTNAME> "
 #RPROMPT=' %~'     # prompt for right side of screen
 
 #Format binary chars in less in an octal fashion
-export LESSBINFMT='*d\%o'
 export MAILCALL='NEW MAIL! '
 export YOUSAID='In %C you wrote:'
 export ATTRIBUTION='%f wrote:'
+export LESSBINFMT='*d\%o'
 export LESS=-eM
 export PAGER=less
+export MANPAGER='less -isR'
 
 MAILCHECK=300
 DIRSTACKSIZE=30
