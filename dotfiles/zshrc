@@ -14,7 +14,7 @@ cdpath=(. .. ~ ~/src)
 fpath=(~/.zfunc /usr/share/zsh/functions /usr/share/zsh/functions/Zle)
 
 # Put information into the tmux title
-function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):${PWD}\033\\" }
+function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\" }
 
 # use hard limits, except for a smaller stack and no core dumps
 unlimit
