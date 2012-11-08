@@ -4,6 +4,11 @@ then
   exit 1
 fi
 
+echo "Setting up submodules"
+git submodule sync
+git submodule init
+git submodule update
+
 echo "Setting up dot files"
 
 for file in vimrc tmux.conf muttrc muttrc-gmail inputrc \
