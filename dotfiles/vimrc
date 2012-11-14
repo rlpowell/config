@@ -22,6 +22,7 @@ nnoremap <Space>k <C-W>k
 " Open various panels or whatever
 nnoremap <Space>t :TagbarToggle<CR>
 nnoremap <Space>a :tabnew<CR>:Ack<Space>
+nnoremap <Space>A :tabnew<CR>:Ack<Space>-a<Space>
 nnoremap <Space>n :tabnew<CR>
 
 " Close all but the current window in the current tab (for dropping stuff like Ack)
