@@ -154,6 +154,10 @@ autocmd FileType sh set formatoptions=tcroq2
 :nnoremap g* g*zz
 :nnoremap g# g#zz
 
+" diff tweaks
+set diffopt=filler,iwhite
+set diffexpr=MyDiff() " See below for the definition
+
 " Per-language special stuff
 autocmd BufReadPost,FileReadPost *.pp setl filetype=puppet
 autocmd BufReadPost,FileReadPost *.scm.stx setl syntax=scheme
@@ -258,7 +262,6 @@ endif
 "******************
 
 " Make diffopt iwhite actually ignore whitespace, and set it on
-set diffexpr=MyDiff()
 function! MyDiff()
    let opt = ""
    if &diffopt =~ "icase"
@@ -270,7 +273,6 @@ function! MyDiff()
    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
         \  " > " . v:fname_out
 endfunction
-set diffopt=filler,iwhite
 
 " FIXME: If we want to make the below more intelligent (like "shrink
 " if necessary based on window size"),
