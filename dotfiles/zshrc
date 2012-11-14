@@ -1,4 +1,9 @@
 
+#*******************************
+# ABOUT THIS FILE
+#
+# zshrc is read for interactive shells
+#*******************************
 #
 # Generic .zshrc file for zsh 2.5
 #
@@ -39,6 +44,9 @@ stty susp 
 # Sorting issues
 alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
+
+# better default
+alias tmux='tmux -2 -u '
 
 # set up aliases
 alias screen="screen -U"

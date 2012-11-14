@@ -1,4 +1,9 @@
 # .bashrc
+#*******************************
+# ABOUT THIS FILE
+#
+# bashrc is read for interactive non-login shells; bash_profile sources it
+#*******************************
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
@@ -27,5 +32,8 @@ alias vim=~/bin/cvim
 # Sorting issues
 alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
+
+# better default
+alias tmux='tmux -2 -u '
 
 export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"

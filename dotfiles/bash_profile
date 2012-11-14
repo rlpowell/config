@@ -1,4 +1,9 @@
 # .bash_profile
+#*******************************
+# ABOUT THIS FILE
+#
+# bash_profile *ONLY* is read for interactive shells, which is why we source bashrc
+#*******************************
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
@@ -10,6 +15,9 @@ fi
 PATH=$PATH:$HOME/bin
 
 export PATH
+
+TERM=screen-256color
+export TERM
 
 # Put pwd in tmux status
 export PROMPT_COMMAND='printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed s;/home/[^/]*powell;~;g)\033\\"'
