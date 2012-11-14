@@ -89,22 +89,44 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 :set notextmode
 :set textwidth=68
 
-" pretty
+" Colors and such
 set t_Co=256
-colorscheme desert256
 set background=dark
+
+colorscheme ir_black
+
+" " Very dark grey background; not bad, but trying out ir_black for now
+" colorscheme inkpot
+
+" " grey background eww
+" colorscheme desert
+
+" " Doesn't work with CSApprox, and hence is kind of terrible.
+" colorscheme desert256
+
+"********************
+" HIGHLIGHTS
+"
+" Which are colorscheme-specific
+"
+" Note that we set *GUI* highlights, because that's how CSApprox works.
+"********************
+"*****
+" ir_black
+"*****
+" Tabline customization
+highlight TabLine guibg=#000000 gui=NONE
+highlight TabLineSel guifg=#ff0000
+highlight TabLineFill guifg=White guibg=Black
+" Basic text is a bit intense
+highlight Normal           guifg=#dadada     guibg=black       gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
+" The fixed text is hard to read on a red background
+highlight DiffText       gui=bold guifg=White guibg=Red
 
 " Makes # style comments do the right thing for some languages.
 autocmd FileType sh set comments=:#
 autocmd FileType sh set formatoptions=tcroq2
 
-" Quickfix/search (aka Ack results) were unreadable, so:
-highlight Search cterm=NONE ctermfg=grey ctermbg=blue
-
-" Tabline customization; more in the MyTabLine function below
-highlight TabLine cterm=NONE
-highlight TabLineSel ctermfg=Red
-highlight TabLineFill cterm=NONE ctermfg=Cyan
 
 " Do or do not break at whitespace
 :map <F5> :setlocal linebreak<CR>
