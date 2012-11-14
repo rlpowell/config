@@ -7,3 +7,6 @@
 [submodule "dotfiles/vim/bundle/tabular"]
 	path = dotfiles/vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule "dotfiles/vim/bundle/inkpot"]
+	path = dotfiles/vim/bundle/inkpot
+	url = https://github.com/ciaranm/inkpot
