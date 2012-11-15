@@ -9,7 +9,7 @@
 	url = git://github.com/godlygeek/tabular.git
 [submodule "dotfiles/vim/bundle/inkpot"]
 	path = dotfiles/vim/bundle/inkpot
-	url = https://github.com/ciaranm/inkpot
+	url = git://github.com/ciaranm/inkpot.git
 [submodule "dotfiles/vim/bundle/vividchalk"]
 	path = dotfiles/vim/bundle/vividchalk
 	url = git://github.com/tpope/vim-vividchalk.git
