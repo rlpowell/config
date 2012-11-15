@@ -10,3 +10,12 @@
 [submodule "dotfiles/vim/bundle/inkpot"]
 	path = dotfiles/vim/bundle/inkpot
 	url = https://github.com/ciaranm/inkpot
+[submodule "dotfiles/vim/bundle/vim2hs"]
+	path = dotfiles/vim/bundle/vim2hs
+	url = git://github.com/dag/vim2hs.git
+[submodule "dotfiles/vim/bundle/ghcmod"]
+	path = dotfiles/vim/bundle/ghcmod
+	url = git://github.com/eagletmt/ghcmod-vim.git
+[submodule "dotfiles/vim/bundle/vimproc"]
+	path = dotfiles/vim/bundle/vimproc
+	url = git://github.com/Shougo/vimproc.git
