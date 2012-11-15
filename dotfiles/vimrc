@@ -37,6 +37,14 @@ nnoremap <Space>d :bdelete<CR>
 nnoremap <Space>T :Tabularize /,
 vnoremap <Space>T :Tabularize /,
 
+" Fugitive
+nnoremap <Space>gs :Gstatus<CR>
+nnoremap <Space>gc :Gcommit<CR>
+nnoremap <Space>gd :Gdiff<CR><C-w>h
+vnoremap <Space>do :diffget<CR>
+vnoremap <Space>dg :diffget<CR>
+vnoremap <Space>dp :diffput<CR>
+
 " FuzzyFinder
 nnoremap <Space>ff :FufCoverageFile<CR>
 nnoremap <Space>fb :FufBuffer<CR>
