@@ -13,3 +13,6 @@
 [submodule "dotfiles/vim/bundle/vividchalk"]
 	path = dotfiles/vim/bundle/vividchalk
 	url = git://github.com/tpope/vim-vividchalk.git
+[submodule "dotfiles/vim/bundle/vim-fugitive"]
+	path = dotfiles/vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
