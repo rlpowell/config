@@ -21,7 +21,8 @@ nnoremap <Space>k <C-W>k
 
 " Open various panels or whatever
 nnoremap <Space>t :TagbarToggle<CR>
-nnoremap <Space>a :tabnew<CR>:Ack<Space>''OD
+nnoremap <Space>a :tabnew<CR>:Ack<Space>''<Left>
+nnoremap <Space>A :tabnew<CR>:Ack<Space>-a<Space>''<Left>
 nnoremap <Space>n :tabnew<CR>
 
 " Close all but the current window in the current tab (for dropping stuff like Ack)
@@ -35,6 +36,14 @@ nnoremap <Space>d :bdelete<CR>
 " edit the params)
 nnoremap <Space>T :Tabularize /,
 vnoremap <Space>T :Tabularize /,
+
+" Fugitive
+nnoremap <Space>gs :Gstatus<CR>
+nnoremap <Space>gc :Gcommit<CR>
+nnoremap <Space>gd :Gdiff<CR><C-w>h
+vnoremap <Space>do :diffget<CR>
+vnoremap <Space>dg :diffget<CR>
+vnoremap <Space>dp :diffput<CR>
 
 " FuzzyFinder
 nnoremap <Space>ff :FufCoverageFile<CR>
@@ -88,22 +97,55 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 :set notextmode
 :set textwidth=68
 
-" pretty
+" Colors and such
 set t_Co=256
-colorscheme desert256
 set background=dark
 
-" Makes # style comments do the right thing for some languages.
-autocmd FileType sh set comments=:#
-autocmd FileType sh set formatoptions=tcroq2
+colorscheme vividchalk
 
-" Quickfix/search (aka Ack results) were unreadable, so:
-highlight Search cterm=NONE ctermfg=grey ctermbg=blue
+" Trying vividchalk for a while
+" colorscheme ir_black
 
-" Tabline customization; more in the MyTabLine function below
-highlight TabLine cterm=NONE
+" " Very dark grey background; not bad, but trying out ir_black for now
+" colorscheme inkpot
+
+" " grey background eww
+" colorscheme desert
+
+" " Doesn't work with CSApprox, and hence is kind of terrible.
+" colorscheme desert256
+
+"********************
+" HIGHLIGHTS
+"
+" Which are colorscheme-specific
+"
+" Note that we set *GUI* highlights, because that's how CSApprox works.
+"********************
+" "*****
+" " ir_black
+" "*****
+" " Tabline customization
+" highlight TabLine guibg=#000000 gui=NONE
+" highlight TabLineSel guifg=#ff0000
+" highlight TabLineFill guifg=White guibg=Black
+" " Basic text is a bit intense
+" highlight Normal           guifg=#dadada     guibg=black       gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
+" " The fixed text is hard to read on a red background
+" highlight DiffText       gui=bold guifg=White guibg=Red
+" 
+" " Makes # style comments do the right thing for some languages.
+" autocmd FileType sh set comments=:#
+" autocmd FileType sh set formatoptions=tcroq2
+"*****
+" vividchalk, which apparently has cterm as well as/rather than GUI
+" values
+"*****
+" Tabline customization
+highlight TabLine ctermbg=Black cterm=NONE
 highlight TabLineSel ctermfg=Red
-highlight TabLineFill cterm=NONE ctermfg=Cyan
+highlight TabLineFill ctermfg=Cyan ctermbg=Black cterm=NONE
+
 
 " Do or do not break at whitespace
 :map <F5> :setlocal linebreak<CR>
@@ -130,6 +172,10 @@ highlight TabLineFill cterm=NONE ctermfg=Cyan
 :nnoremap # #zz
 :nnoremap g* g*zz
 :nnoremap g# g#zz
+
+" diff tweaks
+set diffopt=filler,iwhite
+set diffexpr=MyDiff() " See below for the definition
 
 " Per-language special stuff
 autocmd BufReadPost,FileReadPost *.pp setl filetype=puppet
@@ -235,7 +281,6 @@ endif
 "******************
 
 " Make diffopt iwhite actually ignore whitespace, and set it on
-set diffexpr=MyDiff()
 function! MyDiff()
    let opt = ""
    if &diffopt =~ "icase"
@@ -247,7 +292,6 @@ function! MyDiff()
    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
         \  " > " . v:fname_out
 endfunction
-set diffopt=filler,iwhite
 
 " FIXME: If we want to make the below more intelligent (like "shrink
 " if necessary based on window size"),

@@ -1,4 +1,9 @@
 # .bash_profile
+#*******************************
+# ABOUT THIS FILE
+#
+# bash_profile *ONLY* is read for interactive shells, which is why we source bashrc
+#*******************************
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
@@ -11,7 +16,13 @@ PATH=$PATH:$HOME/bin
 
 export PATH
 
+TERM=putty-256color
+export TERM
+
 # Put pwd in tmux status
-export PROMPT_COMMAND='printf "\033]2;$(uname -n | cut -d . -f 1):${PWD}\033\\"'
+prompt_func () {
+  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\"
+}
+export PROMPT_COMMAND=prompt_func
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

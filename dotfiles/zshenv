@@ -1,11 +1,20 @@
+#*******************************
+# ABOUT THIS FILE
+#
+# zshenv is always read
+#*******************************
 export HOST=$(uname -n)
 export HOSTNAME=$HOST
 export USER=$(id -un)
 export USERNAME=$USER
 export ARCH=$(uname -r)
-export LANG=en_US.UTF-8
 export VISUAL=cvim
 export EDITOR=cvim
+export TERM=putty-256color
+
+# Try to sort correctly
+export LANG=en_US.UTF-8
+export LC_COLLATE=C
 
 export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$HOME/bin:$HOME/.rvm/bin
 

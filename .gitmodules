@@ -7,3 +7,12 @@
 [submodule "dotfiles/vim/bundle/tabular"]
 	path = dotfiles/vim/bundle/tabular
 	url = git://github.com/godlygeek/tabular.git
+[submodule "dotfiles/vim/bundle/inkpot"]
+	path = dotfiles/vim/bundle/inkpot
+	url = https://github.com/ciaranm/inkpot
+[submodule "dotfiles/vim/bundle/vividchalk"]
+	path = dotfiles/vim/bundle/vividchalk
+	url = git://github.com/tpope/vim-vividchalk.git
+[submodule "dotfiles/vim/bundle/vim-fugitive"]
+	path = dotfiles/vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git

@@ -1,4 +1,9 @@
 
+#*******************************
+# ABOUT THIS FILE
+#
+# zshrc is read for interactive shells
+#*******************************
 #
 # Generic .zshrc file for zsh 2.5
 #
@@ -14,7 +19,7 @@ cdpath=(. .. ~ ~/src)
 fpath=(~/.zfunc /usr/share/zsh/functions /usr/share/zsh/functions/Zle)
 
 # Put information into the tmux title
-function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):${PWD}\033\\" }
+function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\" }
 
 # use hard limits, except for a smaller stack and no core dumps
 unlimit
@@ -36,6 +41,13 @@ fi
 
 stty susp 
 
+# Sorting issues
+alias ls='LC_ALL=C ls -AF --color=auto'
+alias sort='LC_ALL=C sort'
+
+# better default
+alias tmux='tmux -2 -u '
+
 # set up aliases
 alias screen="screen -U"
 alias mv='nocorrect mv -i'    # no spelling correction on mv
@@ -50,10 +62,7 @@ alias d='dirs -v'
 alias h=history
 alias pfl='ps -aef --forest | most'
 alias pg='ps -aef | grep '
-alias ls='ls -AF --color=auto'
-alias la='ls -a'
 alias dl='dict -P - -h dict.lojban.org'
-alias sl='ssh -e none ls'
 #alias z=suspend
 #alias x=exit
 alias repl='repl -filter ~/.mh_filter -group -nocc me'
