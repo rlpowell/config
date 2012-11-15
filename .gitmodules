@@ -9,7 +9,7 @@
 	url = git://github.com/godlygeek/tabular.git
 [submodule "dotfiles/vim/bundle/inkpot"]
 	path = dotfiles/vim/bundle/inkpot
-	url = https://github.com/ciaranm/inkpot
+	url = git://github.com/ciaranm/inkpot.git
 [submodule "dotfiles/vim/bundle/vim2hs"]
 	path = dotfiles/vim/bundle/vim2hs
 	url = git://github.com/dag/vim2hs.git
@@ -19,3 +19,9 @@
 [submodule "dotfiles/vim/bundle/vimproc"]
 	path = dotfiles/vim/bundle/vimproc
 	url = git://github.com/Shougo/vimproc.git
+[submodule "dotfiles/vim/bundle/vividchalk"]
+	path = dotfiles/vim/bundle/vividchalk
+	url = git://github.com/tpope/vim-vividchalk.git
+[submodule "dotfiles/vim/bundle/vim-fugitive"]
+	path = dotfiles/vim/bundle/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git

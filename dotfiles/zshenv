@@ -10,7 +10,7 @@ export USERNAME=$USER
 export ARCH=$(uname -r)
 export VISUAL=cvim
 export EDITOR=cvim
-export TERM=screen-256color
+export TERM=putty-256color
 
 # Try to sort correctly
 export LANG=en_US.UTF-8
