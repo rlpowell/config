@@ -145,6 +145,8 @@ colorscheme vividchalk
 highlight TabLine ctermbg=Black cterm=NONE
 highlight TabLineSel ctermfg=Red
 highlight TabLineFill ctermfg=Cyan ctermbg=Black cterm=NONE
+" The search highlighting is a bit weak.
+:highlight Search term=standout cterm=bold ctermfg=0 ctermbg=11 gui=bold guifg=Black guibg=#ffff00
 
 
 " Do or do not break at whitespace
