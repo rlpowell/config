@@ -23,7 +23,7 @@ export VISUAL=~/bin/cvim
 export EDITOR=~/bin/cvim
 
 export LESSBINFMT='*d\%o'
-export LESS=-eM
+export LESS=-eRM
 export PAGER=less
 export MANPAGER='less -isR'
 
