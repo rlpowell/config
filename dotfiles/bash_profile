@@ -16,7 +16,7 @@ PATH=$PATH:$HOME/bin
 
 export PATH
 
-TERM=putty-256color
+TERM=xterm-256color
 export TERM
 
 # Put pwd in tmux status
