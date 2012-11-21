@@ -20,7 +20,7 @@ nnoremap <Space>j <C-W>j
 nnoremap <Space>k <C-W>k
 
 " Open various panels or whatever
-nnoremap <Space>t :TagbarToggle<CR>
+nnoremap <Space>t :TagbarOpen fj<CR>
 nnoremap <Space>a :tabnew<CR>:Ack<Space>''<Left>
 nnoremap <Space>A :tabnew<CR>:Ack<Space>-a<Space>''<Left>
 nnoremap <Space>n :tabnew<CR>
@@ -178,6 +178,9 @@ highlight TabLineFill ctermfg=Cyan ctermbg=Black cterm=NONE
 " diff tweaks
 set diffopt=filler,iwhite
 set diffexpr=MyDiff() " See below for the definition
+
+" Turn off pretty glyphs in vim2hs
+let g:haskell_conceal = 0
 
 " Per-language special stuff
 autocmd BufReadPost,FileReadPost *.pp setl filetype=puppet

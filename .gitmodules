@@ -25,3 +25,9 @@
 [submodule "dotfiles/vim/bundle/vim-fugitive"]
 	path = dotfiles/vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+[submodule "dotfiles/vim/bundle/lushtags"]
+	path = dotfiles/vim/bundle/lushtags
+	url = git://github.com/bitc/lushtags.git
+[submodule "dotfiles/vim/bundle/tagbar"]
+	path = dotfiles/vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar.git
