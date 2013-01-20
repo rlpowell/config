@@ -41,6 +41,8 @@ vnoremap <Space>T :Tabularize /,
 nnoremap <Space>gs :Gstatus<CR>
 nnoremap <Space>gc :Gcommit<CR>
 nnoremap <Space>gd :Gdiff<CR><C-w>h
+
+" These only work in visual mode
 vnoremap <Space>do :diffget<CR>
 vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
