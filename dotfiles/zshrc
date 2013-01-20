@@ -12,11 +12,20 @@
 # options, key bindings, etc.
 #
 
+# vi key bindings
+bindkey -v
+
+# Do lots of magic completion crap
+autoload -Uz compinit
+compinit
+
+# remove bindings defined in _history_complete_word in
+# /usr/share/zsh or similar
+bindkey -r '\e/'
+bindkey -r '\e,'
+
 # search path for the cd command
 cdpath=(. .. ~ ~/src)
-
-# where to look for function definitions
-fpath=(~/.zfunc /usr/share/zsh/functions /usr/share/zsh/functions/Zle)
 
 # Put information into the tmux title
 function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\" }
@@ -72,12 +81,6 @@ then
     alias ftp=ncftp
 fi
 
-# shell functions
-setenv() 
-{ 
-	export $1=$2 
-}  # csh compatibility
-
 # bigger shell functions to autoload
 autoload zed
 autoload run-help
@@ -122,36 +125,6 @@ export HISTFILE=$HOME/.zhistory
 unsetopt rmstarsilent
 unsetopt bgnice
 unsetopt EXTENDED_GLOB 
-
-WATCHFMT='%n %a %l from %m at %t.'
-LOGCHECK=0
-
-bindkey -v       # vi key bindings
-
-# hit v to run the whole thing in your editor
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
-#setenv HOST `hostname`
-setenv USER `whoami`
-setenv ARCH `uname -r`
-
-eclean()
-{
-    (rm .[a-zA-Z0-9]*~;rm *~) >&/dev/null
-}
-
-# The following is used to find out if a particular
-# program exists:
-# consider if [ -n "`exists showpath`" ]
-# if showpath exists, the if part will be executed,
-# if it does not, the else part will be.
-
-exists()
-{
-    which $1 | grep -v no 
-}
 
 if [ -e ~/.zshrc_local ]
 then
