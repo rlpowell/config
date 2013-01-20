@@ -38,8 +38,9 @@ ln -sfT "$(pwd)/dotfiles/vim" ~/.vim
 
 echo "Setting up bin files"
 
-for file in cvim ws_trim_wrap
+for longfile in binfiles/*
 do
+  file=$(basename $longfile)
   binfile="$HOME/bin/$file"
   gitfile="$(pwd)/binfiles/$file"
 
