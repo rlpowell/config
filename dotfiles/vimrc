@@ -51,6 +51,7 @@ vnoremap <Space>dp :diffput<CR>
 nnoremap <Space>ff :FufCoverageFile<CR>
 nnoremap <Space>fb :FufBuffer<CR>
 nnoremap <Space>fl :FufLine<CR>
+nnoremap <Space>fr :FufRenewCache<CR>
 let g:fuf_keyOpen = '<C-o>'
 let g:fuf_keyOpenTabpage = '<CR>'
 
