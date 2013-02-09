@@ -16,9 +16,12 @@ set -o vi
 
 . ~/.ssh/agent >/dev/null 2>&1
 
+export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 export HISTFILESIZE=100000
 export HISTSIZE=100000
 export HISTFILE=~/.bash_history
+shopt -s histappend
+shopt -s cmdhist
 export VISUAL=~/bin/cvim
 export EDITOR=~/bin/cvim
 

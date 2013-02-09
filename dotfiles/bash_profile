@@ -21,6 +21,8 @@ export TERM
 
 # Put pwd in tmux status
 prompt_func () {
+  history -n
+  history -a
   printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\"
 }
 export PROMPT_COMMAND=prompt_func
