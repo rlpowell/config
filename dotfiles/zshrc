@@ -50,6 +50,10 @@ fi
 
 stty susp 
 
+# Spelling mistakes
+alias les=less
+alias gerp=grep
+
 # Sorting issues
 alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
