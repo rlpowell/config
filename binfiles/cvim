@@ -4,4 +4,9 @@
 # "vim", and this path avoided loops.  Not really relevant anymore.
 # export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:$HOME/bin:$PATH
 
+if [ "$(toe 2>&1 | grep screen-256color)" ]
+then
+  export TERM='screen-256color'
+fi
+
 clear && vim "$@"
