@@ -52,6 +52,9 @@ bind index b previous-page
 bind index <esc>b bounce-message
 bind pager <esc>b bounce-message
 
+# Quickly turn off limit
+macro index L "lall\n*"
+
 set move=no
 hdr_order Subject: From: To: Cc: Date:
 set fast_reply=yes
