@@ -85,6 +85,10 @@ then
     alias ftp=ncftp
 fi
 
+# Yay forests
+alias ps='ps --forest -f -e '
+alias pg='ps --forest -f -e | grep '
+
 # bigger shell functions to autoload
 autoload zed
 autoload run-help

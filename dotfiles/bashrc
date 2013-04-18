@@ -47,4 +47,8 @@ alias gerp=grep
 # better default
 alias tmux='tmux -2 -u '
 
+# Yay forests
+alias ps='ps --forest -f -e '
+alias pg='ps --forest -f -e | grep '
+
 export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"
