@@ -51,4 +51,7 @@ alias tmux='tmux -2 -u '
 alias ps='ps --forest -f -e '
 alias pg='ps --forest -f -e | grep '
 
+# Color for grep
+export GREP_OPTIONS='--color=auto'
+
 export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"
