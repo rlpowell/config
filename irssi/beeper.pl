@@ -61,8 +61,8 @@ No more than one flag can appear in each flag set.
   a (for 'a'ctivity)
       Any channel with this flag will produce notifications when
       activity is registered, until and unless it becomes the
-      active window.  This uses the usual activity_msg_level
-      variable.
+      active window.  This uses the usual activity_msg_level and
+      activity_hilight_level variables.
 
       This flag has no effect on whatever channel is currently in
       the active window, partly because making that window active
@@ -351,8 +351,8 @@ sub is_idle {
 #
 # In other words, returns true immediately if:
 #
-# 1. There are no idle time related flags and the window is *not*
-# the current one.
+# 1. There is a flag set with no idle time related flags and the
+# window is *not* the current one.
 #
 # 2. There is a c flag, the window is the current one, and we are in
 # fact idle.
@@ -363,25 +363,25 @@ sub is_idle {
 sub is_idle_enough {
   my $wname = shift;
 
-  # If we have any relevant flags, continue, otherwise idle time is
-  # not relevant, so return true.
-  if (grep { m{[ic]} } @_) {
+  # 1. There is a flag set with no idle time related flags and the
+  # window is *not* the current one.
+  if (not is_active_window($wname) && grep { m{^[^ic]*$} } @_) {
+    # Irssi::print "is_idle_enough: flag set with no idle flags and we're not in the active window";
+    return 1;
+  } else {
+    # There is no flag set without i or c flags
+
     # Perform c flags
-    if (grep { m{c} } @_) {
-      # Irssi::print "is_idle_enough: c flag applies";
-      return (is_active_window($wname) && is_idle());
+    if (is_active_window($wname) && grep { m{c} } @_) {
+      # Irssi::print "is_idle_enough: c flag applies: ".is_idle();
+      return is_idle();
     }
     # If we're still here, no c flags
     if (grep { m{i} } @_) {
-      # Irssi::print "is_idle_enough: i flag applies";
+      # Irssi::print "is_idle_enough: i flag applies: ".is_idle();
       return is_idle();
     }
 
-  } else {
-    # Irssi::print "is_idle_enough: no idle flags: ".(not is_active_window($wname));
-
-    # No idle flags; we're OK if it's not the active window
-    return (not is_active_window($wname));
   }
 
   return 0;
@@ -409,7 +409,7 @@ sub handle_text {
   my ($fg, $bg, $flags, $text, $dest) = @_;
 
   if ($item) {
-    my $name = $item->get_active_name();
+    my $name = clean($item->get_active_name());
 
     if ($name and $name ne '(status)') {
 
@@ -424,30 +424,42 @@ sub handle_text {
       #  Irssi::print "print text: flags: ".Dumper($flags);
       #  Irssi::print "print text: text: ".Dumper($text);
       #  Irssi::print "print text: dest: ".Dumper($dest);
-      #  Irssi::print "print text: $name, $text";
-      #  Irssi::print "print text level: ".Irssi::bits2level($dest->{'level'});
+      # Irssi::print "print text: $name, $text";
+      # Irssi::print "print text level: ".Irssi::bits2level($dest->{'level'});
       #  Irssi::print "print text level hi: ".($dest->{'level'} & Irssi::MSGLEVEL_HILIGHT());
       #  Irssi::print "print text level pub: ".($dest->{'level'} & Irssi::MSGLEVEL_PUBLIC());
-      #  Irssi::print "print text level aml: ".Irssi::settings_get_level('activity_msg_level');
-      #  Irssi::print "print text level aml2: ".($dest->{'level'} & Irssi::settings_get_level('activity_msg_level') );
+
+      # use Data::Dumper;
+      # Irssi::print "chans: ".Dumper(\%channels);
+      # Irssi::print "alerts: ".Dumper(\%alerts);
+      # Irssi::print "chans match: ".Dumper(\$channels{$name});
 
       if ($channels{$name} and not exists $alerts{$name} ) {
+        # Irssi::print "print text: chans match: ".Dumper(\$channels{$name});
+
         # Handle the a flag, if any
         my @flag_sets = grep { m{a} } @{$channels{$name}};
+
+        # Irssi::print "print text: flag_sets 1: ".Dumper(\@flag_sets);
 
         if (@flag_sets) {
           # Use the normal activity_msg_level variable to see if we've
           # got interesting activity as the user sees it.
-          my $activity_match = ($dest->{'level'} & Irssi::settings_get_level('activity_msg_level') );
+          my $activity_match = ($dest->{'level'} & Irssi::settings_get_level('activity_msg_level') ) ||
+                               ($dest->{'level'} & Irssi::settings_get_level('activity_hilight_level') );
+                               # Irssi::print "print text: activity_match 1: $activity_match";
           if ($activity_match) { to_beep_or_not_to_beep( $name, @flag_sets); }
         }
 
         # Handle the h flag, if any
         my @flag_sets = grep { m{h} } @{$channels{$name}};
 
+        # Irssi::print "print text: flag_sets 2".Dumper(\@flag_sets);
+
         if (@flag_sets) {
           # Is it highlighted?
           my $activity_match = ($dest->{'level'} & Irssi::MSGLEVEL_HILIGHT());
+          # Irssi::print "print text: activity_match 2: $activity_match";
           if ($activity_match) { to_beep_or_not_to_beep( $name, @flag_sets); }
         }
       }
