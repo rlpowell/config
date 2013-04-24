@@ -313,7 +313,7 @@ sub beeper_quiet {
 sub beep {
   # use Data::Dumper;
   # Irssi::print "beep: ".Dumper(\%alerts);
-  Irssi::signal_emit('beep');
+  Irssi::command('beep');
 }
 
 sub is_active_window {
