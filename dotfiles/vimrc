@@ -7,6 +7,9 @@ call pathogen#helptags()
 
 " Common keypresses that I want to be fast to hit
 
+" I keep having to reload because Fuf gets confused
+nnoremap <Space>v :source ~/.vimrc<CR>
+
 " Don't bind the leader because other things bind it
 " let mapleader = ","
 
@@ -191,6 +194,8 @@ autocmd BufReadPost,FileReadPost *.scm.stx setl syntax=scheme
 autocmd BufReadPost,FileReadPost *.scm.stx setl filetype=scheme
 autocmd BufReadPost,FileReadPost *.lisp setl lisp
 autocmd BufReadPost,FileReadPost *.cl setl lisp
+autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
+
 
 " " Make tab do indentation of the whole line, even in insert mode
 " " (and shift-tab unindent)
