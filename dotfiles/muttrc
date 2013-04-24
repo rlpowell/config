@@ -52,8 +52,8 @@ bind index b previous-page
 bind index <esc>b bounce-message
 bind pager <esc>b bounce-message
 
-# Quickly turn off limit
-macro index L "lall\n*"
+# Quickly turn off limit and purge
+macro index L "<limit>all<enter><enter-command>set delete=yes<enter><sync-mailbox><enter-command>set delete=ask-yes<enter><last-entry>"
 
 set move=no
 hdr_order Subject: From: To: Cc: Date:
