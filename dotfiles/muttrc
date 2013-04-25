@@ -54,6 +54,8 @@ bind pager <esc>b bounce-message
 
 # Quickly turn off limit and purge
 macro index L "<limit>all<enter><enter-command>set delete=yes<enter><sync-mailbox><enter-command>set delete=ask-yes<enter><last-entry>"
+# Runs the macro just above
+macro pager L "qL"
 
 set move=no
 hdr_order Subject: From: To: Cc: Date:
