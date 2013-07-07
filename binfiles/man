@@ -1,0 +1,21 @@
+#!/bin/sh
+
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+
+for name in "$@"
+do
+  if [ -f /usr/share/info/$name.info.gz ]
+  then
+    url="http://www.gnu.org/software/$name/manual/$name.html"
+    if curl -f "$url" 2>&1 | grep -q 'The requested URL returned error'
+    then
+      man $name
+    else
+      echo "Redirecting to online manual."
+      sleep 1
+      w3m "$url"
+    fi
+  else
+    man $name
+  fi
+done
