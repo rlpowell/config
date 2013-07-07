@@ -51,6 +51,10 @@ bind index B previous-page
 bind index b previous-page
 bind index <esc>b bounce-message
 bind pager <esc>b bounce-message
+bind index < half-up
+bind index > half-down
+bind pager < half-up
+bind pager > half-down
 
 # Quickly turn off limit and purge
 macro index L "<limit>all<enter><enter-command>set delete=yes<enter><sync-mailbox><enter-command>set delete=ask-yes<enter><last-entry>"
