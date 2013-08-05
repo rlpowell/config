@@ -29,6 +29,7 @@ export LESSBINFMT='*d\%o'
 export LESS=-eRM
 export PAGER=less
 export MANPAGER='less -isR'
+export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
 
 # Try to sort correctly
 export LANG=en_US.UTF-8
@@ -51,7 +52,13 @@ alias tmux='tmux -2 -u '
 alias ps='ps --forest -f -e '
 alias pg='ps --forest -f -e | grep '
 
+# Easier lsof
+alias li='sudo lsof -i -Pnl | grep LIST '
+alias lsof='sudo lsof -i -Pnl '
+
 # Color for grep
 export GREP_OPTIONS='--color=auto'
 
 export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
