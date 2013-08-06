@@ -110,8 +110,8 @@ alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 alias gc='g checkout'
 
 # Easier lsof
-alias li='sudo lsof -i -Pnl | grep LIST '
-alias lsof='sudo lsof -i -Pnl '
+alias li='sudo lsof -Pnl -i | grep LIST '
+alias lsof='sudo lsof -Pnl -i '
 
 # bigger shell functions to autoload
 autoload zed
