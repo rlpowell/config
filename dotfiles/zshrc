@@ -109,6 +109,10 @@ alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 alias gc='g checkout'
 
+# Easier lsof
+alias li='sudo lsof -i -Pnl | grep LIST '
+alias lsof='sudo lsof -i -Pnl '
+
 # bigger shell functions to autoload
 autoload zed
 autoload run-help
