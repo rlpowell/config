@@ -51,7 +51,7 @@ fi
 stty susp 
 
 # Spelling mistakes
-alias les=less
+alias les=/home/rlpowell/bin/less
 alias gerp=grep
 
 # Sorting issues
@@ -134,8 +134,8 @@ export PS1="$USER@$HOSTNAME> "
 export MAILCALL='NEW MAIL! '
 export YOUSAID='In %C you wrote:'
 export ATTRIBUTION='%f wrote:'
-export PAGER='less'
-export MANPAGER='less -isR'
+export PAGER='/home/rlpowell/bin/less'
+export MANPAGER='/home/rlpowell/bin/less -isR'
 
 MAILCHECK=300
 DIRSTACKSIZE=30

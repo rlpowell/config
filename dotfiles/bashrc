@@ -27,8 +27,8 @@ export EDITOR=~/bin/cvim
 
 export LESSBINFMT='*d\%o'
 export LESS=-eRM
-export PAGER=less
-export MANPAGER='less -isR'
+export PAGER=/home/rlpowell/bin/less
+export MANPAGER='/home/rlpowell/bin/less -isR'
 export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
 
 # Try to sort correctly
@@ -42,7 +42,7 @@ alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
 
 # Spelling mistakes
-alias les=less
+alias les=/home/rlpowell/bin/less
 alias gerp=grep
 
 # better default
