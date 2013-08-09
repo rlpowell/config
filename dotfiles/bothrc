@@ -12,12 +12,6 @@ then
   . $HOME/bin/agent
 fi
 
-# use hard limits, except for a smaller stack and no core dumps
-unlimit
-#limit stack 8192
-#limit core 0
-limit -s
-
 umask 022
 
 stty echoe
@@ -83,9 +77,13 @@ if [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
 then
   alias a='ack -a'
   alias ai='ack -ai'
+  alias al='ack -al'
+  alias ail='ack -ail'
 else
   alias a='ack'
   alias ai='ack -i'
+  alias al='ack -l'
+  alias ail='ack -il'
 fi
 
 # Easier lsof

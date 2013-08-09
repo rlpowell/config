@@ -110,6 +110,12 @@ unsetopt rmstarsilent
 unsetopt bgnice
 unsetopt EXTENDED_GLOB 
 
+# use hard limits, except for a smaller stack and no core dumps
+unlimit
+#limit stack 8192
+#limit core 0
+limit -s
+
 if [ -e ~/.zshrc_local ]
 then
 	. ~/.zshrc_local
