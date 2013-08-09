@@ -1,4 +1,33 @@
 
+
+
+
+
+
+
+
+
+
+
+
+
+#*******************************
+# YOU ARE PROBABLY IN THE WRONG PLACE.  Try .bothrc
+#*******************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #*******************************
 # ABOUT THIS FILE
 #
@@ -30,88 +59,11 @@ cdpath=(. .. ~ ~/src)
 # Put information into the tmux title
 function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\" }
 
-# use hard limits, except for a smaller stack and no core dumps
-unlimit
-#limit stack 8192
-#limit core 0
-limit -s
 
-umask 022
 
-stty echoe
-stty flush '^@'
-stty start '^@'
-stty stop '^@'
-
-if [ -f "$HOME/bin/agent" ]
-then
-  . $HOME/bin/agent
-fi
-
-stty susp 
-
-# Spelling mistakes
-alias les=/home/rlpowell/bin/less
-alias gerp=grep
-
-# Sorting issues
-alias ls='LC_ALL=C ls -AF --color=auto'
-alias sort='LC_ALL=C sort'
-
-# better default
-alias tmux='tmux -2 -u '
 
 # Color for grep
 export GREP_OPTIONS='--color=auto'
-
-# set up aliases
-alias screen="screen -U"
-alias mv='nocorrect mv -i'    # no spelling correction on mv
-alias cp='nocorrect cp -i'    # no spelling correction on cp
-alias j=jobs
-alias fg='clear ; fg'
-alias vim=cvim
-alias lh='ll -h'
-alias pu=pushd
-alias po=popd
-alias d='dirs -v'
-alias h=history
-alias pfl='ps -aef --forest | most'
-alias pg='ps -aef | grep '
-alias dl='dict -P - -h dict.lojban.org'
-#alias z=suspend
-#alias x=exit
-alias repl='repl -filter ~/.mh_filter -group -nocc me'
-alias vcat='cat -v'
-if [ -z "`which ncftp 2>&1 | grep 'no' `" ]
-then
-    alias ftp=ncftp
-fi
-
-# Yay forests
-alias ps='ps --forest -f -e '
-alias pg='ps --forest -f -e | grep '
-
-# stolen from cizra in #jbopre
-alias g=git
-alias gd='g diff'
-alias gs='g status --short'
-alias ga='g add'
-alias gf='g fetch'
-alias gr='g rebase'
-alias gst='g stash'
-alias gp='g push'
-alias gb='g branch'
-alias gcm='g commit'
-alias gcmam='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
-alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
-alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
-alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
-alias gc='g checkout'
-
-# Easier lsof
-alias li='sudo lsof -Pnl -i | grep LIST '
-alias lsof='sudo lsof -Pnl -i '
 
 # bigger shell functions to autoload
 autoload zed
@@ -131,11 +83,11 @@ export PS1="$USER@$HOSTNAME> "
 #RPROMPT=' %~'     # prompt for right side of screen
 
 #Format binary chars in less in an octal fashion
+export PAGER='/home/rlpowell/bin/less'
+export MANPAGER='/home/rlpowell/bin/less -isR'
 export MAILCALL='NEW MAIL! '
 export YOUSAID='In %C you wrote:'
 export ATTRIBUTION='%f wrote:'
-export PAGER='/home/rlpowell/bin/less'
-export MANPAGER='/home/rlpowell/bin/less -isR'
 
 MAILCHECK=300
 DIRSTACKSIZE=30
@@ -152,7 +104,7 @@ setopt   notify
 setopt INC_APPEND_HISTORY APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
 export SAVEHIST=30000
 export HISTSIZE=30000
-export HISTFILE=$HOME/.zhistory
+export HISTFILE=$HOME/.history_zsh
 
 unsetopt rmstarsilent
 unsetopt bgnice
@@ -161,4 +113,9 @@ unsetopt EXTENDED_GLOB
 if [ -e ~/.zshrc_local ]
 then
 	. ~/.zshrc_local
+fi
+
+if [ -e ~/.bothrc ]
+then
+	. ~/.bothrc
 fi

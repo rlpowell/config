@@ -1,0 +1,107 @@
+#*******************************
+# ABOUT THIS FILE
+#
+# sourced by both bashrc and zshrc; non-interactive shells;
+# essentially, this is sourced in in *all* cases
+#*******************************
+
+set -o vi
+
+if [ -f "$HOME/bin/agent" ]
+then
+  . $HOME/bin/agent
+fi
+
+# use hard limits, except for a smaller stack and no core dumps
+unlimit
+#limit stack 8192
+#limit core 0
+limit -s
+
+umask 022
+
+stty echoe
+stty -ixon
+stty flush '^@'
+stty start '^@'
+stty stop '^@'
+stty susp '^Z'
+
+export VISUAL="$HOME/bin/cvim"
+export EDITOR="$HOME/bin/cvim"
+
+export LESSBINFMT='*d\%o'
+export LESS=-eRM
+export PAGER="$HOME/bin/less"
+export MANPAGER="$HOME/bin/less -isR"
+export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
+
+# Try to sort correctly
+export LANG=en_US.UTF-8
+export LC_COLLATE=C
+
+alias vim="$HOME/bin/cvim"
+
+# Sorting issues
+alias ls='LC_ALL=C ls -AF --color=auto'
+alias sort='LC_ALL=C sort'
+
+# Spelling mistakes
+alias les="$HOME/bin/less"
+alias gerp=grep
+
+# better default
+alias tmux='tmux -2 -u '
+
+# Color for grep
+export GREP_OPTIONS='--color=auto'
+
+# Yay forests
+alias ps='ps --forest -f -e '
+alias pg='ps --forest -f -e | grep '
+
+# stolen from cizra in #jbopre
+alias g=git
+alias gd='g diff -w'
+alias gdc='g diff -w --cached'
+alias gs='g status --short'
+alias ga='g add'
+alias gf='g fetch'
+alias gr='g rebase'
+alias gst='g stash'
+alias gp='g push'
+alias gb='g branch'
+alias gcm='g commit'
+alias gcmam='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
+alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
+alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
+alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
+alias gc='g checkout'
+
+# ack version issues
+if [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
+then
+  alias a='ack -a'
+  alias ai='ack -ai'
+else
+  alias a='ack'
+  alias ai='ack -i'
+fi
+
+# Easier lsof
+alias li='sudo lsof -Pnl -i | grep LIST '
+alias lsof='sudo lsof -Pnl -i '
+
+unset RUBYOPT
+
+# Insert the RVM path, if any, into the middle, by putting the tail
+# on, attaching RVM in front, then adding more.
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+export PATH="$HOME/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+
+export TERM='screen-256color'

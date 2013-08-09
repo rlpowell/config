@@ -2,30 +2,11 @@
 #*******************************
 # ABOUT THIS FILE
 #
-# bash_profile *ONLY* is read for interactive shells, which is why we source bashrc
+# bash_profile *ONLY* is read for *login* shells, which is why we
+# just source bashrc; we don't care about login vs. non-login as
+# long as both are interactive
 #*******************************
 
-# Get the aliases and functions
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
-
-# User specific environment and startup programs
-
-TERM=screen
-export TERM
-
-# Put pwd in tmux status
-prompt_func () {
-  # history -n -- don't read the history back in, it gets confusing.
-  history -a
-  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\"
-}
-export PROMPT_COMMAND=prompt_func
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-PATH=$HOME/bin:$PATH
-
-export PATH
-

@@ -3,26 +3,14 @@
 #
 # zshenv is always read
 #*******************************
-export HOST=$(uname -n)
-export HOSTNAME=$HOST
-export USER=$(id -un)
-export USERNAME=$USER
-export ARCH=$(uname -r)
-export VISUAL=cvim
-export EDITOR=cvim
-export TERM='screen-256color'
 
 # Try to sort correctly
 export LANG=en_US.UTF-8
 export LC_COLLATE=C
 
-export PATH=$HOME/bin:$HOME/.rvm/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:
+# For non-interactive stuff, set a simple TERM
+export TERM='screen'
 
-unset RUBYOPT
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-if [ -e ~/.zshenv_local ]
-then
-	. ~/.zshenv_local
-fi
+export PATH="$HOME/bin:$HOME/.rvm/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin"

@@ -1,8 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+
+#*******************************
+# YOU ARE PROBABLY IN THE WRONG PLACE.  Try .bothrc
+#*******************************
+
+
+
+
 # .bashrc
 #*******************************
 # ABOUT THIS FILE
 #
-# bashrc is read for interactive non-login shells; bash_profile sources it
+# bashrc is read for *interactive* non-login shells; bash_profile
+# for us does nothing but source this file, because login vs.
+# non-login is not interesting to us.
+#
+# This is *NOT* the non-interactive shell-script setup file; bash
+# doesn't have one of those.  -_-
 #*******************************
 
 # Source global definitions
@@ -14,68 +37,23 @@ fi
 
 set -o vi
 
-. ~/.ssh/agent >/dev/null 2>&1
-
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
 export HISTFILESIZE=100000
 export HISTSIZE=100000
-export HISTFILE=~/.bash_history
+export HISTFILE=~/.history_bash
 shopt -s histappend
 shopt -s cmdhist
-export VISUAL=~/bin/cvim
-export EDITOR=~/bin/cvim
 
-export LESSBINFMT='*d\%o'
-export LESS=-eRM
-export PAGER=/home/rlpowell/bin/less
-export MANPAGER='/home/rlpowell/bin/less -isR'
-export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
+# Put pwd in tmux status
+prompt_func () {
+  # history -n -- don't read the history back in, it gets confusing.
+  history -a
+  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\"
+}
 
-# Try to sort correctly
-export LANG=en_US.UTF-8
-export LC_COLLATE=C
+export PROMPT_COMMAND=prompt_func
 
-alias vim=~/bin/cvim 
-
-# Sorting issues
-alias ls='LC_ALL=C ls -AF --color=auto'
-alias sort='LC_ALL=C sort'
-
-# Spelling mistakes
-alias les=/home/rlpowell/bin/less
-alias gerp=grep
-
-# better default
-alias tmux='tmux -2 -u '
-
-# Yay forests
-alias ps='ps --forest -f -e '
-alias pg='ps --forest -f -e | grep '
-
-# stolen from cizra in #jbopre
-alias g=git
-alias gd='g diff'
-alias gs='g status --short'
-alias ga='g add'
-alias gf='g fetch'
-alias gr='g rebase'
-alias gst='g stash'
-alias gp='g push'
-alias gb='g branch'
-alias gcm='g commit'
-alias gcmam='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
-alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
-alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
-alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
-alias gc='g checkout'
-
-# Easier lsof
-alias li='sudo lsof -Pnl -i | grep LIST '
-alias lsof='sudo lsof -Pnl -i '
-
-# Color for grep
-export GREP_OPTIONS='--color=auto'
-
-export PATH="/home/rlpowell/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/opt/ruby/bin:/sbin:/bin:/usr/sbin:/usr/bin:$HOME/.rvm/bin:$PATH"
-
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+if [ -e ~/.bothrc ]
+then
+  . ~/.bothrc
+fi
