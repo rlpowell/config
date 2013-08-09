@@ -37,7 +37,7 @@ do
   ln -sf "$file" "$dotfile"
 done
 
-ln -sfT "dotfiles/vim" ~/.vim
+ln -sfT "$(pwd)/dotfiles/vim" ~/.vim
 
 echo "Setting up bin files"
 
