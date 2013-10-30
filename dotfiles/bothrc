@@ -14,12 +14,12 @@ fi
 
 umask 022
 
-stty echoe
-stty -ixon
-stty flush '^@'
-stty start '^@'
-stty stop '^@'
-stty susp '^Z'
+stty echoe 2>/dev/null
+stty -ixon 2>/dev/null
+stty flush '^@' 2>/dev/null
+stty start '^@' 2>/dev/null
+stty stop '^@' 2>/dev/null
+stty susp '^Z' 2>/dev/null
 
 export VISUAL="$HOME/bin/cvim"
 export EDITOR="$HOME/bin/cvim"
