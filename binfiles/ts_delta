@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Runs ts, but the first column is delta in seconds from the previous line.
+
+lasttime=0
+while read line
+do
+  time=$(echo $line | awk '{ print $1}')
+  delta=$[ $time - $lasttime ]
+  lasttime=$time
+  echo "$delta $line"
+done < <(cat - | ts '%s')
