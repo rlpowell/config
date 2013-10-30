@@ -26,8 +26,8 @@ export EDITOR="$HOME/bin/cvim"
 
 export LESSBINFMT='*d\%o'
 export LESS=-eRM
-export PAGER="$HOME/bin/less"
-export MANPAGER="$HOME/bin/less -isR"
+export PAGER='less'
+export MANPAGER='less -isR'
 export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
 
 # Try to sort correctly
@@ -41,7 +41,7 @@ alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
 
 # Spelling mistakes
-alias les="$HOME/bin/less"
+alias les='less'
 alias gerp=grep
 
 # better default
@@ -102,4 +102,4 @@ export PATH="$HOME/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
-export TERM='screen-256color'
+export TERM='screen'
