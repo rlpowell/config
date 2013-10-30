@@ -73,7 +73,7 @@ alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
 # ack version issues
-if [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
+if which ack >/dev/null 2>&1 && [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
 then
   alias a='ack -a'
   alias ai='ack -ai'
