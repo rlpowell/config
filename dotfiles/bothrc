@@ -71,7 +71,6 @@ alias gca='g commit -a'
 alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
-alias gc='g checkout'
 
 # ack version issues
 if [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
