@@ -34,3 +34,6 @@
 [submodule "dotfiles/vim/bundle/puppet"]
 	path = dotfiles/vim/bundle/puppet
 	url = git://github.com/rodjek/vim-puppet.git
+[submodule "dotfiles/vim/bundle/vim-exchange"]
+	path = dotfiles/vim/bundle/vim-exchange
+	url = git://github.com/tommcdo/vim-exchange.git
