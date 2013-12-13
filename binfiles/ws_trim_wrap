@@ -10,6 +10,12 @@ then
 else
   cat /tmp/rlp_tmux_buf  | sed 's/^ *//' | tr -d '\012' >/tmp/rlp_tmux_buf.tmp
 fi
+
+while [ ! "$(tmux list-buffers -F '#{line}' 2>&1 | grep '^18$' 2>&1)" ]
+do
+  tmux set-buffer "foo"
+done
+
 tmux load-buffer -b 18 /tmp/rlp_tmux_buf.tmp
 tmux paste-buffer -b 18
 rm /tmp/rlp_tmux_buf /tmp/rlp_tmux_buf.tmp
