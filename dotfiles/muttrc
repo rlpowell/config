@@ -13,7 +13,7 @@ set use_envelope_from=yes
 set simple_search="~(~f %s | ~s %s)"
 set metoo=no
 set ascii_chars=yes
-set index_format="%4C %Z %{%b %d} %-15.15F (%4l) %s"
+set index_format="%4C %Z %{%b %d} %-15.15F %s"
 set mbox_type=maildir
 set mark_old=no
 set editor='vim -c "set showtabline=1"'
