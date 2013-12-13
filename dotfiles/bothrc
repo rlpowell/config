@@ -45,7 +45,7 @@ alias les='less'
 alias gerp=grep
 
 # better default
-alias tmux='tmux -2 -u '
+alias tmux='TERM=xterm-256color tmux -2 -u '
 
 # Color for grep
 export GREP_OPTIONS='--color=auto'
