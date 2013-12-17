@@ -51,8 +51,12 @@ alias tmux='TERM=xterm-256color tmux -2 -u '
 export GREP_OPTIONS='--color=auto'
 
 # Yay forests
-alias ps='ps --forest -f -e '
-alias pg='ps --forest -f -e | grep '
+ps () {
+  /bin/ps --forest -f -e "$@"
+}
+pg () {
+  /bin/ps --forest -f -e | grep "$@"
+}
 
 # stolen from cizra in #jbopre
 alias g=git
