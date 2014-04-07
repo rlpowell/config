@@ -40,6 +40,9 @@ alias vim="$HOME/bin/cvim"
 alias ls='LC_ALL=C ls -AF --color=auto'
 alias sort='LC_ALL=C sort'
 
+# Privacy issues
+alias gist='gist -p'
+
 # Spelling mistakes
 alias les='less'
 alias gerp=grep
