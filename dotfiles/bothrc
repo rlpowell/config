@@ -99,6 +99,18 @@ alias lsof='sudo lsof -Pnl -i '
 
 unset RUBYOPT
 
+if [ "$(hostname)" = "vrici.digitalkingdom.org" ]
+then
+  . ~/.selinux_functions
+else
+  sefindif() { echo "Go to vrici" }
+  seshowif() { echo "Go to vrici" }
+  sefinddef() { echo "Go to vrici" }
+  seshowdef() { echo "Go to vrici" }
+  sefindcon() { echo "Go to vrici" }
+  selist() { echo "Go to vrici" }
+fi
+
 # Insert the RVM path, if any, into the middle, by putting the tail
 # on, attaching RVM in front, then adding more.
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
