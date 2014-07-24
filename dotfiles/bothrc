@@ -115,7 +115,13 @@ fi
 # on, attaching RVM in front, then adding more.
 export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+if [ -s "$HOME/.rvm/scripts/rvm" ]
+then
+  source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+elif [ -s "/usr/local/rvm/scripts/rvm" ]
+then
+  source "/usr/local/rvm/scripts/rvm"
+fi
 
 export PATH="$HOME/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
 
