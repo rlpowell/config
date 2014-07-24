@@ -1,0 +1,7 @@
+for file in $(find . -name '.*.sw*')
+do
+  orig="$(echo $file | sed -r 's;/\.([^/]*)\.sw.$;/\1;')"
+  yes | vim -c ':wq' -r "$orig"
+  rm $file
+done
+
