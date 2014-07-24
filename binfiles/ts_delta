@@ -2,7 +2,7 @@
 
 # Runs ts, but the first column is delta in seconds from the previous line.
 
-lasttime=0
+lasttime=$(date +%s)
 while read line
 do
   time=$(echo $line | awk '{ print $1}')
