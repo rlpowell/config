@@ -92,6 +92,8 @@ setopt   autoresume pushdsilent noclobber
 setopt   autopushd pushdminus extendedglob rcquotes mailwarning
 setopt   automenu sunkeyboardhack RM_STAR_WAIT
 setopt   notify
+# Stop things from acting differently than sh in an important way
+setopt   sh_word_split
 
 # History settings
 setopt INC_APPEND_HISTORY APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
