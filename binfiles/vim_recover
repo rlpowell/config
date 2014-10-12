@@ -1,8 +1,11 @@
+all_files=""
 for file in $(find . -name '.*.sw*')
 do
   orig="$(echo $file | sed -r 's;/\.([^/]*)\.sw.$;/\1;')"
   echo "Cleaning $orig"
+  all_files="$orig $all_files"
   yes | vim -c ':wq' -r "$orig"
   rm $file
 done
 
+echo "HERE'S YOUR LIST: $all_files"
