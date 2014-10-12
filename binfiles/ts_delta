@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# Runs ts, but the first column is delta in seconds from the previous line.
+# Runs ts, but the first column is delta in seconds from the
+# previous line, second is datestamp, third is seconds since epoch.
 
 lasttime=$(date +%s)
-while read line
+cat - | ts '%s' | while read line
 do
   time=$(echo $line | awk '{ print $1}')
-  delta=$[ $time - $lasttime ]
+  deltaraw=$[ $time - $lasttime ]
+  delta="$(printf '%3d' $deltaraw)"
   lasttime=$time
-  echo "$delta $line"
-done < <(cat - | ts '%s')
+  nicedate="$(date -d @$time +%Y.%m.%d-%H:%M:%S)"
+  echo "$delta $nicedate $line"
+done
