@@ -102,6 +102,7 @@ unset RUBYOPT
 if [ "$(hostname)" = "vrici.digitalkingdom.org" ]
 then
   . ~/.selinux_functions
+  ~/bin/dropbox start
 else
   sefindif() { echo "Go to vrici" }
   seshowif() { echo "Go to vrici" }
