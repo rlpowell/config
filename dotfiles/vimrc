@@ -106,6 +106,7 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 :set textauto
 :set notextmode
 :set textwidth=68
+:set iskeyword+=-
 
 " Colors and such
 set t_Co=256
