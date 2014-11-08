@@ -87,13 +87,16 @@ DIRSTACKSIZE=30
 
 # set/unset  shell options
 setopt   notify globdots correct pushdtohome cdablevars autolist
-setopt   sunkeyboardhack correctall autocd recexact longlistjobs
+setopt   sunkeyboardhack autocd recexact longlistjobs
 setopt   autoresume pushdsilent noclobber
 setopt   autopushd pushdminus extendedglob rcquotes mailwarning
 setopt   automenu sunkeyboardhack RM_STAR_WAIT
 setopt   notify
 # Stop things from acting differently than sh in an important way
 setopt   sh_word_split
+
+# This is not on by default, I just want to be clear
+unsetopt correctall
 
 # History settings
 setopt INC_APPEND_HISTORY APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
