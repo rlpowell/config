@@ -99,6 +99,7 @@ alias lsof='sudo lsof -Pnl -i '
 
 unset RUBYOPT
 
+# home-specific but whatever
 if [ "$(hostname)" = "vrici.digitalkingdom.org" ]
 then
   . ~/.selinux_functions
@@ -111,6 +112,10 @@ else
   sefindcon() { echo "Go to vrici" }
   selist() { echo "Go to vrici" }
 fi
+
+# work-specific but whatever
+alias myro='sudo -u mysql mysql -u readonly cytobank_development'
+alias myrw='sudo -u mysql mysql -u root --safe-updates cytobank_development'
 
 # Insert the RVM path, if any, into the middle, by putting the tail
 # on, attaching RVM in front, then adding more.
