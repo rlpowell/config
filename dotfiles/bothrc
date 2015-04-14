@@ -121,16 +121,22 @@ alias myrw='sudo -u mysql mysql -u root --safe-updates cytobank_development'
 export CBC=/opt/cytobank/releases/current/WEB-INF/config/config.yml
 export cbc=/opt/cytobank/releases/current/WEB-INF/config/config.yml
 
-# Insert the RVM path, if any, into the middle, by putting the tail
-# on, attaching RVM in front, then adding more.
-export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+# Do RVM stuff only if it hasn't been done yet
+if [ ! "$(which ruby | grep rvm)" ]
+then
+  # Insert the RVM path, if any, into the middle, by putting the tail
+  # on, attaching RVM in front, then adding more.
+  export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
-if [ -s "$HOME/.rvm/scripts/rvm" ]
-then
-  source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-elif [ -s "/usr/local/rvm/scripts/rvm" ]
-then
-  source "/usr/local/rvm/scripts/rvm"
+  if [ -s "$HOME/.rvm/scripts/rvm" ]
+  then
+    source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+  elif [ -s "/usr/local/rvm/scripts/rvm" ]
+  then
+    source "/usr/local/rvm/scripts/rvm"
+  fi
+else
+  export PATH="$PATH:/sbin:/bin:/usr/sbin:/usr/bin"
 fi
 
 export PATH="$HOME/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
