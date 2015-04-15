@@ -114,6 +114,8 @@ unlimit
 #limit core 0
 limit -s
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 if [ -e ~/.zshrc_local ]
 then
 	. ~/.zshrc_local

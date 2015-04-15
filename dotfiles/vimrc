@@ -1,9 +1,36 @@
+call plug#begin('~/.vim/plugged')
 
-" Run pathogen for plugins
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+" Let gvim colorschemes work; not sure if we need this but can't
+" hurt
+Plug 'godlygeek/csapprox'
 
+" Colorscheme
+Plug 'tpope/vim-vividchalk'
+
+" Git Wrapper; don't use it a lot, but maybe should some day
+Plug 'tpope/vim-fugitive'
+
+" extended % matching for HTML, LaTeX, and many other languages
+Plug 'tmhedberg/matchit'
+
+" Entended undo capabilities
+Plug 'sjl/gundo.vim'
+
+" Puppet syntax and stuff
+Plug 'rodjek/vim-puppet'
+
+" Ack Searching
+Plug 'mileszs/ack.vim'
+
+" Tabular Alignment
+Plug 'junegunn/vim-easy-align'
+
+" fzf fuzzy finding tool
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+let g:fzf_default_split_style = 'tabedit'
+let g:fzf_tab_char = 'alt-t'
+
+call plug#end()
 
 " Common keypresses that I want to be fast to hit
 
@@ -23,9 +50,7 @@ nnoremap <Space>j <C-W>j
 nnoremap <Space>k <C-W>k
 
 " Open various panels or whatever
-nnoremap <Space>t :TagbarOpen fj<CR>
 nnoremap <Space>a :tabnew<CR>:Ack<Space>''<Left>
-nnoremap <Space>A :tabnew<CR>:Ack<Space>-a<Space>''<Left>
 nnoremap <Space>n :tabnew<CR>
 
 " Close all but the current window in the current tab (for dropping stuff like Ack)
@@ -35,10 +60,11 @@ nnoremap <Space>Q :tabclose<CR>
 " Attempt to close the current buffer
 nnoremap <Space>d :bdelete<CR>
 
-" Aligning things in columns on commas (doesn't hit return so we can
-" edit the params)
-nnoremap <Space>T :Tabularize /,
-vnoremap <Space>T :Tabularize /,
+" Aligning things in columns based on next character ; see
+" https://github.com/junegunn/vim-easy-align
+nmap <Space>A <Plug>(EasyAlign)
+vmap <Space>A <Plug>(EasyAlign)
+vmap <Enter> <Plug>(EasyAlign)
 
 " Fugitive
 nnoremap <Space>gs :Gstatus<CR>
@@ -50,13 +76,68 @@ vnoremap <Space>do :diffget<CR>
 vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
 
-" FuzzyFinder
-nnoremap <Space>ff :FufCoverageFile<CR>
-nnoremap <Space>fb :FufBuffer<CR>
-nnoremap <Space>fl :FufLine<CR>
-nnoremap <Space>fr :FufRenewCache<CR>
-let g:fuf_keyOpen = '<C-o>'
-let g:fuf_keyOpenTabpage = '<CR>'
+" FZF / fuzzy fining
+nnoremap <Space>ff :FZF<CR>
+
+    " FZF buffer stuff, from https://github.com/junegunn/fzf/wiki/Examples-%28vim%29
+    function! s:buflist()
+      redir => ls
+      silent ls
+      redir END
+      return split(ls, '\n')
+    endfunction
+    
+    function! s:bufopen(e)
+      execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+    endfunction
+    
+    command! FZFBuff call fzf#run({
+    \   'source':  reverse(<sid>buflist()),
+    \   'sink':    function('<sid>bufopen'),
+    \   'options': '+m',
+    \   'down':    len(<sid>buflist()) + 2
+    \ })<CR>
+    
+nnoremap <Space>fb :FZFBuff<CR>
+
+    command! FZFMru call fzf#run({
+                \'source': v:oldfiles,
+                \'sink' : 'e ',
+                \'options' : '-m',
+                \})
+
+nnoremap <Space>fr :FZFMru<CR>
+
+    command! FZFTag if !empty(tagfiles()) | call fzf#run({
+    \   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
+    \   'sink':   'tag',
+    \ }) | else | echo 'No tags' | endif
+
+nnoremap <Space>ft :FZFTag<CR>
+
+    function! s:line_handler(l)
+      let keys = split(a:l, ':\t')
+      exec 'buf ' . keys[0]
+      exec keys[1]
+      normal! ^zz
+    endfunction
+    
+    function! s:buffer_lines()
+      let res = []
+      for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+        call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
+      endfor
+      return res
+    endfunction
+    
+    command! FZFLines call fzf#run({
+    \   'source':  <sid>buffer_lines(),
+    \   'sink':    function('<sid>line_handler'),
+    \   'options': '--extended --nth=3..',
+    \   'down':    '60%'
+    \})
+
+nnoremap <Space>fl :FZFLines<CR>
 
 " tab configuration
 nnoremap < gT
