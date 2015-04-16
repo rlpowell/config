@@ -116,6 +116,11 @@ limit -s
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# We use ctrl-t already
+# From "/home/rlpowell/.fzf/shell/key-bindings.zsh"
+zle     -N   fzf-file-widget
+bindkey '\et' fzf-file-widget
+
 if [ -e ~/.zshrc_local ]
 then
 	. ~/.zshrc_local

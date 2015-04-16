@@ -54,10 +54,13 @@ prompt_func () {
 
 export PROMPT_COMMAND=prompt_func
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# We already use C-t.  Untested.
+# from "/home/rlpowell/.fzf/shell/key-bindings.bash"
+bind '"\et": " \C-u \C-a\C-k$(__fsel_tmux)\e\C-e\C-y\C-a\C-d\C-y\ey\C-h"'
 
 if [ -e ~/.bothrc ]
 then
   . ~/.bothrc
 fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
