@@ -18,3 +18,6 @@ fi
 # ------------
 source "/home/rlpowell/.fzf/shell/key-bindings.zsh"
 
+# We use ctrl-t already
+zle     -N   fzf-file-widget
+bindkey '\et' fzf-file-widget

@@ -18,3 +18,5 @@ fi
 # ------------
 source "/home/rlpowell/.fzf/shell/key-bindings.bash"
 
+# We already use C-t.  Untested.
+bind '"\et": " \C-u \C-a\C-k$(__fsel_tmux)\e\C-e\C-y\C-a\C-d\C-y\ey\C-h"'
