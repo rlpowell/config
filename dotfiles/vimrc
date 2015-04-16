@@ -27,8 +27,10 @@ Plug 'junegunn/vim-easy-align'
 
 " fzf fuzzy finding tool
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-let g:fzf_default_split_style = 'tabedit'
-let g:fzf_tab_char = 'alt-t'
+" ctrl-[a-z], alt-[a-z], f[1-4], or any single character
+let g:fzf_action = {
+  \ 'ctrl-m': 'tabedit',
+  \ 'alt-t': 'tabedit' }
 
 call plug#end()
 
