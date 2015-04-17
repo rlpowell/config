@@ -196,51 +196,18 @@ set t_Co=256
 set background=dark
 
 colorscheme vividchalk
-
-" Trying vividchalk for a while
-" colorscheme ir_black
-
-" " Very dark grey background; not bad, but trying out ir_black for now
-" colorscheme inkpot
-
-" " grey background eww
-" colorscheme desert
-
-" " Doesn't work with CSApprox, and hence is kind of terrible.
-" colorscheme desert256
-
-"********************
-" HIGHLIGHTS
-"
-" Which are colorscheme-specific
-"
-" Note that we set *GUI* highlights, because that's how CSApprox works.
-"********************
-" "*****
-" " ir_black
-" "*****
-" " Tabline customization
-" highlight TabLine guibg=#000000 gui=NONE
-" highlight TabLineSel guifg=#ff0000
-" highlight TabLineFill guifg=White guibg=Black
-" " Basic text is a bit intense
-" highlight Normal           guifg=#dadada     guibg=black       gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
-" " The fixed text is hard to read on a red background
-" highlight DiffText       gui=bold guifg=White guibg=Red
-" 
-" " Makes # style comments do the right thing for some languages.
-" autocmd FileType sh set comments=:#
-" autocmd FileType sh set formatoptions=tcroq2
 "*****
-" vividchalk, which apparently has cterm as well as/rather than GUI
-" values
+" vividchalk apparently has cterm as well as/rather than GUI values
 "*****
 " Tabline customization
 highlight TabLine ctermbg=Black cterm=NONE
 highlight TabLineSel ctermfg=Red
 highlight TabLineFill ctermfg=Cyan ctermbg=Black cterm=NONE
 " The search highlighting is a bit weak.
-:highlight Search term=standout cterm=bold ctermfg=0 ctermbg=11 gui=bold guifg=Black guibg=#ffff00
+highlight Search ctermfg=Black ctermbg=Yellow cterm=NONE
+" Comments were too dark using s:hifg from
+" https://github.com/tpope/vim-vividchalk/blob/master/colors/vividchalk.vim
+highlight Comment ctermfg=Magenta ctermbg=Black cterm=NONE
 
 
 " Do or do not break at whitespace
