@@ -79,7 +79,7 @@ vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
 
 " FZF / fuzzy fining
-nnoremap <Space>ff :FZF<CR>
+nnoremap <Space>ff :FZF --extended<CR>
 
     " FZF buffer stuff, from https://github.com/junegunn/fzf/wiki/Examples-%28vim%29
     function! s:buflist()
@@ -96,7 +96,7 @@ nnoremap <Space>ff :FZF<CR>
     command! FZFBuff call fzf#run({
     \   'source':  reverse(<sid>buflist()),
     \   'sink':    function('<sid>bufopen'),
-    \   'options': '+m',
+    \   'options': '--extenddd +m',
     \   'down':    len(<sid>buflist()) + 2
     \ })<CR>
     
@@ -105,7 +105,7 @@ nnoremap <Space>fb :FZFBuff<CR>
     command! FZFMru call fzf#run({
                 \'source': v:oldfiles,
                 \'sink' : 'e ',
-                \'options' : '-m',
+                \'options' : '--extended -m',
                 \})
 
 nnoremap <Space>fr :FZFMru<CR>
@@ -113,6 +113,7 @@ nnoremap <Space>fr :FZFMru<CR>
     command! FZFTag if !empty(tagfiles()) | call fzf#run({
     \   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
     \   'sink':   'tag',
+    \'options' : '--extended',
     \ }) | else | echo 'No tags' | endif
 
 nnoremap <Space>ft :FZFTag<CR>
