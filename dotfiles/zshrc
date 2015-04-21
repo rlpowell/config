@@ -114,6 +114,7 @@ unlimit
 #limit core 0
 limit -s
 
+export FZF_DEFAULT_OPTS='--extended'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # We use ctrl-t already

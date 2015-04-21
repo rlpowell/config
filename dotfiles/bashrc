@@ -54,6 +54,7 @@ prompt_func () {
 
 export PROMPT_COMMAND=prompt_func
 
+export FZF_DEFAULT_OPTS='--extended'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # We already use C-t.  Untested.
