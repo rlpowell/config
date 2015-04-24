@@ -38,8 +38,8 @@ fi
 set -o vi
 
 export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S - '
-export HISTFILESIZE=100000
-export HISTSIZE=100000
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
 export HISTFILE=~/.history_bash
 shopt -s histappend
 shopt -s cmdhist
