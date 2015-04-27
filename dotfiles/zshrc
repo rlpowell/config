@@ -99,7 +99,7 @@ setopt   sh_word_split
 unsetopt correctall
 
 # History settings
-setopt SHARE_HISTORY INC_APPEND_HISTORY APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_EXPIRE_DUPS_FIRST
+setopt INC_APPEND_HISTORY APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_EXPIRE_DUPS_FIRST
 # Amount of history to save
 export SAVEHIST=1000000
 # Amount of history to load on start; fzf should ignore this
