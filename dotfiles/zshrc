@@ -116,14 +116,6 @@ unlimit
 #limit core 0
 limit -s
 
-export FZF_DEFAULT_OPTS='--extended'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# We use ctrl-t already
-# From "/home/rlpowell/.fzf/shell/key-bindings.zsh"
-zle     -N   fzf-file-widget
-bindkey '\et' fzf-file-widget
-
 if [ -e ~/.zshrc_local ]
 then
 	. ~/.zshrc_local
@@ -133,3 +125,12 @@ if [ -e ~/.bothrc ]
 then
 	. ~/.bothrc
 fi
+
+export FZF_DEFAULT_OPTS='--extended'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# We use ctrl-t already
+# From "/home/rlpowell/.fzf/shell/key-bindings.zsh"
+zle     -N   fzf-file-widget
+bindkey '\et' fzf-file-widget
+
