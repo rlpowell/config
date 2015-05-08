@@ -25,3 +25,7 @@ git pull
 yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
 yes | ~/.fzf/install
+
+cd ~/.tmux/plugins/tpm
+git pull
+/home/rlpowell/.tmux/plugins/tpm/scripts/install_plugins.sh

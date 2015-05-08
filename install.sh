@@ -55,6 +55,12 @@ do
   ln -sf "$file" "$binfile"
 done
 
+echo "Setting up tpm"
+if [ ! -d "/home/rlpowell/.tmux/plugins/tpm" ]
+then
+  git clone https://github.com/tmux-plugins/tpm /home/rlpowell/.tmux/plugins/tpm
+fi
+
 echo "Setting up cron"
 
 cronfile_orig=/tmp/cron.$$
