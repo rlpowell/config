@@ -78,7 +78,7 @@ vnoremap <Space>do :diffget<CR>
 vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
 
-" FZF / fuzzy fining
+" FZF / fuzzy finding
 nnoremap <Space>ff :FZF --extended<CR>
 
     " FZF buffer stuff, from https://github.com/junegunn/fzf/wiki/Examples-%28vim%29
