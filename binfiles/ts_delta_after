@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Same as ts_delta, but doesn't run ts; expects that we ran: foo | ts '%s' 
+# , and we're running this on the output
+
+lasttime=''
+cat - | while read line
+do
+  time=$(echo $line | awk '{ print $1}')
+  if [ ! "$lasttime" ]
+  then
+    lasttime=$time
+  fi
+  deltaraw=$[ $time - $lasttime ]
+  delta="$(printf '%3d' $deltaraw)"
+  lasttime=$time
+  nicedate="$(date -d @$time +%Y.%m.%d-%H:%M:%S)"
+  echo "$delta $nicedate $line"
+done
