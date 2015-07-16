@@ -2,6 +2,11 @@
 
 if [ ! -d "dotfiles" ]
 then
+  cd ~/config/
+fi
+
+if [ ! -d "dotfiles" ]
+then
   echo "Run this from the config/ directory, please ; there should be a 'dotfiles' dir in the place you run this."
   exit 1
 fi
