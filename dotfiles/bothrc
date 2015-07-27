@@ -37,6 +37,7 @@ export LC_COLLATE=C
 alias rm='rm -v -I'
 
 alias vim="$HOME/bin/cvim"
+alias svim="sudo -i \vim"
 
 # Sorting issues
 alias ls='LC_ALL=C ls -AF --color=auto'
