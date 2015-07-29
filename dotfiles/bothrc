@@ -141,7 +141,7 @@ export PATH="$HOME/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
-export TERM='screen'
+export TERM='screen-256color'
 
 if [ -f $HOME/src/ansible/hacking/env-setup ]
 then
