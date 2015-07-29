@@ -53,9 +53,6 @@ alias gerp=grep
 # better default
 alias tmux='TERM=xterm-256color tmux -2 -u '
 
-# Color for grep
-export GREP_OPTIONS='--color=auto'
-
 # Yay forests
 ps () {
   /bin/ps --forest -f -e "$@"
