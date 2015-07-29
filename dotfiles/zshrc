@@ -62,6 +62,9 @@ function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed '
 
 
 
+# Color for grep
+export GREP_OPTIONS='--color=auto'
+
 # bigger shell functions to autoload
 autoload zed
 autoload run-help
