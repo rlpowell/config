@@ -53,6 +53,12 @@ compinit
 bindkey -r '\e/'
 bindkey -r '\e,'
 
+# Jump to successive begin/end line
+bindkey -a '^A' beginning-of-line
+bindkey -v '^A' beginning-of-line
+bindkey -a '^E' end-of-line
+bindkey -v '^E' end-of-line
+
 # search path for the cd command
 cdpath=(. .. ~ ~/src)
 
