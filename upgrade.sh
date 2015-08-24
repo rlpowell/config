@@ -31,6 +31,13 @@ yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
 yes | ~/.fzf/install
 
+echo "Setting up tpm"
+if [ ! -d "/home/rlpowell/.tmux/plugins/tpm" ]
+then
+  git clone https://github.com/tmux-plugins/tpm /home/rlpowell/.tmux/plugins/tpm
+fi
+
 cd ~/.tmux/plugins/tpm
 git pull
 /home/rlpowell/.tmux/plugins/tpm/scripts/install_plugins.sh
+tmux source ~/.tmux.conf

@@ -22,6 +22,10 @@ Plug 'rodjek/vim-puppet'
 " Ack Searching
 Plug 'mileszs/ack.vim'
 
+" Bracketed Paste Mode
+let g:bracketed_paste_tmux_wrap = 0
+Plug 'ConradIrwin/vim-bracketed-paste'
+
 " Tabular Alignment
 Plug 'junegunn/vim-easy-align'
 
