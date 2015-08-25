@@ -40,4 +40,6 @@ fi
 cd ~/.tmux/plugins/tpm
 git pull
 /home/rlpowell/.tmux/plugins/tpm/scripts/install_plugins.sh
-tmux source ~/.tmux.conf
+# This keeps resetting the main tmux binding on the AWS PMs
+# tmux source ~/.tmux.conf
+echo "If tmux things changed run: tmux source ~/.tmux.conf"
