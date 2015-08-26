@@ -26,6 +26,8 @@ set mailcap_path=~/.mailcap
 set markers=no
 set smart_wrap=no
 set pager_index_lines=20
+set attribution="\n\nOn %d, %n wrote:"
+set autoedit=yes
 
 set sort=threads
 

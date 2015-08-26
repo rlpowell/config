@@ -196,6 +196,14 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 :set textwidth=68
 :set iskeyword+=-
 
+" Auto-formatting (i.e. line wrapping by inserting newlines)
+" options.  By default, we only auto-format comments.
+:set formatoptions=c,q,r,o,a,n,j
+" For certain things, format text too
+:autocmd FileType mail set formatoptions=t,q,a,n
+" Including unknown file types
+:autocmd BufEnter * if &filetype == "" | set formatoptions=t,q,a,n | endif
+
 " Colors and such
 set t_Co=256
 set background=dark
@@ -215,7 +223,10 @@ highlight Search ctermfg=Black ctermbg=Yellow cterm=NONE
 highlight Comment ctermfg=Magenta ctermbg=Black cterm=NONE
 
 
-" Do or do not break at whitespace
+" Visual wrapping
+:map <F3> :setl wrap<CR>
+:map <F4> :setl nowrap<CR>
+" While visual wrapping, do or do not break at whitespace
 :map <F5> :setlocal linebreak<CR>
 :map <F6> :setlocal nolinebreak<CR>
 
@@ -229,8 +240,6 @@ highlight Comment ctermfg=Magenta ctermbg=Black cterm=NONE
 :imap <F1> <C-O>:setl paste<CR>
 :imap <F2> <nop>
 :setl pastetoggle=<F2>
-:map <F3> :setl wrap<CR>
-:map <F4> :setl nowrap<CR>
 
 " Center search results.  This can also be done with a let for
 " scrolloff; see http://vim.wikia.com/wiki/VimTip182
