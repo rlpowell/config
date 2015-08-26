@@ -198,11 +198,11 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 
 " Auto-formatting (i.e. line wrapping by inserting newlines)
 " options.  By default, we only auto-format comments.
-:set formatoptions=c,q,r,o,a,n,j
+:set formatoptions=c,q,r,o,n,j
 " For certain things, format text too
-:autocmd FileType mail set formatoptions=t,q,a,n
+:autocmd FileType mail set formatoptions=t,q,n
 " Including unknown file types
-:autocmd BufEnter * if &filetype == "" | set formatoptions=t,q,a,n | endif
+:autocmd BufEnter * if &filetype == "" | set formatoptions=t,q,n | endif
 
 " Colors and such
 set t_Co=256
