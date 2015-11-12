@@ -105,12 +105,24 @@ then
   . ~/.selinux_functions
   ~/bin/dropbox start
 else
-  sefindif() { echo "Go to vrici" }
-  seshowif() { echo "Go to vrici" }
-  sefinddef() { echo "Go to vrici" }
-  seshowdef() { echo "Go to vrici" }
-  sefindcon() { echo "Go to vrici" }
-  selist() { echo "Go to vrici" }
+  sefindif() {
+    echo "Go to vrici"
+  }
+  seshowif() {
+    echo "Go to vrici"
+  }
+  sefinddef() {
+    echo "Go to vrici" 
+  }
+  seshowdef() {
+    echo "Go to vrici" 
+  }
+  sefindcon() {
+    echo "Go to vrici" 
+  }
+  selist() {
+    echo "Go to vrici" 
+  }
 fi
 
 # work-specific but whatever
