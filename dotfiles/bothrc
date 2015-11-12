@@ -7,6 +7,12 @@
 
 set -o vi
 
+# Better than using ssh-agent directly
+if which keychain >/dev/null 2>&1
+then
+  eval $(keychain --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
+fi
+
 if [ -f "$HOME/bin/agent" ]
 then
   . $HOME/bin/agent
