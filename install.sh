@@ -56,9 +56,9 @@ do
 done
 
 echo "Setting up tpm"
-if [ ! -d "/home/rlpowell/.tmux/plugins/tpm" ]
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]
 then
-  git clone https://github.com/tmux-plugins/tpm /home/rlpowell/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
 echo "Setting up cron"
@@ -70,3 +70,7 @@ grep -v "$(pwd)" $cronfile_orig >$cronfile_new
 echo "1 1 * * * $(pwd)/upgrade.sh" >> $cronfile_new
 diff $cronfile_orig $cronfile_new
 crontab $cronfile_new
+
+echo "Running upgrade to install other things."
+
+$HOME/config/upgrade.sh

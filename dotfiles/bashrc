@@ -49,7 +49,7 @@ shopt -u hostcomplete # I use rvm wrappers a lot more than I autocomplete host n
 prompt_func () {
   # history -n -- don't read the history back in, it gets confusing.
   history -a
-  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\"
+  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\"
 }
 
 export PROMPT_COMMAND=prompt_func
@@ -63,5 +63,5 @@ export FZF_DEFAULT_OPTS='--extended'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # We already use C-t.  Untested.
-# from "/home/rlpowell/.fzf/shell/key-bindings.bash"
+# from "$HOME/.fzf/shell/key-bindings.bash"
 bind '"\et": " \C-u \C-a\C-k$(__fsel_tmux)\e\C-e\C-y\C-a\C-d\C-y\ey\C-h"'

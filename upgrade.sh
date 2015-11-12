@@ -17,13 +17,13 @@ then
   exit 1
 fi
 
-if [ -h "/home/rlpowell/.fzf.bash" ]
+if [ -h "$HOME/.fzf.bash" ]
 then
-  rm "/home/rlpowell/.fzf.bash"
+  rm "$HOME/.fzf.bash"
 fi
-if [ -h "/home/rlpowell/.fzf.zsh" ]
+if [ -h "$HOME/.fzf.zsh" ]
 then
-  rm "/home/rlpowell/.fzf.zsh"
+  rm "$HOME/.fzf.zsh"
 fi
 
 git pull
@@ -32,14 +32,14 @@ yes | vim -c ':PlugUpdate' -c ':qa'
 yes | ~/.fzf/install
 
 echo "Setting up tpm"
-if [ ! -d "/home/rlpowell/.tmux/plugins/tpm" ]
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]
 then
-  git clone https://github.com/tmux-plugins/tpm /home/rlpowell/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
 cd ~/.tmux/plugins/tpm
 git pull
-/home/rlpowell/.tmux/plugins/tpm/scripts/install_plugins.sh
+$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
 # This keeps resetting the main tmux binding on the AWS PMs
 # tmux source ~/.tmux.conf
 echo "If tmux things changed run: tmux source ~/.tmux.conf"

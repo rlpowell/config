@@ -3,4 +3,4 @@
 # Runs ts, but the first column is delta in seconds from the
 # previous line, second is datestamp, third is seconds since epoch.
 
-cat - | ts '%s' | /home/rlpowell/bin/ts_delta_after
+cat - | ts '%s' | $HOME/bin/ts_delta_after
