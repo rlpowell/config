@@ -42,7 +42,7 @@ sed -i "s:$HOME:\$HOME:g" ~/.fzf.*
 
 cd ~/.tmux/plugins/tpm
 git pull
+# Force complete plugin refresh, as otherwise it doesn't seem to update
+ls -d ~/.tmux/plugins/* | grep -v -P '\.tmux/plugins/tpm/?$' | xargs \rm -rf
 $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
-# This keeps resetting the main tmux binding on the AWS PMs
-# tmux source ~/.tmux.conf
-echo "If tmux things changed run: tmux source ~/.tmux.conf"
+tmux source ~/.tmux.conf
