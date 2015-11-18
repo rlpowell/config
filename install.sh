@@ -32,12 +32,13 @@ do
     continue
   fi
 
-  ln -sf "$file" "$dotfile"
+  ln -sf "config/dotfiles/$short" "$dotfile"
 done
 
-ln -sfT "$(pwd)/dotfiles/vim" ~/.vim
+ln -sfT "config/dotfiles/vim" ~/.vim
 
 echo "Setting up bin files"
+mkdir -p $HOME/bin
 
 for file in $(pwd)/binfiles/*
 do
@@ -52,7 +53,7 @@ do
     continue
   fi
 
-  ln -sf "$file" "$binfile"
+  ln -sf "../config/binfiles/$short" "$binfile"
 done
 
 echo "Setting up tpm"

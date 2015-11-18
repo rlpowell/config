@@ -37,6 +37,9 @@ then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
+echo "Fixing fzf for HOME portability"
+sed -i "s:$HOME:\$HOME:g" ~/.fzf.*
+
 cd ~/.tmux/plugins/tpm
 git pull
 $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
