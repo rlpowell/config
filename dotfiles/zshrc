@@ -63,7 +63,7 @@ bindkey -v '^E' end-of-line
 cdpath=(. .. ~ ~/src)
 
 # Put information into the tmux title
-function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed 's;/home/[^/]*powell;~;g')\033\\" }
+function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\" }
 
 
 
@@ -133,7 +133,7 @@ export FZF_DEFAULT_OPTS='--extended'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # We use ctrl-t already
-# From "/home/rlpowell/.fzf/shell/key-bindings.zsh"
+# From "$HOME/.fzf/shell/key-bindings.zsh"
 zle     -N   fzf-file-widget
 bindkey '\et' fzf-file-widget
 

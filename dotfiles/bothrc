@@ -8,7 +8,7 @@
 set -o vi
 
 # Better than using ssh-agent directly
-if which keychain >/dev/null 2>&1
+if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
 then
   eval $(keychain --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
 fi
@@ -114,12 +114,24 @@ if [ -f ~/.selinux_functions ]
 then
   . ~/.selinux_functions
 else
-  sefindif() { echo "Go to vrici" }
-  seshowif() { echo "Go to vrici" }
-  sefinddef() { echo "Go to vrici" }
-  seshowdef() { echo "Go to vrici" }
-  sefindcon() { echo "Go to vrici" }
-  selist() { echo "Go to vrici" }
+  sefindif() {
+    echo "Go to vrici"
+  }
+  seshowif() {
+    echo "Go to vrici"
+  }
+  sefinddef() {
+    echo "Go to vrici" 
+  }
+  seshowdef() {
+    echo "Go to vrici" 
+  }
+  sefindcon() {
+    echo "Go to vrici" 
+  }
+  selist() {
+    echo "Go to vrici" 
+  }
 fi
 
 # work-specific but whatever
