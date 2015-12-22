@@ -105,11 +105,14 @@ alias lsof='sudo lsof -Pnl -i '
 
 unset RUBYOPT
 
-# home-specific but whatever
-if [ "$(hostname)" = "vrici.digitalkingdom.org" ]
+if [ -x ~/bin/dropbox ]
+then
+  ~/bin/dropbox start
+fi
+
+if [ -f ~/.selinux_functions ]
 then
   . ~/.selinux_functions
-  ~/bin/dropbox start
 else
   sefindif() { echo "Go to vrici" }
   seshowif() { echo "Go to vrici" }
