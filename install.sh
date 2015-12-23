@@ -64,6 +64,7 @@ fi
 
 echo "Setting up cron"
 
+# conf file upgrade.sh
 cronfile_orig=/tmp/cron.$$
 cronfile_new=/tmp/cron.$$.new
 crontab -l >$cronfile_orig
@@ -71,6 +72,18 @@ grep -v "$(pwd)" $cronfile_orig >$cronfile_new
 echo "1 1 * * * $(pwd)/upgrade.sh" >> $cronfile_new
 diff $cronfile_orig $cronfile_new
 crontab $cronfile_new
+
+# Todo list recurrence
+if [ -f $HOME/Dropbox/Private/todo/recur.txt ]
+then
+  cronfile_orig=/tmp/cron.$$
+  cronfile_new=/tmp/cron.$$.new
+  crontab -l >$cronfile_orig
+  grep -v "Dropbox/Private/todo" $cronfile_orig >$cronfile_new
+  echo "2 2 * * * $HOME/Dropbox/Private/todo/todo.sh recur" >> $cronfile_new
+  diff $cronfile_orig $cronfile_new
+  crontab $cronfile_new
+fi
 
 echo "Running upgrade to install other things."
 

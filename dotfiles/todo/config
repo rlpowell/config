@@ -11,6 +11,7 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 
 # You can customize your actions directory location
 #export TODO_ACTIONS_DIR="$HOME/.todo.actions.d"
+export TODO_ACTIONS_DIR="$HOME/Dropbox/Private/todo/actions"
 
 # == EDIT FILE LOCATIONS ABOVE ===
 
@@ -51,9 +52,9 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 # Priorities can be any upper-case letter.
 # A,B,C are highlighted; you can add coloring for more.
 #
-# export PRI_A=$YELLOW        # color for A priority
-# export PRI_B=$GREEN         # color for B priority
-# export PRI_C=$LIGHT_BLUE    # color for C priority
+export PRI_A=$RED       # color for A priority
+export PRI_B=$YELLOW    # color for B priority
+export PRI_C=$GREEN     # color for C priority
 # export PRI_D=...            # define your own
 # export PRI_X=$WHITE         # color unless explicitly defined
 
@@ -76,4 +77,10 @@ export REPORT_FILE="$TODO_DIR/report.txt"
 # priority hiding, context hiding, and project hiding. That is,
 # just before the list output is displayed.
 #
-# export TODOTXT_FINAL_FILTER='cat'
+export TODOTXT_FINAL_FILTER="$HOME/Dropbox/Private/todo/filters/no_future_tasks"
+
+# -A Auto-archive tasks automatically on completion
+export TODOTXT_AUTO_ARCHIVE=1
+# -t Prepend the current date to a task automatically when it's added.
+export TODOTXT_DATE_ON_ADD=1
+export TODOTXT_DEFAULT_ACTION="ls"
