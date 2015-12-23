@@ -57,8 +57,9 @@ alias les='less'
 alias gerp=grep
 
 # todo.sh
-if [ -x ~/bin/todo.sh ]
+if [ -x ~/Dropbox/Private/todo/todo.sh ]
 then
+  ln -sf ~/Dropbox/Private/todo/todo.sh ~/bin/todo.sh
   alias t=~/bin/todo.sh
 fi
 
