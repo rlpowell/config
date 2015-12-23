@@ -23,23 +23,25 @@ do
 
   if [ -d "$file" ]
   then
+    # Directory
     if [ \( ! -e "$dotfile" \) -o -L "$dotfile" ]
     then
       ln -sfT "config/dotfiles/$short" "$dotfile"
     else
-      echo "Please move/remove $dotfile ; I'm trying to replace it with a symlink to a directory ( $(pwd)/config/dotfiles/$short )"
+      echo "Please move/remove $dotfile ; I'm trying to replace it with a symlink to a directory ( $HOME/config/dotfiles/$short )"
       exit
     fi
-  fi
+  else
+    # Regular file
+    if [ -e "$dotfile" -a ! -h "$dotfile" ]
+    then
+      echo "File $dotfile already exists; diffs: "
+      vimdiff "$file" "$dotfile"
+      continue
+    fi
 
-  if [ -e "$dotfile" -a ! -h "$dotfile" ]
-  then
-    echo "File $dotfile already exists; diffs: "
-    vimdiff "$file" "$dotfile"
-    continue
+    ln -sf "config/dotfiles/$short" "$dotfile"
   fi
-
-  ln -sf "config/dotfiles/$short" "$dotfile"
 done
 
 echo "Setting up bin files"
