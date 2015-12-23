@@ -18,12 +18,19 @@ for file in $(pwd)/dotfiles/*
 do
   echo "- Processing $file"
   short=$(basename $file)
-  if [ $short == "vim" ]
-  then
-    continue
-  fi
 
   dotfile="$HOME/.$short"
+
+  if [ -d "$file" ]
+  then
+    if [ \( ! -e "$dotfile" \) -o -L "$dotfile" ]
+    then
+      ln -sfT "config/dotfiles/$short" "$dotfile"
+    else
+      echo "Please move/remove $dotfile ; I'm trying to replace it with a symlink to a directory ( $(pwd)/config/dotfiles/$short )"
+      exit
+    fi
+  fi
 
   if [ -e "$dotfile" -a ! -h "$dotfile" ]
   then
@@ -34,8 +41,6 @@ do
 
   ln -sf "config/dotfiles/$short" "$dotfile"
 done
-
-ln -sfT "config/dotfiles/vim" ~/.vim
 
 echo "Setting up bin files"
 mkdir -p $HOME/bin
