@@ -56,6 +56,12 @@ alias gist='gist -p'
 alias les='less'
 alias gerp=grep
 
+# todo.sh
+if [ -x ~/bin/todo.sh ]
+then
+  alias t=~/bin/todo.sh
+fi
+
 # better default
 alias tmux='TERM=xterm-256color tmux -2 -u '
 
