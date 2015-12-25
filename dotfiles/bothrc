@@ -27,8 +27,8 @@ stty start '^@' 2>/dev/null
 stty stop '^@' 2>/dev/null
 stty susp '^Z' 2>/dev/null
 
-export VISUAL="$HOME/bin/cvim"
-export EDITOR="$HOME/bin/cvim"
+export VISUAL="/usr/bin/vim"
+export EDITOR="/usr/bin/vim"
 
 export LESSBINFMT='*d\%o'
 export LESS=-eRM
@@ -42,7 +42,6 @@ export LC_COLLATE=C
 
 alias rm='rm -v -I'
 
-alias vim="$HOME/bin/cvim"
 alias svim="sudo -i \vim"
 
 # Sorting issues
