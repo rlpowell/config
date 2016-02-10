@@ -174,3 +174,8 @@ if [ -f $HOME/src/ansible/hacking/env-setup ]
 then
   yes | . ~/src/ansible/hacking/env-setup -q
 fi
+
+if [ -f $HOME/.bothrc-local ]
+then
+  . $HOME/.bothrc-local
+fi
