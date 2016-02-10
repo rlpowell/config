@@ -24,7 +24,7 @@ do
   if [ -d "$file" ]
   then
     # Directory
-    if [ \( ! -e "$dotfile" \) -o -L "$dotfile" ]
+    if [ \( ! -e "$dotfile" \) -o -L "$dotfile" -o "$1" = "-f" ]
     then
       ln -sfT "config/dotfiles/$short" "$dotfile"
     else
@@ -35,9 +35,15 @@ do
     # Regular file
     if [ -e "$dotfile" -a ! -h "$dotfile" ]
     then
-      echo "File $dotfile already exists; diffs: "
-      vimdiff "$file" "$dotfile"
-      continue
+      if [ "$1" = "-f" ]
+      then
+        echo "File $dotfile already exists, but in force mode; removing."
+        /bin/rm $dotfile
+      else
+        echo "File $dotfile already exists; diffs: "
+        vimdiff "$file" "$dotfile"
+        continue
+      fi
     fi
 
     ln -sf "config/dotfiles/$short" "$dotfile"
@@ -55,9 +61,15 @@ do
 
   if [ -e "$binfile" -a ! -h "$binfile" ]
   then
-    echo "File $binfile already exists; diffs: "
-    vimdiff "$file" "$binfile"
-    continue
+    if [ "$1" = "-f" ]
+    then
+      echo "File $binfile already exists, but in force mode; removing."
+      /bin/rm $binfile
+    else
+      echo "File $binfile already exists; diffs: "
+      vimdiff "$file" "$binfile"
+      continue
+    fi
   fi
 
   ln -sf "../config/binfiles/$short" "$binfile"
