@@ -80,7 +80,7 @@ export PRI_C=$GREEN     # color for C priority
 export TODOTXT_FINAL_FILTER="$HOME/Dropbox/Private/todo/filters/no_future_tasks"
 
 # -A Auto-archive tasks automatically on completion
-export TODOTXT_AUTO_ARCHIVE=1
+# export TODOTXT_AUTO_ARCHIVE=1
 # -t Prepend the current date to a task automatically when it's added.
 export TODOTXT_DATE_ON_ADD=1
 export TODOTXT_DEFAULT_ACTION="ls"
