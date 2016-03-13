@@ -55,6 +55,7 @@ export TODO_ACTIONS_DIR="$HOME/Dropbox/Private/todo/actions"
 export PRI_A=$RED       # color for A priority
 export PRI_B=$YELLOW    # color for B priority
 export PRI_C=$GREEN     # color for C priority
+export PRI_D=$BLUE      # color for D priority
 # export PRI_D=...            # define your own
 # export PRI_X=$WHITE         # color unless explicitly defined
 
