@@ -36,6 +36,17 @@ let g:fzf_action = {
   \ 'ctrl-m': 'tabedit',
   \ 'alt-t': 'tabedit' }
 
+" Better pasting ; substitution
+Plug 'svermeulen/vim-easyclip' | Plug 'tpope/vim-repeat'
+nnoremap <Space>y :Yanks<CR>
+let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipUseCutDefaults = 0
+
+" reamp easyclip's "cut" from m to Space-c
+nmap <Space>c <Plug>MoveMotionPlug
+xmap <Space>c <Plug>MoveMotionXPlug
+nmap <Space>cc <Plug>MoveMotionLinePlug
+
 call plug#end()
 
 " Common keypresses that I want to be fast to hit
@@ -168,8 +179,8 @@ nmap <Space><Space> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " Double column
-nnoremap <Space>c :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
-nnoremap <Space>C <C-w>o
+" nnoremap <Space>c :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
+" nnoremap <Space>C <C-w>o
 
 " Should learn to use this better
 nnoremap <Space>u :GundoToggle<CR>
