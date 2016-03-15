@@ -219,6 +219,10 @@ nnoremap <Space>r :NERDTreeToggle<CR>
 set t_Co=256
 set background=dark
 
+" See surprising whitespace
+set list
+set listchars=tab:!·,trail:·
+
 colorscheme vividchalk
 "*****
 " vividchalk apparently has cterm as well as/rather than GUI values
@@ -319,7 +323,6 @@ endif
 :set nojoinspaces
 :set keywordprg=ref
 :set laststatus=1
-:set nolist
 :set magic
 :set makeprg=make
 :set maxmem=1024
