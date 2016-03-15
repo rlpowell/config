@@ -237,6 +237,13 @@ highlight Search ctermfg=Black ctermbg=Yellow cterm=NONE
 " https://github.com/tpope/vim-vividchalk/blob/master/colors/vividchalk.vim
 highlight Comment ctermfg=Magenta ctermbg=Black cterm=NONE
 
+" *ALWAYS* highlight fixme/todo stuff
+autocmd Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO)>/ containedin=.*
+" This version only works in comments:
+" au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE|XXX)>/ containedin=.*Comment,vimCommentTitle
+highlight def link MyTodo Error
+" Make sure we have a filetype, so it works.
+autocmd BufEnter * if &filetype == "" | setlocal ft=text | endif
 
 " Visual wrapping
 :map <F3> :setl wrap<CR>
