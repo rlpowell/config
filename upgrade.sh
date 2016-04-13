@@ -29,6 +29,7 @@ fi
 git pull
 yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
+yes | vim -c ':PlugClean!' -c ':qa'
 yes | ~/.fzf/install
 
 echo "Setting up tpm"
