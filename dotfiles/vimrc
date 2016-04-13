@@ -19,8 +19,8 @@ Plug 'sjl/gundo.vim'
 " Puppet syntax and stuff
 Plug 'rodjek/vim-puppet'
 
-" Ack Searching
-Plug 'mileszs/ack.vim'
+" The Silver Searcher Searching
+Plug 'rking/ag.vim'
 
 " Bracketed Paste Mode
 let g:bracketed_paste_tmux_wrap = 0
@@ -29,30 +29,86 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 " Tabular Alignment
 Plug 'junegunn/vim-easy-align'
 
-" fzf fuzzy finding tool
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-" ctrl-[a-z], alt-[a-z], f[1-4], or any single character
-let g:fzf_action = {
-  \ 'ctrl-m': 'tabedit',
-  \ 'alt-t': 'tabedit' }
+" Unite!  So many things!
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/neoyank.vim'
 
-" Better pasting ; substitution
-Plug 'svermeulen/vim-easyclip' | Plug 'tpope/vim-repeat'
-nnoremap <Space>y :Yanks<CR>
-let g:EasyClipUseSubstituteDefaults = 1
-let g:EasyClipUseCutDefaults = 0
-
-" reamp easyclip's "cut" from m to Space-c
-nmap <Space>c <Plug>MoveMotionPlug
-xmap <Space>c <Plug>MoveMotionXPlug
-nmap <Space>cc <Plug>MoveMotionLinePlug
+" tab-ish buffer list
+Plug 'weynhamz/vim-plugin-minibufexpl'
 
 call plug#end()
 
-" Common keypresses that I want to be fast to hit
+" *********************
+" BEGIN: Unite.vim
+" *********************
 
-" I keep having to reload because Fuf gets confused
-nnoremap <Space>v :source ~/.vimrc<CR>
+"-----
+"Unite Options
+"-----
+
+" fuzzy matching; currently not using because "foo bar" finds things
+" with both foo and bar, which is more natural for me I think
+"
+"call unite#custom#source('file_rec,file_rec/async', 'matchers', 'matcher_fuzzy')
+
+" Unlimit the number of files that can be found
+let g:unite_source_rec_max_cache_files = 0
+call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
+
+" Order quick matches like tmux
+let g:unite_quick_match_table =
+      \ get(g:, 'unite_quick_match_table', {
+      \     '1' : 0, '2' : 1, '3' : 2, '4' : 3, '5' : 4, '6' : 5, '7' : 6, '8' : 7, '9' : 8, '0' : 9,
+      \     'a' : 10, 'b' : 11, 'c' : 12, 'd' : 13, 'e' : 14, 'f' : 15, 'g' : 16, 'h' : 17, 'i' : 18, 'j' : 19,
+      \     'k' : 20, 'l' : 21, 'm' : 22, 'n' : 23, 'o' : 24, 'p' : 25, 'q' : 26, 'r' : 27, 's' : 28, 't' : 29,
+      \ })
+
+" Use ag (the silver searcher)
+" https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+    let g:unite_source_rec_async_command = [ 'ag', '--nogroup', '-S', '--hidden', '--ignore', '.hg', '--ignore', '.svn', '--ignore', '.git', '--ignore', '.bzr', '-l' ]
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nogroup -S --hidden --ignore .hg --ignore .svn --ignore .git --ignore .bzr'
+    let g:unite_source_grep_recursive_opt=''
+endif
+
+"-----
+"Unite Searches
+"-----
+
+" The big one: buffers, files most recently used, all files (that last uses "ag -l")
+nnoremap <Space>uf :Unite -wrap -no-split -start-insert -smartcase buffer file_mru file_rec/async<CR>
+nmap <Space>f <Space>uf
+
+" Recursive grep through files using ag
+nnoremap <Space>ug :Unite -no-split -start-insert -smartcase -custom-grep-search-word-highlight grep<CR>
+nmap <Space>G <Space>ug
+
+" Insert from our yank/delete history
+nnoremap <Space>uP :Unite -quick-match -no-split -default-action=insert history/yank<CR>
+nmap <Space>P <Space>uP
+nnoremap <Space>up :Unite -quick-match -no-split -default-action=append history/yank<CR>
+nmap <Space>p <Space>up
+
+" Quick-match buffer selector
+nnoremap <Space>ub :Unite -quick-match -no-split buffer<CR>
+nmap <Space>b <Space>ub
+
+" Quick-match most recently used files
+nnoremap <Space>um :Unite -quick-match -no-split file_mru<CR>
+
+" Search inside all buffers for things like function finding
+nnoremap <Space>ul :Unite -no-split -start-insert -smartcase -custom-line-enable-highlight line:buffers<CR>
+" This next bit will make sure we load all the buffers so the above will work properly.
+autocmd VimEnter * silent bufdo echo|buffer 1
+
+" *********************
+" END: Unite.vim
+" *********************
+
+" Common keypresses that I want to be fast to hit
 
 " Don't bind the leader because other things bind it
 " let mapleader = ","
@@ -68,12 +124,13 @@ nnoremap <Space>k <C-W>k
 
 " Open various panels or whatever
 nnoremap <Space>a :tabnew<CR>:Ack<Space>''<Left>
-nnoremap <Space>n :tabnew<CR>
 
-" Close all but the current window in the current tab (for dropping stuff like Ack)
-nnoremap <Space>q :cclose<CR>:only<CR>
-" Close the currrent tab
-nnoremap <Space>Q :tabclose<CR>
+" Open a new tab
+"
+" No reason for this when buffer based, really; could bind it to
+" :enew, but why?
+" nnoremap <Space>n :tabnew<CR>
+
 " Attempt to close the current buffer
 nnoremap <Space>d :bdelete<CR>
 
@@ -93,101 +150,48 @@ vnoremap <Space>do :diffget<CR>
 vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
 
-" FZF / fuzzy finding
-nnoremap <Space>ff :FZF --extended<CR>
 
-    " FZF buffer stuff, from https://github.com/junegunn/fzf/wiki/Examples-%28vim%29
-    function! s:buflist()
-      redir => ls
-      silent ls
-      redir END
-      return split(ls, '\n')
-    endfunction
-    
-    function! s:bufopen(e)
-      execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-    endfunction
-    
-    command! FZFBuff call fzf#run({
-    \   'source':  reverse(<sid>buflist()),
-    \   'sink':    function('<sid>bufopen'),
-    \   'options': '--extenddd +m',
-    \   'down':    len(<sid>buflist()) + 2
-    \ })<CR>
-    
-nnoremap <Space>fb :FZFBuff<CR>
+"***************
+" BEGIN: MiniBufExplorer configuration / tab-ish stuff
+"***************
+let g:miniBufExplCycleArround=1
+" vertical MBE: let g:miniBufExplVSplit = 20
+nnoremap < :MBEbp<CR>
+nnoremap > :MBEbn<CR>
 
-    command! FZFMru call fzf#run({
-                \'source': v:oldfiles,
-                \'sink' : 'e ',
-                \'options' : '--extended -m',
-                \})
-
-nnoremap <Space>fr :FZFMru<CR>
-
-    command! FZFTag if !empty(tagfiles()) | call fzf#run({
-    \   'source': "sed '/^\\!/d;s/\t.*//' " . join(tagfiles()) . ' | uniq',
-    \   'sink':   'tag',
-    \'options' : '--extended',
-    \ }) | else | echo 'No tags' | endif
-
-nnoremap <Space>ft :FZFTag<CR>
-
-    function! s:line_handler(l)
-      let keys = split(a:l, ':\t')
-      exec 'buf ' . keys[0]
-      exec keys[1]
-      normal! ^zz
-    endfunction
-    
-    function! s:buffer_lines()
-      let res = []
-      for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-        call extend(res, map(getbufline(b,0,"$"), 'b . ":\t" . (v:key + 1) . ":\t" . v:val '))
-      endfor
-      return res
-    endfunction
-    
-    command! FZFLines call fzf#run({
-    \   'source':  <sid>buffer_lines(),
-    \   'sink':    function('<sid>line_handler'),
-    \   'options': '--extended --nth=3..',
-    \   'down':    '60%'
-    \})
-
-nnoremap <Space>fl :FZFLines<CR>
-
-" tab configuration
-nnoremap < gT
-nnoremap > gt
-
-nnoremap <Space>1 1gt
-nnoremap <Space>2 2gt
-nnoremap <Space>3 3gt
-nnoremap <Space>4 4gt
-nnoremap <Space>5 5gt
-nnoremap <Space>6 6gt
-nnoremap <Space>7 7gt
-nnoremap <Space>8 8gt
-nnoremap <Space>9 9gt
-nnoremap <Space>0 0gt
+nnoremap <Space>1 :buffer 1<CR>
+nnoremap <Space>2 :buffer 2<CR>
+nnoremap <Space>3 :buffer 3<CR>
+nnoremap <Space>4 :buffer 4<CR>
+nnoremap <Space>5 :buffer 5<CR>
+nnoremap <Space>6 :buffer 6<CR>
+nnoremap <Space>7 :buffer 7<CR>
+nnoremap <Space>8 :buffer 8<CR>
+nnoremap <Space>9 :buffer 9<CR>
+nnoremap <Space>0 :buffer 0<CR>
 
 " Switch to last active tab; from
 " http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
-let g:lasttab = 1
-nmap <Space><Space> :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+"
+"let g:lasttab = 1
+"nmap <Space><Space> :exe "tabn ".g:lasttab<CR>
+"au TabLeave * let g:lasttab = tabpagenr()
+"
+" Modified to do last buffer
+let g:lastbuffer = 1
+nmap <Space><Space> :exe "buffer ".g:lastbuffer<CR>
+" If we're not in the MBE buffer, save the buffer number on the way out
+au BufLeave * if &filetype != "minibufexpl" | let g:lastbuffer = bufnr("%") | endif
+"***************
+" END: MiniBufExplorer configuration / tab-ish stuff
+"***************
 
 " Double column
 " nnoremap <Space>c :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 " nnoremap <Space>C <C-w>o
 
 " Should learn to use this better
-nnoremap <Space>u :GundoToggle<CR>
-
-" Mostly unused packages, might want to retry them some day
-nnoremap <Space>N :NERDTreeToggle<CR>
-nnoremap <Space>r :NERDTreeToggle<CR>
+nnoremap <Space>gu :GundoToggle<CR>
 
 "The important bits:
 
@@ -276,22 +280,12 @@ autocmd BufReadPost,FileReadPost *.lisp setl lisp
 autocmd BufReadPost,FileReadPost *.cl setl lisp
 autocmd BufNew,BufNewFile,BufRead *.md set filetype=markdown
 
-
-" " Make tab do indentation of the whole line, even in insert mode
-" " (and shift-tab unindent)
-" vnoremap <C-T> >
-" vnoremap <C-D> <LT>
-" vmap <Tab> <C-T>
-" vmap <S-Tab> <C-D>
-" inoremap <Tab> <C-T>
-" inoremap <S-Tab> <C-D>
-
 " Stuff that I've reviewed but do not have specific comments about
 
 set backspace=2
 set history=1024
 set ruler
-set hidden             " very important with NERDTree
+set hidden
 set hlsearch
 set undolevels=10000
 if version >= 703
@@ -386,89 +380,92 @@ function! MyDiff()
         \  " > " . v:fname_out
 endfunction
 
-" FIXME: If we want to make the below more intelligent (like "shrink
-" if necessary based on window size"),
-" https://github.com/blueyed/dotfiles/blob/master/vimrc#L396 might
-" make a good starting point (the ShortenFilename function), not
-" because we want to do the same things but just to cargo cult.
-
-" tabline customization function; started with the JonSkanes example
-" from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
-" and customized further
-set showtabline=2  " 0, 1 or 2; when to use a tab pages line
-set tabline=%!MyTabLine()  " custom tab pages line
-function! MyTabLine()
-  let s = '' " complete tabline goes here
-  " loop through each tab page
-  for t in range(tabpagenr('$'))
-    " " set highlight for tab number and &modified
-    let s .= '%#TabLineFill#'
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (t + 1) . 'T'
-    " get buffer names and statuses
-    let n = ''  "temp string for buffer names while we loop and check buftype
-    let m = 0  " &modified counter
-    let bc = len(tabpagebuflist(t + 1))  "counter to avoid last ' '
-    " loop through each buffer in a tab
-    for b in tabpagebuflist(t + 1)
-      " buffer types: quickfix gets a [Q], help gets [H]{base fname}
-      " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
-      if getbufvar( b, "&buftype" ) == 'help'
-        let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-      elseif getbufvar( b, "&buftype" ) == 'quickfix'
-        let n .= '[Q]'
-      else
-        " Enforce file name maxlen
-        let bufname = bufname(b)
-        let bufname = substitute(bufname, 'manifests/', 'm/', 'g')
-        let bufname = substitute(bufname, 'modules/', 'm/', 'g')
-        let bufname = substitute(bufname, 'templates/', 'm/', 'g')
-        let bufname = substitute(bufname, 'init.pp', 'ip', 'g')
-        let bufname = substitute(bufname, 'files/', 'f/', 'g')
-        let bufname = substitute(bufname, 'lib/', 'l/', 'g')
-        let bufname = substitute(bufname, 'pages/', 'p/', 'g')
-        let bufname = substitute(bufname, 'cloud/', 'c/', 'g')
-        let n .= bufname[-30:-1]
-      endif
-      " check and ++ tab's &modified count
-      if getbufvar( b, "&modified" )
-        let m += 1
-      endif
-      " no final ' ' added...formatting looks better done later
-      if bc > 1
-        let n .= ' '
-      endif
-      let bc -= 1
-    endfor
-    " set page number string
-    let s .= 't'
-    let s .= t + 1
-    " add modified label
-    if m > 0
-      let s .= '+'
-    endif
-    let s .= ':'
-    " select the highlighting for the buffer names
-    " my default highlighting only underlines the active tab
-    " buffer names.
-    if t + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-    else
-      let s .= '%#TabLine#'
-    endif
-    " add buffer names
-    let s .= n
-    " switch to no underlining and add final space to buffer list
-    let s .= '%#TabLineSel#' . ' '
-  endfor
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLineFill#%999Xclose'
-  endif
-  return s
-endfunction
+" tabline customization function; left here in case we want to hack
+" MiniBufExplorer in similar ways.
+"
+" " FIXME: If we want to make the below more intelligent (like "shrink
+" " if necessary based on window size"),
+" " https://github.com/blueyed/dotfiles/blob/master/vimrc#L396 might
+" " make a good starting point (the ShortenFilename function), not
+" " because we want to do the same things but just to cargo cult.
+" 
+" " tabline customization function; started with the JonSkanes example
+" " from http://vim.wikia.com/wiki/Show_tab_number_in_your_tab_line
+" " and customized further
+" set showtabline=2  " 0, 1 or 2; when to use a tab pages line
+" set tabline=%!MyTabLine()  " custom tab pages line
+" function! MyTabLine()
+"   let s = '' " complete tabline goes here
+"   " loop through each tab page
+"   for t in range(tabpagenr('$'))
+"     " " set highlight for tab number and &modified
+"     let s .= '%#TabLineFill#'
+"     " set the tab page number (for mouse clicks)
+"     let s .= '%' . (t + 1) . 'T'
+"     " get buffer names and statuses
+"     let n = ''  "temp string for buffer names while we loop and check buftype
+"     let m = 0  " &modified counter
+"     let bc = len(tabpagebuflist(t + 1))  "counter to avoid last ' '
+"     " loop through each buffer in a tab
+"     for b in tabpagebuflist(t + 1)
+"       " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+"       " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+"       if getbufvar( b, "&buftype" ) == 'help'
+"         let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+"       elseif getbufvar( b, "&buftype" ) == 'quickfix'
+"         let n .= '[Q]'
+"       else
+"         " Enforce file name maxlen
+"         let bufname = bufname(b)
+"         let bufname = substitute(bufname, 'manifests/', 'm/', 'g')
+"         let bufname = substitute(bufname, 'modules/', 'm/', 'g')
+"         let bufname = substitute(bufname, 'templates/', 'm/', 'g')
+"         let bufname = substitute(bufname, 'init.pp', 'ip', 'g')
+"         let bufname = substitute(bufname, 'files/', 'f/', 'g')
+"         let bufname = substitute(bufname, 'lib/', 'l/', 'g')
+"         let bufname = substitute(bufname, 'pages/', 'p/', 'g')
+"         let bufname = substitute(bufname, 'cloud/', 'c/', 'g')
+"         let n .= bufname[-30:-1]
+"       endif
+"       " check and ++ tab's &modified count
+"       if getbufvar( b, "&modified" )
+"         let m += 1
+"       endif
+"       " no final ' ' added...formatting looks better done later
+"       if bc > 1
+"         let n .= ' '
+"       endif
+"       let bc -= 1
+"     endfor
+"     " set page number string
+"     let s .= 't'
+"     let s .= t + 1
+"     " add modified label
+"     if m > 0
+"       let s .= '+'
+"     endif
+"     let s .= ':'
+"     " select the highlighting for the buffer names
+"     " my default highlighting only underlines the active tab
+"     " buffer names.
+"     if t + 1 == tabpagenr()
+"       let s .= '%#TabLineSel#'
+"     else
+"       let s .= '%#TabLine#'
+"     endif
+"     " add buffer names
+"     let s .= n
+"     " switch to no underlining and add final space to buffer list
+"     let s .= '%#TabLineSel#' . ' '
+"   endfor
+"   " after the last tab fill with TabLineFill and reset tab page nr
+"   let s .= '%#TabLineFill#%T'
+"   " right-align the label to close the current tab page
+"   if tabpagenr('$') > 1
+"     let s .= '%=%#TabLineFill#%999Xclose'
+"   endif
+"   return s
+" endfunction
 
 " Last so we can override stuff
 silent! source ~/.vimrc-local
