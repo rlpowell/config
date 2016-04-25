@@ -87,9 +87,9 @@ nnoremap <Space>ug :Unite -no-split -start-insert -smartcase -custom-grep-search
 nmap <Space>G <Space>ug
 
 " Insert from our yank/delete history
-nnoremap <Space>uP :Unite -quick-match -no-split -default-action=insert history/yank<CR>
+nnoremap <Space>uP :Unite -quick-match -multi-line -no-split -default-action=insert history/yank<CR>
 nmap <Space>P <Space>uP
-nnoremap <Space>up :Unite -quick-match -no-split -default-action=append history/yank<CR>
+nnoremap <Space>up :Unite -quick-match -multi-line -no-split -default-action=append history/yank<CR>
 nmap <Space>p <Space>up
 
 " Quick-match buffer selector
@@ -101,8 +101,6 @@ nnoremap <Space>um :Unite -quick-match -no-split file_mru<CR>
 
 " Search inside all buffers for things like function finding
 nnoremap <Space>ul :Unite -no-split -start-insert -smartcase -custom-line-enable-highlight line:buffers<CR>
-" This next bit will make sure we load all the buffers so the above will work properly.
-autocmd VimEnter * silent bufdo echo|buffer 1
 
 " *********************
 " END: Unite.vim
