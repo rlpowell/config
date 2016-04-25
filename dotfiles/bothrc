@@ -35,6 +35,7 @@ export LESS=-eRM
 export PAGER='less'
 export MANPAGER='less -isR'
 export MANPATH=/usr/local/man:/usr/local/share/man:$MANPATH
+export TMOUT=0
 
 # Try to sort correctly
 export LANG=en_US.UTF-8
@@ -91,19 +92,16 @@ alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
-# ack version issues
-if which ack >/dev/null 2>&1 && [ $(ack --version | head -n 1 | sed 's/\..*//' | sed 's/.* //') -eq 1 ]
-then
-  alias a='ack -a'
-  alias ai='ack -ai'
-  alias al='ack -al'
-  alias ail='ack -ail'
-else
-  alias a='ack'
-  alias ai='ack -i'
-  alias al='ack -l'
-  alias ail='ack -il'
-fi
+# Text only
+alias a='ag -t --hidden'
+alias ai='ag -ti --hidden'
+alias al='ag -tl --hidden'
+alias ail='ag -til --hidden'
+# Also binary
+alias ab='ag -a --hidden'
+alias abi='ag -ai --hidden'
+alias abl='ag -al --hidden'
+alias abil='ag -ail --hidden'
 
 # Easier lsof
 alias li='sudo lsof -Pnl -i | grep LIST '
