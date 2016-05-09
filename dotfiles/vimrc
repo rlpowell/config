@@ -36,7 +36,12 @@ Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/neoyank.vim'
 
 " tab-ish buffer list
-Plug 'weynhamz/vim-plugin-minibufexpl'
+" Plug 'weynhamz/vim-plugin-minibufexpl'
+Plug 'rlpowell/vim-plugin-minibufexpl'
+let g:miniBufExplShowBufNumbers = 0
+let g:miniBufExplShowBufMBENumbers = 1
+let g:miniBufExplShowBufMRUNumbers = 0
+
 
 call plug#end()
 
@@ -157,29 +162,18 @@ let g:miniBufExplCycleArround=1
 nnoremap < :MBEbp<CR>
 nnoremap > :MBEbn<CR>
 
-nnoremap <Space>1 :buffer 1<CR>
-nnoremap <Space>2 :buffer 2<CR>
-nnoremap <Space>3 :buffer 3<CR>
-nnoremap <Space>4 :buffer 4<CR>
-nnoremap <Space>5 :buffer 5<CR>
-nnoremap <Space>6 :buffer 6<CR>
-nnoremap <Space>7 :buffer 7<CR>
-nnoremap <Space>8 :buffer 8<CR>
-nnoremap <Space>9 :buffer 9<CR>
-nnoremap <Space>0 :buffer 0<CR>
+nnoremap <Space>1 :MBEGoTo 1<CR>
+nnoremap <Space>2 :MBEGoTo 2<CR>
+nnoremap <Space>3 :MBEGoTo 3<CR>
+nnoremap <Space>4 :MBEGoTo 4<CR>
+nnoremap <Space>5 :MBEGoTo 5<CR>
+nnoremap <Space>6 :MBEGoTo 6<CR>
+nnoremap <Space>7 :MBEGoTo 7<CR>
+nnoremap <Space>8 :MBEGoTo 8<CR>
+nnoremap <Space>9 :MBEGoTo 9<CR>
+nnoremap <Space>0 :MBEGoTo 10<CR>
 
-" Switch to last active tab; from
-" http://stackoverflow.com/questions/2119754/switch-to-last-active-tab-in-vim
-"
-"let g:lasttab = 1
-"nmap <Space><Space> :exe "tabn ".g:lasttab<CR>
-"au TabLeave * let g:lasttab = tabpagenr()
-"
-" Modified to do last buffer
-let g:lastbuffer = 1
-nmap <Space><Space> :exe "buffer ".g:lastbuffer<CR>
-" If we're not in the MBE buffer, save the buffer number on the way out
-au BufLeave * if &filetype != "minibufexpl" | let g:lastbuffer = bufnr("%") | endif
+nmap <Space><Space> :MBEMRUGoTo 2<CR>
 "***************
 " END: MiniBufExplorer configuration / tab-ish stuff
 "***************
