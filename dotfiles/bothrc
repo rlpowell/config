@@ -7,15 +7,16 @@
 
 set -o vi
 
-# Better than using ssh-agent directly
-if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
-then
-  eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
-fi
-
 if [ -f "$HOME/bin/agent" ]
 then
   . $HOME/bin/agent
+fi
+
+# Better than using ssh-agent directly; also detects if the agent we
+# just loaded is invalid.
+if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
+then
+  eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
 fi
 
 umask 022
