@@ -14,6 +14,7 @@ fi
 
 echo "Setting up dot files"
 
+diffs=""
 for file in $(pwd)/dotfiles/*
 do
   echo "- Processing $file"
@@ -40,6 +41,7 @@ do
         echo "File $dotfile already exists, but in force mode; removing."
         /bin/rm $dotfile
       else
+        diffs=1
         echo "File $dotfile already exists; diffs: "
         vimdiff "$file" "$dotfile"
         continue
@@ -49,6 +51,12 @@ do
     ln -sf "config/dotfiles/$short" "$dotfile"
   fi
 done
+
+if [ $diffs ]
+then
+  echo "Diffs were found.  Fix and run again with -f."
+  exit 1
+fi
 
 echo "Setting up bin files"
 mkdir -p $HOME/bin
