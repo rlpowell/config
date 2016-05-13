@@ -49,6 +49,7 @@ shopt -u hostcomplete # I use rvm wrappers a lot more than I autocomplete host n
 prompt_func () {
   # history -n -- don't read the history back in, it gets confusing.
   history -a
+  ssh-add -l >/dev/null 2>&1 || . ~/bin/agent >/dev/null 2>&1
   printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\"
 }
 

@@ -7,16 +7,35 @@
 
 set -o vi
 
-if [ -f "$HOME/bin/agent" ]
+# The workflow we're aiming for here is ssh-agent running on some
+# other computer that has been forwarded, but then it changes, and
+# we want to be able to easily pull the new agent's info into
+# running shells.  So first we check if we have an agent.  If we do
+# not, we try loading the one we've stored.
+if ! ssh-add -l >/dev/null 2>&1 && [ -f "$HOME/bin/agent" ]
 then
   . $HOME/bin/agent
 fi
 
-# Better than using ssh-agent directly; also detects if the agent we
-# just loaded is invalid.
+# Clean out the relevant env stuff if that didn't work
+if ! ssh-add -l >/dev/null 2>&1
+then
+  unset SSH_AUTH_SOCK
+  unset SSH_AGENT_PID
+fi
+
+# Then we run keychain to add any keys we might be missing and/or
+# start the agent if needed
 if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
 then
   eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
+fi
+
+# Then we store the working agent, if any, to the bin/agent file
+if ssh-add -l >/dev/null 2>&1
+then
+  rm ~/bin/agent
+  keychain --inherit any --eval >~/bin/agent 2>/dev/null
 fi
 
 umask 022

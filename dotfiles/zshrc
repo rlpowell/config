@@ -63,7 +63,11 @@ bindkey -v '^E' end-of-line
 cdpath=(. .. ~ ~/src)
 
 # Put information into the tmux title
-function precmd { printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\" }
+# This runs before the prompt
+function precmd {
+  ssh-add -l >/dev/null 2>&1 || . ~/bin/agent >/dev/null 2>&1
+  printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\"
+}
 
 
 
