@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ~/.bothrc
+
 if [ ! -d "dotfiles" ]
 then
   cd ~/config/
