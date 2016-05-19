@@ -3,7 +3,7 @@
 sep="$1"
 
 rm -f /tmp/rlp_tmux_buf
-tmux save-buffer -b 0 /tmp/rlp_tmux_buf
+tmux save-buffer /tmp/rlp_tmux_buf
 if [ "$sep" ]
 then
   cat /tmp/rlp_tmux_buf | sed 's/^ *//' | tr '\012' "$sep" >/tmp/rlp_tmux_buf.tmp
@@ -11,11 +11,6 @@ else
   cat /tmp/rlp_tmux_buf  | sed 's/^ *//' | tr -d '\012' >/tmp/rlp_tmux_buf.tmp
 fi
 
-while [ ! "$(tmux list-buffers -F '#{line}' 2>&1 | grep '^18$' 2>&1)" ]
-do
-  tmux set-buffer "foo"
-done
-
-tmux load-buffer -b 18 /tmp/rlp_tmux_buf.tmp
-tmux paste-buffer -p -b 18
+tmux load-buffer -b ws_trim_wrap /tmp/rlp_tmux_buf.tmp
+tmux paste-buffer -p -b ws_trim_wrap
 rm /tmp/rlp_tmux_buf /tmp/rlp_tmux_buf.tmp
