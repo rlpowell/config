@@ -118,3 +118,6 @@ fi
 echo "Running upgrade to install other things."
 
 $HOME/config/upgrade.sh
+
+# We don't want to use the exit value, and it upsets docker if the last command happens to go poorly.
+exit 0
