@@ -28,7 +28,7 @@ then
   rm "$HOME/.fzf.zsh"
 fi
 
-git pull
+ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
 yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
 yes | vim -c ':PlugClean!' -c ':qa'
@@ -44,7 +44,7 @@ echo "Fixing fzf for HOME portability"
 sed -i "s:$HOME:\$HOME:g" ~/.fzf.*
 
 cd ~/.tmux/plugins/tpm
-git pull
+ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
 # Force complete plugin refresh, as otherwise it doesn't seem to update
 ls -d ~/.tmux/plugins/* | grep -v -P '\.tmux/plugins/tpm/?$' | xargs \rm -rf
 $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
