@@ -121,7 +121,7 @@ alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
 # General utility git stuff
-git_delete_branch () ?
+git_delete_branch () {
   git branch -d $1
   git push origin --delete P1
 }
