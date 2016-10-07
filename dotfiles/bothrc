@@ -120,6 +120,19 @@ alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
+# General utility git stuff
+git_delete_branch () ?
+  git branch -d $1
+  git push origin --delete P1
+}
+git_make_new_branch () {
+  git checkout -b $1
+  git push -u origin $1
+}
+git_reset_to_upstream_master () {
+  git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin
+}
+
 # Text only
 alias a='ag -t --hidden'
 alias ai='ag -ti --hidden'
