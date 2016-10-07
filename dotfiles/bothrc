@@ -107,6 +107,7 @@ alias g=git
 alias gd='g diff -w'
 alias gdc='g diff -w --cached'
 alias gs='g status --short'
+alias gsl='g status'
 alias ga='g add'
 alias gf='g fetch'
 alias gr='g rebase'
