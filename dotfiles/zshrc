@@ -105,6 +105,9 @@ setopt   sh_word_split
 # This is not on by default, I just want to be clear
 unsetopt correctall
 
+# So annoying
+unsetopt CDABLE_VARS
+
 # History settings
 setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_EXPIRE_DUPS_FIRST
 # Amount of history to save
