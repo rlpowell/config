@@ -116,6 +116,7 @@ alias gp='g pull ; g push'
 alias gb='g branch'
 alias gc='g commit'
 alias gca='g commit -a'
+alias gfa='g fetch --all -p'
 # alias gcah='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
 alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
@@ -124,7 +125,7 @@ alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 # General utility git stuff
 git_delete_branch () {
   git branch -d $1
-  git push origin --delete P1
+  git push origin --delete $1
 }
 git_make_new_branch () {
   git checkout -b $1
