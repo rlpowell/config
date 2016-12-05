@@ -35,6 +35,10 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/vimproc.vim'
 Plug 'Shougo/neoyank.vim'
 
+" auto-save for mutt
+Plug 'vim-scripts/vim-auto-save'
+autocmd BufReadPost,FileReadPost ~/.mutt-*/* let g:auto_save = 1
+
 " tab-ish buffer list
 " Plug 'weynhamz/vim-plugin-minibufexpl'
 Plug 'rlpowell/vim-plugin-minibufexpl'
@@ -190,7 +194,8 @@ nnoremap <Space>gu :GundoToggle<CR>
 :filetype indent on
 :filetype plugin on
 :set autoindent
-:set nobackup
+:set backup
+:set backupdir=~/.vimtmp,/home/tmp/rlpowell/vimtmp
 "This is the option that allows undo levels.
 :set nocompatible
 :set noedcompatible
