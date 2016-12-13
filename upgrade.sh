@@ -34,6 +34,8 @@ chmod 600 github-config-readonly.ssh*
 ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
 yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
+yes | vim -c ':VimProcInstall' -c ':qa'
+yes | vim -c ':PlugUpdate' -c ':qa'
 yes | vim -c ':PlugClean!' -c ':qa'
 yes | ~/.fzf/install
 
