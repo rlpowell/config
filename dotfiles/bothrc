@@ -135,15 +135,15 @@ git_reset_to_upstream_master () {
 }
 
 # Text only
-alias a='ag -t --hidden'
-alias ai='ag -ti --hidden'
-alias al='ag -tl --hidden'
-alias ail='ag -til --hidden'
-# Also binary
-alias ab='ag -a --hidden'
-alias abi='ag -ai --hidden'
-alias abl='ag -al --hidden'
-alias abil='ag -ail --hidden'
+alias a='pt --hidden --ignore=.git'
+alias ai='pt -i --hidden --ignore=.git'
+alias al='pt -l --hidden --ignore=.git'
+alias ail='pt -il --hidden --ignore=.git'
+# # Also binary
+# alias ab='ag -a --hidden'
+# alias abi='ag -ai --hidden'
+# alias abl='ag -al --hidden'
+# alias abil='ag -ail --hidden'
 
 # Easier lsof
 alias li='sudo lsof -Pnl -i | grep LIST '
