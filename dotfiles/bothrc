@@ -12,14 +12,19 @@ set -o vi
 # we want to be able to easily pull the new agent's info into
 # running shells.  So first we check if we have an agent.  If we do
 # not, we try loading the one we've stored.
-if ! ssh-add -l >/dev/null 2>&1 && [ -f "$HOME/bin/agent" ]
+if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
 then
-  . $HOME/bin/agent
+  if [ -f "$HOME/bin/agent" ]
+  then
+    echo "Loading SSH agent."
+    . $HOME/bin/agent
+  fi
 fi
 
 # Clean out the relevant env stuff if that didn't work
-if ! ssh-add -l >/dev/null 2>&1
+if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
 then
+  echo "Agent not working; clearing variables."
   unset SSH_AUTH_SOCK
   unset SSH_AGENT_PID
 fi
@@ -28,12 +33,14 @@ fi
 # start the agent if needed
 if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
 then
+  echo "Running keychain."
   eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
 fi
 
 # Then we store the working agent, if any, to the bin/agent file
-if ssh-add -l >/dev/null 2>&1
+if timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
 then
+  echo "Writing the agent."
   rm ~/bin/agent
   keychain --inherit any --eval >~/bin/agent 2>/dev/null
 fi
@@ -132,7 +139,7 @@ git_make_new_branch () {
   git push -u origin $1
 }
 git_reset_to_upstream_master () {
-  git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin
+  curbranch=$(git rev-parse --abbrev-ref HEAD) ; git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
 }
 
 # Text only
