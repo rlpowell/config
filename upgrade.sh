@@ -28,6 +28,8 @@ then
   rm "$HOME/.fzf.zsh"
 fi
 
+mkdir -p $HOME/.vimtmp
+
 chmod 600 github-config-readonly.ssh*
 ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
 yes | vim -c ':PlugInstall' -c ':qa'
