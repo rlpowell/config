@@ -95,6 +95,8 @@ if which todo.sh >/dev/null 2>&1
 then
   alias t=~/bin/todo.sh
   alias th='t | head -n 40'
+  alias tll='t ls life'
+  alias tlb='t ls buy'
 fi
 
 # better default
