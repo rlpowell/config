@@ -145,10 +145,10 @@ git_reset_to_upstream_master () {
 }
 
 # Text only
-alias a='pt --hidden --ignore=.git'
-alias ai='pt -i --hidden --ignore=.git'
-alias al='pt -l --hidden --ignore=.git'
-alias ail='pt -il --hidden --ignore=.git'
+alias a='pt -e --hidden --ignore=.git'
+alias ai='pt -e -i --hidden --ignore=.git'
+alias al='pt -e -l --hidden --ignore=.git'
+alias ail='pt -e -il --hidden --ignore=.git'
 # # Also binary
 # alias ab='ag -a --hidden'
 # alias abi='ag -ai --hidden'
