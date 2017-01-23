@@ -97,6 +97,7 @@ then
   alias th='t | head -n 40'
   alias tll='t ls life'
   alias tlb='t ls buy'
+  alias tlc='t ls calendar'
 fi
 
 # better default
