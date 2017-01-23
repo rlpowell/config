@@ -87,8 +87,8 @@ endif
 "Unite Searches
 "-----
 
-" The big one: buffers, files most recently used, all files (that last uses "ag -l")
-nnoremap <Space>uf :Unite -wrap -no-split -start-insert -smartcase -unique buffer file_mru file_rec/async<CR>
+" The big one: buffers, files most recently used, all files (that last uses "find -L", which is the default)
+nnoremap <Space>uf :Unite -wrap -no-split -start-insert -smartcase -unique -force-redraw buffer file_mru file_rec/async<CR>
 nmap <Space>f <Space>uf
 
 " Recursive grep through files using ag
