@@ -78,7 +78,10 @@ color header    brightcyan black ^Cc:
 color header    brightwhite black ^Subject:
 
 color index     brightred black ~N
-color index     black brightred '~h "^X-Spam-Level: ."'
+spam "^X-Spam-Level: ." "yes"
+set spam_separator=", "
+color index     blue black "~H yes"
+macro index <esc>S "<limit>~H yes<enter>"
 
 
 # aliases for broken MUAs
