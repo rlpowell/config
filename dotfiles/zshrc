@@ -109,7 +109,7 @@ unsetopt correctall
 unsetopt CDABLE_VARS
 
 # History settings
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_EXPIRE_DUPS_FIRST
+setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
 # Amount of history to save
 export SAVEHIST=1000000
 # Amount of history to load on start; fzf should ignore this
@@ -118,7 +118,7 @@ export HISTFILE=$HOME/.history_zsh
 
 unsetopt rmstarsilent
 unsetopt bgnice
-unsetopt EXTENDED_GLOB 
+unsetopt EXTENDED_GLOB
 
 # use hard limits, except for a smaller stack and no core dumps
 unlimit
