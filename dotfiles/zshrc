@@ -65,7 +65,6 @@ cdpath=(. .. ~ ~/src)
 # Put information into the tmux title
 # This runs before the prompt
 function precmd {
-  timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+' || . ~/bin/agent >/dev/null 2>&1
   printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\"
 }
 

@@ -7,43 +7,65 @@
 
 set -o vi
 
-# The workflow we're aiming for here is ssh-agent running on some
-# other computer that has been forwarded, but then it changes, and
-# we want to be able to easily pull the new agent's info into
-# running shells.  So first we check if we have an agent.  If we do
-# not, we try loading the one we've stored.
-if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
-then
-  if [ -f "$HOME/bin/agent" ]
+#***************************
+# BEGIN SSH Agent Stuff
+#***************************
+function fix_ssh_agent {
+  # The workflow we're aiming for here is ssh-agent running on some
+  # other computer that has been forwarded, but then it changes, and
+  # we want to be able to easily pull the new agent's info into
+  # running shells.
+  #
+  # So we have function, that we also run on new shell start, that
+  # links the agent's socket to ~/.ssh-agent-sock
+  #
+  # First we check if we have an agent.
+  if timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
-    echo "Loading SSH agent."
-    . $HOME/bin/agent
+    # We do have an agent!  Is it in the right place?
+    if [[ ! $SSH_AUTH_SOCK =~ ssh-agent-sock ]]
+    then
+      # It is not; fix
+      rm ~/.ssh-agent-sock
+      ln -s "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
+    fi
+  else
+    # We do not have an agent; do nothing, we're about to set the
+    # socket to the normal place.
   fi
-fi
 
-# Clean out the relevant env stuff if that didn't work
-if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
-then
-  echo "Agent not working; clearing variables."
-  unset SSH_AUTH_SOCK
-  unset SSH_AGENT_PID
-fi
+  # In any case, make the socket point to the standard place.
+  export SSH_AUTH_SOCK=~/.ssh-agent-sock
 
-# Then we run keychain to add any keys we might be missing and/or
-# start the agent if needed
-if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
-then
-  echo "Running keychain."
-  eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
-fi
+  # Now double-check
+  if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
+  then
+    echo "No SSH agent found.  You ran run make_ssh_agent to fix that."
+  fi
+}
+alias ssh_agent_fix=fix_ssh_agent
+# Now run it
+fix_ssh_agent
 
-# Then we store the working agent, if any, to the bin/agent file
-if timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
-then
-  echo "Writing the agent."
-  rm ~/bin/agent
-  keychain --inherit any --eval >~/bin/agent 2>/dev/null
-fi
+function make_ssh_agent {
+  # Run keychain, if we have it, to add any keys we might be missing
+  # and/or start the agent if needed
+  if [ -d ~/.ssh ] && which keychain >/dev/null 2>&1
+  then
+    echo "Running keychain."
+    eval $(keychain --inherit any --eval "$(cd ~/.ssh ; \ls | grep -P '(id_|github)' | grep -v pub)")
+  else
+    echo "Running ssh-agent.  You may want to install keychain."
+    eval $(ssh-agent)
+  fi
+
+  # Fix the socket
+  ln -sf ~/.ssh-agent-sock "$SSH_AUTH_SOCK"
+}
+alias ssh_agent_make=make_ssh_agent
+#***************************
+# END SSH Agent Stuff
+#***************************
 
 umask 022
 
