@@ -144,6 +144,17 @@ git_make_new_branch () {
 git_reset_to_upstream_master () {
   curbranch=$(git rev-parse --abbrev-ref HEAD) ; git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
 }
+git_force_push () {
+  local curbranch=$(git rev-parse --abbrev-ref HEAD)
+  echo "Pushing $curbranch to origin"
+  git push --force origin $curbranch
+}
+git_amend_force_push () {
+  local curbranch=$(git rev-parse --abbrev-ref HEAD)
+  echo "Amending branch $curbranch"
+  git commit --amend .
+  git_force_push
+}
 
 # Text only
 alias a='pt -e --hidden --ignore=.git'
