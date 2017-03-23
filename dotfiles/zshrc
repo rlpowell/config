@@ -109,11 +109,12 @@ unsetopt correctall
 unsetopt CDABLE_VARS
 
 # History settings
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS
-# Amount of history to save
-export SAVEHIST=1000000
+setopt INC_APPEND_HISTORY EXTENDED_HISTORY HIST_FIND_NO_DUPS HIST_EXPIRE_DUPS_FIRST
+# Amount of history to save; turns out this needs to be smaller than
+# HISTSIZE, or startup is super slow.
+export SAVEHIST=100000
 # Amount of history to load on start; fzf should ignore this
-export HISTSIZE=10000
+export HISTSIZE=200000
 export HISTFILE=$HOME/.history_zsh
 
 unsetopt rmstarsilent
