@@ -114,8 +114,8 @@ pg () {
 
 # stolen from cizra in #jbopre
 alias g=git
-alias gd='g diff -w'
-alias gdc='g diff -w --cached'
+alias gd='g diff -w --color'
+alias gdc='g diff -w --cached --color'
 alias gs='g status --short'
 alias gsl='g status'
 alias ga='g add'
@@ -203,6 +203,12 @@ then
   # Insert the RVM path, if any, into the middle, by putting the tail
   # on, attaching RVM in front, then adding more.
   export PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+
+  # Clean out previous partial RVM stuff, if any
+  if set | grep -ai '^rvm' >/dev/null 2>&1
+  then
+    unset $(set | grep -ai '^rvm' | sed 's/=.*//')
+  fi
 
   if [ -s "$HOME/.rvm/scripts/rvm" ]
   then
