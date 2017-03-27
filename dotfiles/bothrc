@@ -32,6 +32,7 @@ function fix_ssh_agent {
   else
     # We do not have an agent; do nothing, we're about to set the
     # socket to the normal place.
+    :
   fi
 
   # In any case, make the socket point to the standard place.
