@@ -32,12 +32,19 @@ mkdir -p $HOME/.vimtmp
 
 chmod 600 github-config-readonly.ssh*
 ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
+
 yes | vim -c ':PlugInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
 yes | vim -c ':VimProcInstall' -c ':qa'
 yes | vim -c ':PlugUpdate' -c ':qa'
 yes | vim -c ':PlugClean!' -c ':qa'
-yes | ~/.fzf/install
+
+if [ -d ~/.fzf ]
+then
+  yes | ~/.fzf/install
+  echo "Fixing fzf for HOME portability"
+  sed -i "s:$HOME:\$HOME:g" ~/.fzf.*
+fi
 
 echo "Setting up tpm"
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]
@@ -45,12 +52,7 @@ then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-echo "Fixing fzf for HOME portability"
-sed -i "s:$HOME:\$HOME:g" ~/.fzf.*
-
 cd ~/.tmux/plugins/tpm
-chmod 600 github-config-readonly.ssh*
-ssh-agent bash -c 'ssh-add github-config-readonly.ssh ; git pull'
 # Force complete plugin refresh, as otherwise it doesn't seem to update
 ls -d ~/.tmux/plugins/* | grep -v -P '\.tmux/plugins/tpm/?$' | xargs \rm -rf
 $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
