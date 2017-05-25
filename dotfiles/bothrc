@@ -41,7 +41,7 @@ function fix_ssh_agent {
   # Now double-check
   if ! timeout 2s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
-    echo "No SSH agent found.  You ran run make_ssh_agent to fix that."
+    echo "No SSH agent found.  You can run make_ssh_agent to fix that."
   fi
 }
 alias ssh_agent_fix=fix_ssh_agent
@@ -61,7 +61,7 @@ function make_ssh_agent {
   fi
 
   # Fix the socket
-  ln -sf ~/.ssh-agent-sock "$SSH_AUTH_SOCK"
+  ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
 }
 alias ssh_agent_make=make_ssh_agent
 #***************************
