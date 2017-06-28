@@ -165,6 +165,9 @@ git_delete_branch () {
   git branch -d $1
   git push origin --delete $1
 }
+git_new_commit () {
+  git commit -a ; git pull && git push
+}
 git_make_new_branch () {
   git checkout -b $1
   git push -u origin $1
