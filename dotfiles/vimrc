@@ -46,6 +46,9 @@ let g:miniBufExplShowBufNumbers = 0
 let g:miniBufExplShowBufMBENumbers = 1
 let g:miniBufExplShowBufMRUNumbers = 0
 
+" Pandoc markdown support
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax' 
 
 call plug#end()
 
