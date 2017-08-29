@@ -173,6 +173,7 @@ git_make_new_branch () {
   git push -u origin $1
 }
 git_reset_to_upstream_master () {
+  gfa
   curbranch=$(git rev-parse --abbrev-ref HEAD) ; git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
 }
 git_force_push () {
