@@ -233,12 +233,6 @@ else
   }
 fi
 
-# work-specific but whatever
-alias myro='sudo -u mysql mysql -u readonly cytobank_development'
-alias myrw='sudo -u mysql mysql -u root --safe-updates cytobank_development'
-export CBC=/opt/cytobank/releases/current/WEB-INF/config/config.yml
-export cbc=/opt/cytobank/releases/current/WEB-INF/config/config.yml
-
 # Do RVM stuff only if it hasn't been done yet
 if [ ! "$(which ruby | grep rvm)" ]
 then
