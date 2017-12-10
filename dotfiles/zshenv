@@ -13,4 +13,4 @@ export TERM='screen'
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
-export PATH="$HOME/bin:$HOME/.rvm/bin:/root/bin:/usr/local/bin/:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin"
+export PATH="$HOME/bin:$HOME/.rvm/bin:/usr/local/bin/:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin"
