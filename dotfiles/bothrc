@@ -207,7 +207,7 @@ unset RUBYOPT
 
 if [ -x /bin/mega-cmd-server ]
 then
-  /bin/mega-cmd-server 2>&1 | grep -v 'Another instance'
+  mega-sync --path-display-size=50
 fi
 
 if [ -f ~/.selinux_functions ]
