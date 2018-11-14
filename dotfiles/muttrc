@@ -55,11 +55,16 @@ bind index < half-up
 bind index > half-down
 bind pager < half-up
 bind pager > half-down
+bind index <esc>\Cs decode-save
 
 # Quickly turn off limit and purge
 macro index L "<limit>all<enter><enter-command>set delete=yes<enter><sync-mailbox><enter-command>set delete=ask-yes<enter><last-entry>"
 # Runs the macro just above
 macro pager L "qL"
+# macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+# macro pager \cx <pipe-entry>'lynx'<enter> 'lynx'
+# macro  index   \cx     ":set pipe_decode<enter>|~/bin/show_urls<enter>:unset pipe_decode<enter>"
+ macro  index   \cx     "|~/bin/show_urls<enter>"
 
 set move=no
 hdr_order Subject: From: To: Cc: Date:

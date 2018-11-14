@@ -211,9 +211,9 @@ alias lsof='sudo lsof -Pnl -i '
 
 unset RUBYOPT
 
-if [ -x ~/bin/dropbox ]
+if [ -x /bin/mega-cmd-server ]
 then
-  ~/bin/dropbox start
+  mega-sync --path-display-size=50
 fi
 
 if [ -f ~/.selinux_functions ]

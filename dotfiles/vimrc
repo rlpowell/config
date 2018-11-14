@@ -1,3 +1,8 @@
+" Force any python mods to use python3; we'll want this for denite
+" someday probably
+if has('python3')
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " Let gvim colorschemes work; not sure if we need this but can't
@@ -14,7 +19,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tmhedberg/matchit'
 
 " Entended undo capabilities
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 
 " Puppet syntax and stuff
 Plug 'rodjek/vim-puppet'
@@ -190,7 +195,7 @@ nmap <Space><Space> :MBEMRUGoTo 2<CR>
 " nnoremap <Space>C <C-w>o
 
 " Should learn to use this better
-nnoremap <Space>gu :GundoToggle<CR>
+nnoremap <Space>ut :UndotreeToggle<CR>
 
 "The important bits:
 

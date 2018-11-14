@@ -1,4 +1,4 @@
 set editing-mode vi
 set keymap vi
-set prefer-visual-bell on
+set bell-style visible
 set show-all-if-ambiguous on
