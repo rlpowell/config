@@ -41,7 +41,7 @@ function fix_ssh_agent {
   # Now double-check
   if ! timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
-    echo "No SSH agent found.  You can run make_ssh_agent to fix that."
+    echo "No SSH agent found, or it has no keys loaded.  You can run make_ssh_agent to fix the former, and re-run fix_ssh_agent to fix the latter."
   fi
 
   # Run keychain, if we have it, to add any keys we might be missing
@@ -56,14 +56,18 @@ alias ssh_agent_fix=fix_ssh_agent
 fix_ssh_agent
 
 function make_ssh_agent {
+  unset SSH_AUTH_SOCK
   # Start the agent if needed
-  if timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
+  if ! timeout 10s ssh-add -l >/dev/null 2>&1 || timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
     echo "Running ssh-agent."
-    eval $(ssh-agent)
+    agent="$(ssh-agent)"
+    echo "$agent"
+    eval "$agent"
   fi
 
   # Fix the socket
+  echo ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
 
   fix_ssh_agent
