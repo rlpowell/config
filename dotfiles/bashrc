@@ -52,6 +52,9 @@ prompt_func () {
   printf "\033]2;$(uname -n | cut -d . -f 1):$(echo $PWD | sed "s;$HOME;~;g")\033\\"
 }
 
+# Fantastic info for set -x
+export PS4='+ $(date "+%F__%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]}): '
+
 export PROMPT_COMMAND=prompt_func
 
 if [ -e ~/.bothrc ]
