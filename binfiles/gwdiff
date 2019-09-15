@@ -10,7 +10,8 @@
 #
 # path old-file old-hex old-mode new-file new-hex new-mode
 
-echo "You can pipe the wdiff output below through colordiff --difftype=wdiff for color."
-echo "BEGIN wdiffs for $1"
+echo
+echo "----------- BEGIN wdiffs for $1"
 wdiff -n $2 $5 | colordiff --difftype=wdiff | grep --color=never -C 5 '[{[][+-]'
-echo "END wdiffs for $1"
+echo "----------- END wdiffs for $1"
+echo
