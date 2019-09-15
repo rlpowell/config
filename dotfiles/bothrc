@@ -162,8 +162,9 @@ alias gc='g commit'
 alias gca='g commit -a'
 alias gfa='g fetch --all -p'
 # alias gcah='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
-alias glp='GIT_EXTERNAL_DIFF=~/bin/gwdiff g log --ext-diff -p'
-alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
+alias gl='GIT_EXTERNAL_DIFF=~/bin/gwdiff g log --follow --ext-diff'
+alias glp='gl -p'
+alias glg='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
