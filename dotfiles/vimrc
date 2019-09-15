@@ -309,6 +309,8 @@ if version >= 703
   set undodir=/home/tmp/rlpowell/vimundo
   set undofile
 endif
+set ignorecase
+set smartcase
 
 " Everything below here has probably not been properly reviewed
 
@@ -325,7 +327,6 @@ endif
 :set nogdefault
 :set nographic
 :set noicon
-:set noignorecase
 :set noinsertmode
 :set nojoinspaces
 :set keywordprg=ref
