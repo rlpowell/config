@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# If you make major changes here, consider making them to
+# ~/src/hblog/hbgwdiff.sh as well, although they do not serve exactly the same
+# function.
+
 # This is an external diff command for git.  Per
 # https://web.archive.org/web/20170508180316/http://git.net:80/ml/version-control.msysgit/2008-06/msg00200.html
 # , diff is called by git with 7 parameters:
 #
 # path old-file old-hex old-mode new-file new-hex new-mode
 
-wdiff -n $2 $5 | colordiff --difftype=wdiff | (grep --color=never -C 5 '[{[][+-]' ; true)
+echo "You can pipe the wdiff output below through colordiff --difftype=wdiff for color."
+echo "BEGIN wdiffs for $1"
+wdiff -n $2 $5 | colordiff --difftype=wdiff | grep --color=never -C 5 '[{[][+-]'
+echo "END wdiffs for $1"
