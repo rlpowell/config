@@ -41,7 +41,7 @@ function fix_ssh_agent {
   # Now double-check
   if ! timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
-    echo "No SSH agent found.  You can run make_ssh_agent to fix that."
+    echo "No SSH agent found, or it has no keys loaded.  You can run make_ssh_agent to fix the former, and re-run fix_ssh_agent to fix the latter."
   fi
 
   # Run keychain, if we have it, to add any keys we might be missing
@@ -56,14 +56,18 @@ alias ssh_agent_fix=fix_ssh_agent
 fix_ssh_agent
 
 function make_ssh_agent {
+  unset SSH_AUTH_SOCK
   # Start the agent if needed
-  if timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
+  if ! timeout 10s ssh-add -l >/dev/null 2>&1 || timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
     echo "Running ssh-agent."
-    eval $(ssh-agent)
+    agent="$(ssh-agent)"
+    echo "$agent"
+    eval "$agent"
   fi
 
   # Fix the socket
+  echo ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh-agent-sock
 
   fix_ssh_agent
@@ -142,8 +146,10 @@ pg () {
 
 # stolen from cizra in #jbopre
 alias g=git
-alias gd='g diff -w --color'
-alias gdc='g diff -w --cached --color'
+alias gd='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w'
+alias gdc='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w --cached'
+alias gdl='g diff -w --color'
+alias gdlc='g diff -w --cached --color'
 alias gs='g status --short'
 alias gsl='g status'
 alias ga='g add'
@@ -156,7 +162,9 @@ alias gc='g commit'
 alias gca='g commit -a'
 alias gfa='g fetch --all -p'
 # alias gcah='g commit --amend -C HEAD'  # amend the last commit keeping the same commit message
-alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
+alias gl='GIT_EXTERNAL_DIFF=~/bin/gwdiff g log --follow --ext-diff'
+alias glp='gl -p'
+alias glg='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gin='gl ..@{u}'  # [w]hat's [i]ncoming; useful after a gf (git fetch)
 alias gout='gl @{u}..'  # what's [u]npushed; useful before a gp (git push)
 
@@ -226,9 +234,9 @@ alias lsof='sudo lsof -Pnl -i '
 
 unset RUBYOPT
 
-if [ -x /bin/mega-cmd-server ]
+if [ -x ~/bin/dropbox ]
 then
-  mega-sync --path-display-size=50
+  ~/bin/dropbox start
 fi
 
 if [ -f ~/.selinux_functions ]

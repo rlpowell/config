@@ -62,3 +62,5 @@ macro index,pager ,a "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 macro index,pager ,s "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
 macro index,pager ,d "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index,pager ,t "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
+
+source ~/.muttrc-gmail-local

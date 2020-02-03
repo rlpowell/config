@@ -81,6 +81,12 @@ autoload run-help
 # hosts to use for completion
 #hosts=($HOSTANME mobius07.math.uwaterloo.ca calum.csclub.uwaterloo.ca)
 
+# Fantastic info for set -x
+# This is the zsh version:
+# export PS4='+ %D{%F__%T.%N} %x(%N)@%I: '
+# but we almost never run zsh scripts, so here's the bash version:
+export PS4='+ $(date "+%F__%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]}): '
+
 # set prompts
 USER=$(whoami)
 HOSTNAME=$(uname -n | sed 's/\..*//')

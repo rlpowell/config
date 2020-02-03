@@ -3,6 +3,8 @@
 # Deal with vim swap files; from
 # http://vim.wikia.com/wiki/Swap_file_%22...%22already_exists!_-_so_diff_it
 
+realfiles=""
+
 function vim-process-swap {
     local swapfile_first=0
     while true; do
@@ -29,6 +31,7 @@ function vim-process-swap {
     fi
     local recoverfile=${3:-"${path}/${realname}-recovered"}
     local lastresort=0
+    realfiles="$realfile $realfiles"
     for f in "$realfile" "$swapfile"; do
         if [ ! -f "$f" ]; then
             echo "File $f does not exist." >&2
@@ -82,3 +85,4 @@ do
   vim-process-swap -s "$file"
 done
 
+echo "Files dealt with: $realfiles"
