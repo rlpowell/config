@@ -172,15 +172,30 @@ git_make_new_branch () {
   git checkout -b $1
   git push -u origin $1
 }
-git_reset_to_upstream_master () {
+git_reset_to_upstream_branch () {
+  branch="$1"
   gfa
   local curbranch=$(git rev-parse --abbrev-ref HEAD)
-  if [ "$curbranch" != 'master' ]
+  if ! git remote show upstream >/dev/null 2>&1
   then
-    echo -e "\n\n******** Your current branch is $curbranch, not 'master'; enter to continue, ctrl-c to abort.  *******\n\n"
+    echo -e "\n\n******** You don't have an 'upstream' remote; bailing."
+    return
+  fi
+  if [ "$curbranch" != "$branch" ]
+  then
+    echo -e "\n\n******** Your current branch is $curbranch, not '$branch'; enter to continue, ctrl-c to abort.  *******\n\n"
     read line
   fi
-  curbranch=$(git rev-parse --abbrev-ref HEAD) ; git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
+  olddir="$(git rev-parse --show-toplevel)"
+  newdir="/var/tmp/$(id -un)-git-backup-$(git rev-parse --show-toplevel | tr '/' '_')--$(date +%Y-%m-%d_%H%M)"
+  curbranch=$(git rev-parse --abbrev-ref HEAD)
+  echo -e "\n\nBacking up current git repo ($olddir) to $newdir\n\n"
+  rsync -aSHAX . "$olddir/" "$newdir/" && \
+  echo -e "\n\nForcibly resetting to upstream.\n\n" && \
+  git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
+}
+git_reset_to_upstream_master () {
+  git_reset_to_upstream_branch master
 }
 git_force_push () {
   local curbranch=$(git rev-parse --abbrev-ref HEAD)
