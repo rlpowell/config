@@ -28,6 +28,10 @@
 # doesn't have one of those.  -_-
 #*******************************
 
+# This doesn't seem to get set properly when manually running bash,
+# so...
+SHELL=bash
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc

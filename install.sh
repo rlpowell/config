@@ -115,6 +115,18 @@ then
   crontab $cronfile_new
 fi
 
+# Saving tmux state
+if [ -x "$(which --skip-alias --skip-functions tmux)" ]
+then
+  cronfile_orig=/tmp/cron.$$
+  cronfile_new=/tmp/cron.$$.new
+  crontab -l >$cronfile_orig
+  grep -v "save_tmux" $cronfile_orig >$cronfile_new
+  echo "3 3 * * * $HOME/bin/save_tmux" >> $cronfile_new
+  diff $cronfile_orig $cronfile_new
+  crontab $cronfile_new
+fi
+
 echo "Running upgrade to install other things."
 
 $HOME/config/upgrade.sh
