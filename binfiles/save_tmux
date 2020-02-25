@@ -1,0 +1,21 @@
+#!/bin/bash
+
+dir="$HOME/scratch/$(date +%Y-%m-%d_%Hh)"
+
+echo "Saving tmux state to $dir"
+
+mkdir -p "$dir"
+
+cd "$dir"
+
+tmux list-panes -a -F '#{pane_id} -- #{pane_index} -- #{pane_start_command} -- #{pane_current_command} -- #{pane_current_path} -- #{pane_title} -- #{pane_tty}' >list_of_panes
+
+for name in $(tmux list-buffers -F '#{buffer_name}')
+do
+  tmux show-buffer -b "$name" >"buffer_$name"
+done
+
+for id in $(tmux list-panes -a -F '#{pane_id}')
+do
+  tmux capture-pane -p -S -5000 -t "$id" >"pane_$id"
+done
