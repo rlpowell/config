@@ -137,11 +137,26 @@ alias tmux='TERM=xterm-256color tmux -2 -u '
 alias ta='TERM=xterm-256color tmux -2 -u new-session -A -s main'
 
 # Yay forests
-ps () {
-  /bin/ps --forest -f -e "$@"
+#ps () {
+#  /bin/ps --forest -f -e "$@"
+#}
+pm () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS
+}
+pml () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS | less
+}
+pw () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd
+}
+pwl () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd | less
 }
 pg () {
-  /bin/ps --forest -f -e | grep "$@"
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS | grep "$@"
+}
+pgw () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd | grep "$@"
 }
 
 # stolen from cizra in #jbopre
