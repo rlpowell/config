@@ -1,0 +1,53 @@
+#!/bin/bash
+
+cd ~/todo/
+
+cp --backup=t todo.txt todo.txt.backup-$(date +%Y-%m-%d)
+echo "Moving to Music:"
+grep '^(E) .* [+@]music ' todo.txt
+grep '^(E) .* [+@]music ' todo.txt >>time_permitting/music.txt
+grep -v '^(E) .* [+@]music ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Video:"
+grep -P '^[(]E[)] .* [+@]movies? ' todo.txt
+grep -P '^[(]E[)] .* [+@]movies? ' todo.txt >>time_permitting/video.txt
+grep -v -P '^[(]E[)] .* [+@]movies? ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Video:"
+grep '^(E) .* [+@]TV ' todo.txt
+grep '^(E) .* [+@]TV ' todo.txt >>time_permitting/video.txt
+grep -v '^(E) .* [+@]TV ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Books:"
+grep -P '^[(]E[)] .* [+@]books? ' todo.txt
+grep -P '^[(]E[)] .* [+@]books? ' todo.txt >>time_permitting/books.txt
+grep -v -P '^[(]E[)] .* [+@]books? ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Lojban:"
+grep '^(E) .* [+@]lojban ' todo.txt
+grep '^(E) .* [+@]lojban ' todo.txt >>time_permitting/lojban.txt
+grep -v '^(E) .* [+@]lojban ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Spanish:"
+grep '^(E) .* [+@]spanish ' todo.txt
+grep '^(E) .* [+@]spanish ' todo.txt >>time_permitting/spanish.txt
+grep -v '^(E) .* [+@]spanish ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+echo "Moving to Twins:"
+grep '^(E) .* [+@]twins ' todo.txt
+grep '^(E) .* [+@]twins ' todo.txt >>time_permitting/twins.txt
+grep -v '^(E) .* [+@]twins ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
+
+# And now dump everything else
+echo "Moving to Unknown:"
+grep '^(E) ' todo.txt
+grep '^(E) ' todo.txt >>time_permitting/unknown.txt
+grep -v '^(E) ' todo.txt >todo.txt.$$
+mv todo.txt.$$ todo.txt
