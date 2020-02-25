@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir="$HOME/scratch/$(date +%Y-%m-%d_%Hh)"
+dir="$HOME/scratch/tmux-save/$(date +%Y-%m-%d_%Hh)"
 
 echo "Saving tmux state to $dir"
 
