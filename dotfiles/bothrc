@@ -232,16 +232,11 @@ git_amend_force_push () {
   git_force_push
 }
 
-# Text only
-alias a='pt -e --hidden --ignore=.git'
-alias ai='pt -e -i --hidden --ignore=.git'
-alias al='pt -e -l --hidden --ignore=.git'
-alias ail='pt -e -il --hidden --ignore=.git'
-# # Also binary
-# alias ab='ag -a --hidden'
-# alias abi='ag -ai --hidden'
-# alias abl='ag -al --hidden'
-# alias abil='ag -ail --hidden'
+# Recursive search
+alias a='rg --hidden --binary'
+alias ai='rg --hidden --binary -i'
+alias al='rg --hidden --binary -l'
+alias ail='rg --hidden --binary -il'
 
 # Easier lsof
 alias li='sudo lsof -Pnl -i | grep LIST '
