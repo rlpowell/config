@@ -136,22 +136,21 @@ fi
 alias tmux='TERM=xterm-256color tmux -2 -u '
 alias ta='TERM=xterm-256color tmux -2 -u new-session -A -s main'
 
-# Yay forests
-#ps () {
-#  /bin/ps --forest -f -e "$@"
-#}
-pm () {
-  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS
+# ps tree, width limited
+pt () {
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS | cat
 }
-pml () {
+ptl () {
   /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS | less
 }
+# ps tree, not width limited
 pw () {
-  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd
+  /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd | cat
 }
 pwl () {
   /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd | less
 }
+# ps tree grep
 pg () {
   /bin/ps fax o user:16,pid,pcpu,pmem,vsz,rss,stat,start_time,time,cmd --cols $COLUMNS | grep "$@"
 }
