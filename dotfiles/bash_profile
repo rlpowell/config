@@ -7,6 +7,16 @@
 # long as both are interactive
 #*******************************
 
+if [ -x "$(which zsh)" ]
+then
+    # Interactivity test
+    if [ "$PS1" ]
+    then
+        echo "Switching to zsh"
+    fi
+    exec "$(which zsh)"
+fi
+
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc
 fi
