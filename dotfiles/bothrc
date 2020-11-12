@@ -214,6 +214,11 @@ git_reset_to_upstream_branch () {
   olddir="$(git rev-parse --show-toplevel)"
   newdir="/var/tmp/$(id -un)-git-backup-$(git rev-parse --show-toplevel | tr '/' '_')--$(date +%Y-%m-%d_%H%M)"
   curbranch=$(git rev-parse --abbrev-ref HEAD)
+  if [ "$(du -s . | awk '{ print $1 }')" -gt 100000 ]
+  then
+    echo "This directory seems to be quite large; hit enter if you really want to back it up: $(du -sh .)"
+    read line
+  fi
   echo -e "\n\nBacking up current git repo ($olddir) to $newdir\n\n"
   rsync -aSHAX . "$olddir/" "$newdir/" && \
   echo -e "\n\nForcibly resetting to upstream.\n\n" && \
