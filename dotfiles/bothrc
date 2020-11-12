@@ -222,7 +222,7 @@ git_reset_to_upstream_branch () {
   echo -e "\n\nBacking up current git repo ($olddir) to $newdir\n\n"
   rsync -aSHAX . "$olddir/" "$newdir/" && \
   echo -e "\n\nForcibly resetting to upstream.\n\n" && \
-  git remote | grep -q upstream && git fetch --all && git reset --hard upstream/master && git push --force origin $curbranch
+  git remote | grep -q upstream && git fetch --all && git reset --hard $branch && git push --force origin $curbranch
 }
 git_reset_to_upstream_master () {
   git_reset_to_upstream_branch master
