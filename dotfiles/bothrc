@@ -304,7 +304,7 @@ else
   export PATH="$PATH:/sbin:/bin:/usr/sbin:/usr/bin"
 fi
 
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin/:/usr/local/sbin:$HOME/go/bin:$PATH"
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
