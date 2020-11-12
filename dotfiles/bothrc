@@ -41,7 +41,10 @@ function fix_ssh_agent {
   # Now double-check
   if ! timeout 10s ssh-add -l 2>&1 | grep -q -P '^[0-9][0-9][0-9]+'
   then
-    echo "No SSH agent found, or it has no keys loaded.  You can run make_ssh_agent to fix the former, and re-run fix_ssh_agent to fix the latter."
+    if [[ -o interactive ]]
+    then
+      echo "No SSH agent found, or it has no keys loaded.  You can run make_ssh_agent to fix the former, and re-run fix_ssh_agent to fix the latter."
+    fi
   fi
 
   # Run keychain, if we have it, to add any keys we might be missing
