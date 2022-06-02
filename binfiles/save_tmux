@@ -10,7 +10,7 @@ mkdir -p "$dir"
 
 cd "$dir"
 
-tmux list-panes -a -F '#{pane_id} -- #{pane_index} -- #{pane_start_command} -- #{pane_current_command} -- #{pane_current_path} -- #{pane_title} -- #{pane_tty}' >list_of_panes
+tmux list-panes -a -F '#{session_name} -- #{pane_id} -- #{pane_index} -- #{pane_start_command} -- #{pane_current_command} -- #{pane_current_path} -- #{pane_title} -- #{pane_tty}' >list_of_panes
 
 for name in $(tmux list-buffers -F '#{buffer_name}')
 do
