@@ -56,4 +56,4 @@ cd ~/.tmux/plugins/tpm
 # Force complete plugin refresh, as otherwise it doesn't seem to update
 ls -d ~/.tmux/plugins/* | grep -v -P '\.tmux/plugins/tpm/?$' | xargs \rm -rf
 $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
-tmux source ~/.tmux.conf
+tmux source "$(readlink -f ~/.tmux.conf)"
