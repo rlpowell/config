@@ -23,6 +23,7 @@ Plug 'mbbill/undotree'
 
 " Puppet syntax and stuff
 Plug 'rodjek/vim-puppet'
+let g:puppet_align_hashes = 0
 
 " The Silver Searcher Searching
 Plug 'rking/ag.vim'
