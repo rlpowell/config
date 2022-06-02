@@ -259,6 +259,17 @@ unset RUBYOPT
 if [ -x ~/bin/dropbox ]
 then
   ~/bin/dropbox start
+
+  (
+  cd /home/rlpowell/Dropbox/Docs/Public
+
+  if [[ $(dropbox ls | wc -w) -lt 10 ]]
+  then
+    echo -e "\n\nDROPBOX IS PROBABLY STUCK\n\n"
+  else
+    echo "Dropbox looks OK."
+  fi
+  )
 fi
 
 if [ -f ~/.selinux_functions ]
