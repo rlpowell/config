@@ -171,6 +171,15 @@ vnoremap <Space>do :diffget<CR>
 vnoremap <Space>dg :diffget<CR>
 vnoremap <Space>dp :diffput<CR>
 
+" Settings for textual writing, i.e. for blog post editing; got
+" these from https://stackoverflow.com/a/50415982/1461430
+nnoremap <Space>t :setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns=80<CR>:setl spell<CR>
+
+" Settings for 'don't wrap my shit' but without the visual soft margin
+nnoremap <Space>c :setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl nospell<CR>
+
+" Settings for textual writing with hard wrapping
+nnoremap <Space>w :setl number<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions+=t<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl spell<CR>
 
 "***************
 " BEGIN: MiniBufExplorer configuration / tab-ish stuff
