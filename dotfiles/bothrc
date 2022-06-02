@@ -163,8 +163,10 @@ pgw () {
 
 # stolen from cizra in #jbopre
 alias g=git
-alias gd='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w'
-alias gdc='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w --cached'
+alias gdw='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w'
+alias gdwc='GIT_EXTERNAL_DIFF=~/bin/gwdiff g diff -w --cached'
+alias gd='g diff -w --color'
+alias gdc='g diff -w --cached --color'
 alias gdl='g diff -w --color'
 alias gdlc='g diff -w --cached --color'
 alias gs='g status --short'
@@ -240,10 +242,10 @@ git_amend_force_push () {
 }
 
 # Recursive search
-alias a='rg --hidden --binary'
-alias ai='rg --hidden --binary -i'
-alias al='rg --hidden --binary -l'
-alias ail='rg --hidden --binary -il'
+alias a='rg --hidden --binary -g "!.git"'
+alias ai='rg --hidden --binary -g "!.git" -i'
+alias al='rg --hidden --binary -g "!.git" -l'
+alias ail='rg --hidden --binary -g "!.git" -il'
 
 # Easier lsof
 alias li='sudo lsof -Pnl -i | grep LIST '
