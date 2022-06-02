@@ -1,0 +1,104 @@
+############
+# Personal settings.
+############
+set alias_file=~/.aliases
+source ~/.aliases
+set use_envelope_from=yes
+
+############
+# Personal settings.
+############
+set simple_search="~(~f %s | ~s %s)"
+set metoo=no
+set ascii_chars=yes
+set index_format="%4C %Z %{%b %d} %-15.15F %s"
+set mbox_type=maildir
+set mark_old=no
+set editor='vim -c "set showtabline=1"'
+set confirmappend=no
+set recall=no
+set pager_stop=yes
+set mime_forward=ask-no
+set realname='Robin Lee Powell'
+set mailcap_path=~/.mailcap
+set markers=no
+set smart_wrap=no
+set pager_index_lines=20
+set attribution="\n\nOn %d, %n wrote:"
+set autoedit=yes
+
+set sort=threads
+set sort_aux=reverse-date-sent
+
+auto_view text/html
+
+alternative_order text/plain text/enriched text text/html *
+
+# Holy Shit?!
+set write_bcc=no
+
+ignore *
+unignore from: date subject to cc
+
+#################
+# Bindings
+#################
+bind index \Cp previous-page
+bind index \Cf next-page
+bind index ' ' next-page
+bind index J next-line
+bind index K previous-line
+bind index B previous-page
+bind index b previous-page
+bind index <esc>b bounce-message
+bind pager <esc>b bounce-message
+bind index < half-up
+bind index > half-down
+bind pager < half-up
+bind pager > half-down
+bind index <esc>\Cs decode-save
+
+# Quickly turn off limit and purge
+macro index L "<limit>all<enter><enter-command>set delete=yes<enter><sync-mailbox><enter-command>set delete=ask-yes<enter><first-entry>"
+# Runs the macro just above
+macro pager L "qL"
+# macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+# macro pager \cx <pipe-entry>'lynx'<enter> 'lynx'
+# macro  index   \cx     ":set pipe_decode<enter>|~/bin/show_urls<enter>:unset pipe_decode<enter>"
+ macro  index   \cx     "|~/bin/show_urls<enter>"
+
+set move=no
+hdr_order Subject: From: To: Cc: Date:
+set fast_reply=yes
+set include=yes
+
+# colors
+color markers   black brightblue
+color tilde     brightblue black
+color indicator yellow red
+
+color header    brightgreen black ^From:
+color header    brightcyan black ^To:
+color header    brightcyan black ^Reply-To:
+color header    brightcyan black ^Cc:
+color header    brightwhite black ^Subject:
+
+color index     brightred black ~N
+spam "^X-Spam-Level: ." "yes"
+set spam_separator=", "
+color index     brightblue black "~H yes"
+macro index <esc>S "<limit>~H yes<enter>"
+
+
+# aliases for broken MUAs
+charset-hook US-ASCII     ISO-8859-1
+charset-hook x-unknown    ISO-8859-1
+charset-hook windows-1250 CP1250
+charset-hook windows-1251 CP1251
+charset-hook windows-1252 CP1252
+charset-hook windows-1253 CP1253
+charset-hook windows-1254 CP1254
+charset-hook windows-1255 CP1255
+charset-hook windows-1256 CP1256
+charset-hook windows-1257 CP1257
+charset-hook windows-1258 CP1258

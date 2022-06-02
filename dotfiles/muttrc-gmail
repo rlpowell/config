@@ -1,3 +1,6 @@
+# Get all the normal stuff
+source ~/.muttrc-common
+
 ############
 # IMAP/GMail settings
 ############
@@ -6,10 +9,13 @@ set spoolfile = "+INBOX"
 set imap_check_subscribed
 set hostname = gmail.com
 set imap_keepalive = 900
-set record="+[Gmail]/Sent Mail"
+# We use gmail smtp, so a copy gets saved anyway.  Having said that,
+# we have various fcc hooks that override this, but saving a copy
+# locally does not harm.
+set record=""
 set postponed="+[Gmail]/Drafts"
 
-mailboxes ! "=[Gmail]/Drafts" "=[Gmail]/All Mail" =[Gmail]/Trash
+mailboxes "+INBOX" "=[Gmail]/All Mail" =[Gmail]/Trash
 
 bind index G imap-fetch-mail
 
@@ -35,32 +41,29 @@ bind index,pager D noop
 macro index,pager ^D "<tag-thread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Gmail trash thread"
 macro index,pager <esc>d "<tag-subthread><tag-prefix><save-message>=[Gmail]/Trash<enter>" "Gmail trash thread"
 
-# I don't use labels basically ever, so by default save just means
-# "get it out of my inbox"
-#
-# This version, and the variable setting, auto-expunge such
-# messages; if you don't want that, comment out the next three lines
-# and uncomment the one after that.
-
-# This caused problems with my finger memory vs. other
-# configurations.
-#
-# set delete=yes
-
-# macro index,pager s "<save-message>=Saved<enter><sync-mailbox>" "Remove from inbox/save to all mail"
-# macro index,pager S "<tag-thread><tag-prefix><save-message>=Saved<enter><sync-mailbox>" "Thread save: Remove from inbox/save to all mail"
-# # macro index,pager s "<save-message>=Saved<enter>" "Remove from inbox/save to all mail"
-# macro index,pager ,S "<save-message>" "Normal save"
-
-# The above got annoying because I couldn't remember how to get to
-# normal save when I needed it, so:
-save-hook ~A =Saved
+# Default back to the inbox
+macro index 'c' '<change-folder>^U='
 
 # Macros to go to common gmail labels.
 macro index,pager ,i "<change-folder>=INBOX<enter>" "Go to inbox"
 macro index,pager ,a "<change-folder>=[Gmail]/All Mail<enter>" "Go to all mail"
 macro index,pager ,s "<change-folder>=[Gmail]/Sent Mail<enter>" "Go to outbox"
+macro index,pager ,S "<change-folder>=[Gmail]/Spam<enter>" "Go to spam"
 macro index,pager ,d "<change-folder>=[Gmail]/Drafts<enter>" "Go to drafts"
 macro index,pager ,t "<change-folder>=[Gmail]/Trash<enter>" "Go to trash"
 
 source ~/.muttrc-gmail-local
+
+# I don't use labels basically ever, so by default save just means
+# "get it out of my inbox".  Using save-hook for this purpose
+# matches my current muscle memory, and also putting things in the
+# Saved label has the added bonus of meaning "I explicitely decided
+# to save this", but there are alternative ways to handle this
+# commented out below.
+#
+# Also, this goes *after* the local stuff as it's the "only if
+# nothing else matches" fallback.
+save-hook ~A =Saved
+# macro index,pager s "<save-message>=[Gmail]/All Mail<enter><enter>" "Archive"
+# macro index,pager S "<tag-thread><tag-prefix><save-message>=[Gmail]/All Mail<enter>" "Thread save: Remove from inbox/save to all mail"
+
