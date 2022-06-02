@@ -10,7 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'godlygeek/csapprox'
 
 " Colorscheme
-Plug 'tpope/vim-vividchalk'
+Plug 'tpope/vim-vividchalk'             " dark
+Plug 'acarapetis/vim-colors-github'     " light
 
 " Git Wrapper; don't use it a lot, but maybe should some day
 Plug 'tpope/vim-fugitive'
