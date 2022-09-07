@@ -96,14 +96,13 @@ lvim.builtin.which_key.mappings["r"] = {
   r = { "<cmd>RustRunnables<cr>", "Run Rust Commands (i.e. cargo)" },
 }
 
+-- Why some of this works here and some only in the on_config_done below, I have no idea
+lvim.builtin.bufferline.highlights.buffer_selected.bg = "DarkRed"
+lvim.builtin.bufferline.options.indicator = { style = "icon", icon = "[0m~V~N" }
+lvim.builtin.bufferline.options.indicator_icon = nil
+
 lvim.builtin.bufferline.on_config_done = function()
   require("bufferline").setup {
-    highlights = {
-      buffer_selected = {
-        gui = "NONE",
-        guibg = "DarkRed"
-      },
-    },
     options = {
       numbers = "ordinal",
       sort_by = "insert_at_end",
