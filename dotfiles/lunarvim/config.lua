@@ -16,12 +16,13 @@ lvim.colorscheme = "default"
 -- lvim.use_icons = false
 
 lvim.autocommands = {
-	-- Fix the horrible background for which key
-	{ "ColorScheme", { pattern = { "*" }, command = "highlight Pmenu ctermbg=NONE guibg=#3A3A3A" } },
-	{ "ColorScheme", { pattern = { "*" }, command = "highlight FloatBorder ctermbg=NONE guibg=#3A3A3A" } },
-	-- And some hard-to-read stuff
-	{ "ColorScheme", { pattern = { "*" }, command = "highlight Visual ctermbg=DarkRed guibg=DarkRed" } },
-	{ "ColorScheme", { pattern = { "*" }, command = "highlight PmenuSel ctermbg=Green guibg=Green" } },
+  -- Fix the horrible background for which key
+  { "ColorScheme", { pattern = { "*" }, command = "highlight Pmenu ctermbg=NONE guibg=#3A3A3A" } },
+  { "ColorScheme", { pattern = { "*" }, command = "highlight FloatBorder ctermbg=NONE guibg=#3A3A3A" } },
+  -- And some hard-to-read stuff
+  { "ColorScheme", { pattern = { "*" }, command = "highlight Visual ctermbg=DarkRed guibg=DarkRed" } },
+  { "ColorScheme", { pattern = { "*" }, command = "highlight PmenuSel ctermbg=Green guibg=Green" } },
+  { "ColorScheme", { pattern = { "*" }, command = "highlight CursorLine guibg=Grey15" } },
 }
 
 vim.opt.wildmode = "longest:full"
@@ -86,22 +87,28 @@ lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files<CR>", "Find 
 lvim.builtin.which_key.mappings["c"] = { "<cmd>Telescope commands<CR>", "Find Vim Command" }
 
 lvim.builtin.which_key.mappings["r"] = {
-	name = "Rust",
-	h = { "<cmd>RustHoverActions<cr>", "Hover Actions" },
-	u = { "<cmd>RustMoveItemUp<cr>", "Move Item Up" },
-	d = { "<cmd>RustMoveItemDown<cr>", "Move Item Down" },
-	c = { "<cmd>RustOpenCargo<cr>", "Open Cargo.toml" },
-	p = { "<cmd>RustParentModule<cr>", "Open Parent Module" },
-	r = { "<cmd>RustRunnables<cr>", "Run Rust Commands (i.e. cargo)" },
+  name = "Rust",
+  h = { "<cmd>RustHoverActions<cr>", "Hover Actions" },
+  u = { "<cmd>RustMoveItemUp<cr>", "Move Item Up" },
+  d = { "<cmd>RustMoveItemDown<cr>", "Move Item Down" },
+  c = { "<cmd>RustOpenCargo<cr>", "Open Cargo.toml" },
+  p = { "<cmd>RustParentModule<cr>", "Open Parent Module" },
+  r = { "<cmd>RustRunnables<cr>", "Run Rust Commands (i.e. cargo)" },
 }
 
 lvim.builtin.bufferline.on_config_done = function()
-	require("bufferline").setup{
-		options = {
-			numbers = "ordinal",
-			sort_by = "insert_at_end",
-		}
-	}
+  require("bufferline").setup {
+    highlights = {
+      buffer_selected = {
+        gui = "NONE",
+        guibg = "DarkRed"
+      },
+    },
+    options = {
+      numbers = "ordinal",
+      sort_by = "insert_at_end",
+    }
+  };
 end
 
 -- TODO: User Config for predefined plugins
@@ -236,62 +243,62 @@ lvim.plugins = {
   {
     "simrat39/rust-tools.nvim",
     config = function()
-	    local status_ok, rust_tools = pcall(require, "rust-tools")
-	    if not status_ok then
-		    return
-	    end
+      local status_ok, rust_tools = pcall(require, "rust-tools")
+      if not status_ok then
+        return
+      end
 
-	    local opts = {
-		    tools = {
-			    executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
-			    reload_workspace_from_cargo_toml = true,
-			    inlay_hints = {
-				    auto = true,
-				    only_current_line = false,
-				    show_parameter_hints = true,
-				    parameter_hints_prefix = "<-",
-				    other_hints_prefix = "=>",
-				    max_len_align = false,
-				    max_len_align_padding = 1,
-				    right_align = false,
-				    right_align_padding = 7,
-				    highlight = "Comment",
-			    },
-			    hover_actions = {
-				    --border = {
-				    --        { "╭", "FloatBorder" },
-				    --        { "─", "FloatBorder" },
-				    --        { "╮", "FloatBorder" },
-				    --        { "│", "FloatBorder" },
-				    --        { "╯", "FloatBorder" },
-				    --        { "─", "FloatBorder" },
-				    --        { "╰", "FloatBorder" },
-				    --        { "│", "FloatBorder" },
-				    --},
-				    auto_focus = true,
-			    },
-		    },
-		    server = {
-			    on_attach = require("lvim.lsp").common_on_attach,
-			    on_init = require("lvim.lsp").common_on_init,
-			    settings = {
-				    ["rust-analyzer"] = {
-					    checkOnSave = {
-						    command = "clippy"
-					    }
-				    }
-			    },
-		    },
-	    }
-	    --local extension_path = vim.fn.expand "~/" .. ".vscode/extensions/vadimcn.vscode-lldb-1.7.3/"
+      local opts = {
+        tools = {
+          executor = require("rust-tools/executors").termopen, -- can be quickfix or termopen
+          reload_workspace_from_cargo_toml = true,
+          inlay_hints = {
+            auto = true,
+            only_current_line = false,
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<-",
+            other_hints_prefix = "=>",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "Comment",
+          },
+          hover_actions = {
+            --border = {
+            --        { "╭", "FloatBorder" },
+            --        { "─", "FloatBorder" },
+            --        { "╮", "FloatBorder" },
+            --        { "│", "FloatBorder" },
+            --        { "╯", "FloatBorder" },
+            --        { "─", "FloatBorder" },
+            --        { "╰", "FloatBorder" },
+            --        { "│", "FloatBorder" },
+            --},
+            auto_focus = true,
+          },
+        },
+        server = {
+          on_attach = require("lvim.lsp").common_on_attach,
+          on_init = require("lvim.lsp").common_on_init,
+          settings = {
+            ["rust-analyzer"] = {
+              checkOnSave = {
+                command = "clippy"
+              }
+            }
+          },
+        },
+      }
+      --local extension_path = vim.fn.expand "~/" .. ".vscode/extensions/vadimcn.vscode-lldb-1.7.3/"
 
-	    --local codelldb_path = extension_path .. "adapter/codelldb"
-	    --local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+      --local codelldb_path = extension_path .. "adapter/codelldb"
+      --local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
-	    --opts.dap = {
-	    --        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-	    --}
-	    rust_tools.setup(opts)
+      --opts.dap = {
+      --        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+      --}
+      rust_tools.setup(opts)
     end,
     ft = { "rust", "rs" },
   },
