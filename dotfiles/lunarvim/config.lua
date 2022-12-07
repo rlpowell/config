@@ -70,6 +70,8 @@ lvim.keys.normal_mode["<"] = ":BufferLineCyclePrev<CR>"
 
 -- These will show up in which-key without ignore_missing
 lvim.builtin.which_key.setup.ignore_missing = true
+-- Built-in command to jump to previous file; see also ctrl-o and ctrl-i
+lvim.keys.normal_mode["<Leader><Space>"] = "<C-^>"
 lvim.keys.normal_mode["<Leader>1"] = "<cmd>BufferLineGoToBuffer 1<CR>"
 lvim.keys.normal_mode["<Leader>2"] = "<cmd>BufferLineGoToBuffer 2<CR>"
 lvim.keys.normal_mode["<Leader>3"] = "<cmd>BufferLineGoToBuffer 3<CR>"
@@ -165,7 +167,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 -- ---`:LvimInfo` lists which server(s) are skipped for the current filetype
--- vim.tbl_map(function(server)
+-- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(server)
 --   return server ~= "emmet_ls"
 -- end, lvim.lsp.automatic_configuration.skipped_servers)
 
