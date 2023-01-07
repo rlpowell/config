@@ -42,7 +42,12 @@ lvim.keys.normal_mode["<"] = ":BufferLineCyclePrev<CR>"
 -- -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["W"] = { "<cmd>noautocmd w<cr>", "Save without formatting" }
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+
+-- Built-in command to jump to previous file; see also ctrl-o and ctrl-i
 lvim.keys.normal_mode["<Leader><Space>"] = "<C-^>"
+
+-- These will show up in which-key without ignore_missing
+lvim.builtin.which_key.setup.ignore_missing = true
 lvim.keys.normal_mode["<Leader>1"] = "<cmd>BufferLineGoToBuffer 1<CR>"
 lvim.keys.normal_mode["<Leader>2"] = "<cmd>BufferLineGoToBuffer 2<CR>"
 lvim.keys.normal_mode["<Leader>3"] = "<cmd>BufferLineGoToBuffer 3<CR>"
