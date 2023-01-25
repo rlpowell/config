@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Error trapping from https://gist.github.com/oldratlee/902ad9a398affca37bfcfab64612e7d1
+__error_trapper() {
+  local parent_lineno="$1"
+  local code="$2"
+  local commands="$3"
+  echo "error exit status $code, at file $0 on or near line $parent_lineno: $commands"
+}
+trap '__error_trapper "${LINENO}/${BASH_LINENO}" "$?" "$BASH_COMMAND"' ERR
+
+set -euE -o pipefail nullglob
+
 if [ ! -d "dotfiles" ]
 then
   echo "Run this from the config/ directory, please ; there should be a 'dotfiles' dir in the place you run this."
@@ -99,7 +110,7 @@ then
   crontab -l >$cronfile_orig
   grep -v "$(pwd)" $cronfile_orig >$cronfile_new
   echo "1 1 * * * $(pwd)/upgrade.sh" >> $cronfile_new
-  diff $cronfile_orig $cronfile_new
+  diff $cronfile_orig $cronfile_new || true
   crontab $cronfile_new
 fi
 
@@ -111,7 +122,7 @@ then
   crontab -l >$cronfile_orig
   grep -v "Dropbox/Private/todo" $cronfile_orig >$cronfile_new
   echo "2 2 * * * $HOME/Dropbox/Private/todo/todo.sh recur" >> $cronfile_new
-  diff $cronfile_orig $cronfile_new
+  diff $cronfile_orig $cronfile_new || true
   crontab $cronfile_new
 fi
 
@@ -123,7 +134,7 @@ then
   crontab -l >$cronfile_orig
   grep -v "save_tmux" $cronfile_orig >$cronfile_new
   echo "3 3 * * * $HOME/bin/save_tmux" >> $cronfile_new
-  diff $cronfile_orig $cronfile_new
+  diff $cronfile_orig $cronfile_new || true
   crontab $cronfile_new
 fi
 
