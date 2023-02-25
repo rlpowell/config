@@ -179,7 +179,10 @@ nnoremap <Space>t :setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:se
 nnoremap <Space>c :setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl nospell<CR>
 
 " Settings for textual writing with hard wrapping
-nnoremap <Space>w :setl number<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions+=t<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl spell<CR>
+nnoremap <Space>w :setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions+=t<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl spell<CR>
+
+" Normal settings
+nnoremap <Space>n :setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions=cqron,j<CR>:setl nolinebreak<CR>:setl columns&vim<CR>:setl nospell<CR>
 
 "***************
 " BEGIN: MiniBufExplorer configuration / tab-ish stuff
