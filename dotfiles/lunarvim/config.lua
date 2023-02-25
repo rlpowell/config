@@ -169,8 +169,7 @@ vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyz
 
 lvim.plugins = {
   {
-    -- Using a non-default fork because https://github.com/simrat39/rust-tools.nvim/issues/309
-    "kdarkhan/rust-tools.nvim",
+    "simrat39/rust-tools.nvim",
     config = function()
       local status_ok, rust_tools = pcall(require, "rust-tools")
       if not status_ok then
