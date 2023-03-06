@@ -211,8 +211,9 @@ lvim.plugins = {
           on_init = require("lvim.lsp").common_on_init,
           settings = {
             ["rust-analyzer"] = {
-              checkOnSave = {
-                command = "clippy"
+              check = {
+                command = "clippy",
+		extraArgs = { "--all", "--", "-W", "clippy::all" },
               }
             }
           },
