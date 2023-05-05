@@ -57,7 +57,7 @@ prompt_func () {
 }
 
 # Fantastic info for set -x
-export PS4='+ $(date "+%F__%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]}): '
+export PS4='+ $(date "+%F_%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]:-unset}): '
 
 export PROMPT_COMMAND=prompt_func
 
