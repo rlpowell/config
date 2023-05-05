@@ -9,7 +9,8 @@ __error_trapper() {
 }
 trap '__error_trapper "${LINENO}/${BASH_LINENO}" "$?" "$BASH_COMMAND"' ERR
 
-set -euE -o pipefail nullglob
+set -euE -o pipefail
+shopt -s nullglob
 
 if [ ! -d "dotfiles" ]
 then
