@@ -85,7 +85,7 @@ autoload run-help
 # This is the zsh version:
 # export PS4='+ %D{%F__%T.%N} %x(%N)@%I: '
 # but we almost never run zsh scripts, so here's the bash version:
-export PS4='+ $(date "+%F__%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]}): '
+export PS4='+ $(date "+%F_%T.%N") ${BASH_SOURCE}@${LINENO}(${FUNCNAME[0]:-unset}): '
 
 # set prompts
 USER=$(whoami)
