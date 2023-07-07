@@ -60,9 +60,33 @@ lvim.keys.normal_mode["<Leader>9"] = "<cmd>BufferLineGoToBuffer 9<CR>"
 lvim.keys.normal_mode["<Leader>0"] = "<cmd>BufferLineGoToBuffer 10<CR>"
 
 lvim.builtin.which_key.mappings["d"] = { "<cmd>BufferKill<CR>", "Close Buffer" }
+lvim.builtin.which_key.mappings["o"] = { "<C-w>o", "Close Other Windows == <C-w>o" }
 
 lvim.builtin.which_key.mappings["f"] = { "<cmd>Telescope find_files<CR>", "Find File" }
 lvim.builtin.which_key.mappings["c"] = { "<cmd>Telescope commands<CR>", "Find Vim Command" }
+
+lvim.builtin.which_key.mappings["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show LSP hover == K" }
+
+-- Extra LSP bits, mostly to help remember the other shortcuts
+lvim.builtin.which_key.mappings["lR"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Show references == gr" }
+lvim.builtin.which_key.mappings["lD"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Show definition == gd" }
+lvim.builtin.which_key.mappings["lC"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Show declaration == gD" }
+lvim.builtin.which_key.mappings["lE"] = { "<cmd>lua vim.diagnostic.open_float() <CR>", "Show line diagnostics/errors == gl" }
+lvim.builtin.which_key.mappings["lI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Show implementation == gI" }
+lvim.builtin.which_key.mappings["lK"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show LSP hover == K" }
+lvim.builtin.which_key.mappings["ln"] = { "<cmd>lua require('illuminate').goto_next_reference()<CR>", "Goto next reference == <M-n>" }
+lvim.builtin.which_key.mappings["lp"] = { "<cmd>lua require('illuminate').goto_prev_reference()<CR>", "Goto prev reference == <M-p>" }
+
+lvim.builtin.which_key.mappings["C"] = {
+  name = "Comments",
+  A = { "<cmd>lua local api = require('Comment.api') ; api.insert.linewise.eol()<CR>", "Comment insert end of line == gcA" },
+  O = { "<cmd>lua local api = require('Comment.api') ; api.insert.linewise.above()<CR>", "Comment insert above == gcO" },
+  o = { "<cmd>lua local api = require('Comment.api') ; api.insert.linewise.below()<CR>", "Comment insert below == gco" },
+  L = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line == gcc" },
+  B = { "<Plug>(comment_toggle_blockwise_current)", "Comment toggle current block == gcc" },
+  l = { "<Plug>(comment_toggle_linewise)", "Comment toggle linewise by motion == gc" },
+  b = { "<Plug>(comment_toggle_blockwise)", "Comment toggle blockwise by motion == gb" },
+}
 
 lvim.builtin.which_key.mappings["r"] = {
   name = "Rust",
@@ -213,7 +237,7 @@ lvim.plugins = {
             ["rust-analyzer"] = {
               check = {
                 command = "clippy",
-		extraArgs = { "--all", "--", "-W", "clippy::all" },
+                extraArgs = { "--all", "--", "-W", "clippy::all" },
               }
             }
           },
