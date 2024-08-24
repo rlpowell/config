@@ -72,10 +72,11 @@ lvim.builtin.which_key.mappings["lR"] = { "<cmd>lua vim.lsp.buf.references()<CR>
 lvim.builtin.which_key.mappings["lD"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Show definition == gd" }
 lvim.builtin.which_key.mappings["lC"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Show declaration == gD" }
 lvim.builtin.which_key.mappings["lE"] = { "<cmd>lua vim.diagnostic.open_float() <CR>", "Show line diagnostics/errors == gl" }
-lvim.builtin.which_key.mappings["lI"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Show implementation == gI" }
+lvim.builtin.which_key.mappings["lm"] = { "<cmd>lua vim.lsp.buf.implementation()<CR>", "Show implementation == gI" }
 lvim.builtin.which_key.mappings["lK"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show LSP hover == K" }
 lvim.builtin.which_key.mappings["ln"] = { "<cmd>lua require('illuminate').goto_next_reference()<CR>", "Goto next reference == <M-n>" }
 lvim.builtin.which_key.mappings["lp"] = { "<cmd>lua require('illuminate').goto_prev_reference()<CR>", "Goto prev reference == <M-p>" }
+lvim.builtin.which_key.mappings["lt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Show type definition" }
 
 lvim.builtin.which_key.mappings["C"] = {
   name = "Comments",
@@ -111,6 +112,14 @@ lvim.builtin.bufferline.on_config_done = function()
     }
   };
 end
+
+-- Don't do bizarre truncations on find file's directory list
+--
+-- See :help telescope.defaults for options here
+lvim.builtin.telescope.defaults={
+	path_display = { "absolute" },
+        wrap_results = true
+}
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
@@ -192,6 +201,16 @@ lvim.builtin.treesitter.auto_install = true
 vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 
 lvim.plugins = {
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    require("todo-comments").setup()
+  },
   {
     "simrat39/rust-tools.nvim",
     config = function()
