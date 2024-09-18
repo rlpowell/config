@@ -34,7 +34,7 @@ vim.keymap.set('n', '<leader>o', '<C-w>o', { desc = 'Close Other Windows == <C-w
 
 vim.keymap.set('n', '<leader>f', ':Telescope find_files<CR>', { desc = 'Find File' })
 
-vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc ='Show LSP hover == K' })
+vim.keymap.set('n', '<leader>K', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Show LSP hover == K' })
 
 -- Extra LSP bits, mostly to help remember the other shortcuts
 vim.keymap.set('n', '<leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>', { desc = 'Show references == gr' })
@@ -83,23 +83,43 @@ vim.keymap.set('v', '<Enter>', "<cmd>'<,'>EasyAlign<cr>", { desc = 'EasyAlign' }
 
 -- Settings for textual writing, i.e. for blog post editing; got
 -- these from https://stackoverflow.com/a/50415982/1461430
-vim.keymap.set('n', '<Space>t', ':setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns=80<CR>:setl spell<CR>')
+vim.keymap.set(
+  'n',
+  '<Space>t',
+  ':setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns=80<CR>:setl spell<CR>',
+  { desc = 'text mode: soft wrap' }
+)
 
 -- Settings for 'don't wrap my shit' but without the visual soft margin
-vim.keymap.set('n', '<Space>C', ':setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl nospell<CR>')
+vim.keymap.set(
+  'n',
+  '<Space>C',
+  ':setl number<CR>:setl textwidth=0<CR>:setl wrapmargin=0<CR>:setl wrap<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl nospell<CR>',
+  { desc = 'text mode: no wrap' }
+)
 
 -- Settings for textual writing with hard wrapping
-vim.keymap.set('n', '<Space>w', ':setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions+=t<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl spell<CR>')
+vim.keymap.set(
+  'n',
+  '<Space>w',
+  ':setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions+=t<CR>:setl linebreak<CR>:setl columns&vim<CR>:setl spell<CR>',
+  { desc = 'text mode: hard wrap' }
+)
 
 -- Normal settings
-vim.keymap.set('n', '<Space>n', ':setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions=cqron,j<CR>:setl nolinebreak<CR>:setl columns&vim<CR>:setl nospell<CR>')
+vim.keymap.set(
+  'n',
+  '<Space>n',
+  ':setl nonumber<CR>:setl textwidth=68<CR>:setl wrapmargin=0<CR>:setl nowrap<CR>:setl formatoptions=cqron,j<CR>:setl nolinebreak<CR>:setl columns&vim<CR>:setl nospell<CR>',
+  { desc = 'text mode: normal' }
+)
 
-vim.diagnostic.config({
+vim.diagnostic.config {
   underline = true,
   virtual_text = true,
   signs = true,
   severity_sort = true,
-})
+}
 
 -- Built-in command to jump to previous file; see also ctrl-o and ctrl-i
 vim.keymap.set('n', '<Leader><Space>', '<C-^>', { desc = 'Jump to previous file' })
@@ -172,7 +192,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>cq', vim.diagnostic.setloclist, { desc = 'Open [c]ode diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>cf', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Open [c]ode diagnostic [f]loat for current line' })
+vim.keymap.set('n', '<leader>cf', function()
+  vim.diagnostic.open_float { border = 'rounded' }
+end, { desc = 'Open [c]ode diagnostic [f]loat for current line' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -247,34 +269,34 @@ require('lazy').setup({
         indicator = {
           style = 'underline',
         },
-        numbers = "ordinal",
-        sort_by = "insert_at_end",
-        diagnostics = "nvim_lsp",
+        numbers = 'ordinal',
+        sort_by = 'insert_at_end',
+        diagnostics = 'nvim_lsp',
         diagnostics_update_on_event = true, -- use nvim's diagnostic handler
         -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
-          return "("..count..")"
+        diagnostics_indicator = function(count, _, _, _)
+          return '(' .. count .. ')'
         end,
       },
       highlights = {
-        modified = { fg = 'Red', },
-        modified_selected = { fg = 'Red', },
-        modified_visible = { fg = 'Red', },
-        diagnostic = { fg = 'Blue', },
-        diagnostic_selected = { fg = 'Blue', },
-        diagnostic_visible = { fg = 'Blue', },
-        hint_diagnostic = { fg = 'Blue', },
-        hint_diagnostic_selected = { fg = 'Blue', },
-        hint_diagnostic_visible = { fg = 'Blue', },
-        info_diagnostic = { fg = 'Blue', },
-        info_diagnostic_selected = { fg = 'Blue', },
-        info_diagnostic_visible = { fg = 'Blue', },
-        warning_diagnostic = { fg = 'Yellow', },
-        warning_diagnostic_selected = { fg = 'Yellow', },
-        warning_diagnostic_visible = { fg = 'Yellow', },
-        error_diagnostic = { fg = 'Red', },
-        error_diagnostic_selected = { fg = 'Red', },
-        error_diagnostic_visible = { fg = 'Red', },
+        modified = { fg = 'Red' },
+        modified_selected = { fg = 'Red' },
+        modified_visible = { fg = 'Red' },
+        diagnostic = { fg = 'Blue' },
+        diagnostic_selected = { fg = 'Blue' },
+        diagnostic_visible = { fg = 'Blue' },
+        hint_diagnostic = { fg = 'Blue' },
+        hint_diagnostic_selected = { fg = 'Blue' },
+        hint_diagnostic_visible = { fg = 'Blue' },
+        info_diagnostic = { fg = 'Blue' },
+        info_diagnostic_selected = { fg = 'Blue' },
+        info_diagnostic_visible = { fg = 'Blue' },
+        warning_diagnostic = { fg = 'Yellow' },
+        warning_diagnostic_selected = { fg = 'Yellow' },
+        warning_diagnostic_visible = { fg = 'Yellow' },
+        error_diagnostic = { fg = 'Red' },
+        error_diagnostic_selected = { fg = 'Red' },
+        error_diagnostic_visible = { fg = 'Red' },
       },
     },
   },
@@ -330,7 +352,7 @@ require('lazy').setup({
         { '<leader>c', group = '[c]ode' },
         { '<leader>D', group = '[D]ocument' },
         { '<leader>l', group = '[l]SP' },
-        { '<leader>r', group = '[r]ename' },
+        -- { '<leader>r', group = '[r]ename' },
         { '<leader>s', group = '[s]earch' },
         -- { '<leader>w', group = '[w]orkspace' },
         -- { '<leader>t', group = '[t]oggle' },
@@ -408,11 +430,10 @@ require('lazy').setup({
         -- },
         -- pickers = {}
 
-
         -- Don't do bizarre truncations on find file's directory list
         defaults = {
-          path_display = { "absolute" },
-          wrap_results = true
+          path_display = { 'absolute' },
+          wrap_results = true,
         },
         extensions = {
           ['ui-select'] = {
@@ -433,14 +454,16 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', function() builtin.diagnostics({wrap_results=true, line_width='full'}) end, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.diagnostics { wrap_results = true, line_width = 'full' }
+      end, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sR', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch Vim [C]ommands' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       -- vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set("n", "<leader>sl", ":Telescope current_buffer_fuzzy_find<CR>", { desc = "Search Lines In Current Buffer" })
-      vim.keymap.set("n", "<leader>sb", ":Telescope buffers<CR>", { desc = "Search Buffers" })
-      vim.keymap.set("n", "<leader>sr", ":Telescope lsp_references<CR>", { desc = "Search LSP References" })
+      vim.keymap.set('n', '<leader>sl', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Search Lines In Current Buffer' })
+      vim.keymap.set('n', '<leader>sb', ':Telescope buffers<CR>', { desc = 'Search Buffers' })
+      vim.keymap.set('n', '<leader>sr', ':Telescope lsp_references<CR>', { desc = 'Search LSP References' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -566,7 +589,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[R]ename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -605,11 +628,11 @@ require('lazy').setup({
             })
           end
 
-          vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+          vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
             -- Use a sharp border with `FloatBorder` highlights
-            border = "rounded",
+            border = 'rounded',
             -- add the title in hover float window
-            title = "hover"
+            title = 'hover',
           })
 
           -- Inlay hint stuff
@@ -621,12 +644,12 @@ require('lazy').setup({
             -- globally, but as of this writing (21 Aug 2024), there
             -- doesn't seem to be anything.  It can be viewed with
             -- `:lua =vim.lsp.handlers`
-            vim.lsp.handlers["experimental/serverStatus"] = function(_, result, ctx, _)
-              if result.quiescent and not ran_once then
+            vim.lsp.handlers['experimental/serverStatus'] = function(_, result, _, _)
+              if result.quiescent then
                 vim.lsp.inlay_hint.enable(false, nil)
                 vim.lsp.inlay_hint.enable(true, nil)
 
-                vim.lsp.handlers["experimental/serverStatus"] = nil
+                vim.lsp.handlers['experimental/serverStatus'] = nil
               end
             end
 
@@ -657,9 +680,9 @@ require('lazy').setup({
       local servers = {
         rust_analyzer = {
           settings = {
-            ["rust-analyzer"] = {
+            ['rust-analyzer'] = {
               check = {
-                command = "clippy",
+                command = 'clippy',
               },
             },
           },
@@ -724,13 +747,13 @@ require('lazy').setup({
     end,
   },
 
--- Adds a bunch of Rust features if we decide we need that
---
---   {
---     'mrcjkb/rustaceanvim',
---     version = '^5', -- Recommended
---     lazy = false, -- This plugin is already lazy
---   },
+  -- Adds a bunch of Rust features if we decide we need that
+  --
+  --   {
+  --     'mrcjkb/rustaceanvim',
+  --     version = '^5', -- Recommended
+  --     lazy = false, -- This plugin is already lazy
+  --   },
 
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -760,7 +783,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        rust = { "rustfmt", lsp_format = "fallback" },
+        rust = { 'rustfmt', lsp_format = 'fallback' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1004,7 +1027,7 @@ require('lazy').setup({
 -- This started life as https://github.com/pineapplegiant/spaceduck
 -- , but I wanted to change several colors everywhere they occurred
 -- so I just went ahead and copied it.
-vim.cmd([[
+vim.cmd [[
 hi ColorColumn guifg=NONE guibg=#16172d gui=NONE
 hi CursorColumn guifg=NONE guibg=#16172d gui=NONE
 hi Conceal guifg=#686f9a guibg=NONE gui=NONE
@@ -1049,7 +1072,7 @@ hi link StatusLineNC StatusLineTermNC
 hi TabLine guifg=#000000 guibg=#818596 gui=NONE
 hi TabLineFill guifg=#818596 guibg=#000000 gui=NONE
 hi TabLineSel guifg=#c1c3cc guibg=#0f111b gui=NONE
-hi Visual guifg=NONE guibg=#1b1c36 gui=NONE
+hi Visual guifg=NONE guibg=#2e4053 gui=NONE
 hi link VisualNOS Visual
 hi WarningMsg guifg=#e39400 guibg=#0f111b gui=NONE
 hi WildMenu guifg=#000000 guibg=#c1c3cc gui=NONE
@@ -1222,7 +1245,7 @@ hi BufferInactiveSign guifg=#CC99FF guibg=#0f111b gui=NONE
 hi BufferCurrentTarget guifg=#ce6f8f guibg=#0f111b gui=NONE
 hi BufferVisibleTarget guifg=#ce6f8f guibg=#0f111b gui=NONE
 hi BufferInactiveTarget guifg=#ce6f8f guibg=#0f111b gui=NONE
-]])
+]]
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
