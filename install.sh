@@ -37,7 +37,7 @@ do
   if [ -d "$file" ]
   then
     # Directory
-    if [ \( ! -e "$dotfile" \) -o -L "$dotfile" -o "$1" = "-f" ]
+    if [ \( ! -e "$dotfile" \) -o -L "$dotfile" -o "${1:-}" = "-f" ]
     then
       ln -sfT "config/dotfiles/$short" "$dotfile"
     else
@@ -48,7 +48,7 @@ do
     # Regular file
     if [ -e "$dotfile" -a ! -h "$dotfile" ]
     then
-      if [ "$1" = "-f" ]
+      if [ "${1:-}" = "-f" ]
       then
         echo "File $dotfile already exists, but in force mode; removing."
         /bin/rm $dotfile
@@ -81,7 +81,7 @@ do
 
   if [ -e "$binfile" -a ! -h "$binfile" ]
   then
-    if [ "$1" = "-f" ]
+    if [ "${1:-}" = "-f" ]
     then
       echo "File $binfile already exists, but in force mode; removing."
       /bin/rm $binfile
